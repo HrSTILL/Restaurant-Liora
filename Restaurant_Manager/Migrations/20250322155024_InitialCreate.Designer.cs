@@ -11,8 +11,8 @@ using Restaurant_Manager.Data;
 namespace Restaurant_Manager.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250314153438_FixUserModel")]
-    partial class FixUserModel
+    [Migration("20250322155024_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,6 +134,9 @@ namespace Restaurant_Manager.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("NumberOfPeople")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("ReservationTime")
                         .HasColumnType("TEXT");
 
@@ -194,12 +197,17 @@ namespace Restaurant_Manager.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -210,6 +218,11 @@ namespace Restaurant_Manager.Migrations
 
                     b.Property<string>("Role")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

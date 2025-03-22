@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/Shared/_StaffLayout.cshtml";
+}
+@{
+    var username = Context.Session.GetString("Username");
+    var role = Context.Session.GetString("Role");
+}
+<h2>Welcome, Staff!</h2>
+<p>You are logged in as an Staff.</p>
+
+
+<p>Logged in as: @username</p>
+<p>Role: @role</p>

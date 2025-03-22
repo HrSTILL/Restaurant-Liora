@@ -23,5 +23,8 @@ public class Reservation
     [Required]
     public string Status { get; set; } = "pending"; 
 
+    [Required]
+    public int NumberOfPeople { get; set; } 
+
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

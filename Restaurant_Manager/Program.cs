@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Restaurant_Manager.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,28 +10,100 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.Strict;
+    options.Secure = CookieSecurePolicy.Always;
+
+});
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.SameSite = SameSiteMode.Strict;
+});
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.LoginPath = "/Auth/Login";
+        options.AccessDeniedPath = "/Auth/Restricted";
+    });
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+using (var scope = app.Services.CreateScope())
 {
-    app.UseMigrationsEndPoint();
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
 }
-else
+
+if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
+    app.UseHttpsRedirection();
+}
+else
+{
+    app.UseDeveloperExceptionPage();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles(); 
+app.UseStaticFiles();
+
+app.UseCookiePolicy();
 
 app.UseRouting();
+app.UseSession(); 
+app.UseAuthentication();
 app.UseAuthorization();
+
+app.Use(async (context, next) =>
+{
+    var path = context.Request.Path;
+    var userRole = context.Session.GetString("Role");
+
+    if ((path.StartsWithSegments("/Admin") || path.StartsWithSegments("/Staff")) && string.IsNullOrEmpty(userRole))
+    {
+        context.Response.Redirect("/Auth/Login");
+        return;
+    }
+
+    if (path.StartsWithSegments("/Admin") && userRole != "admin")
+    {
+        context.Response.Redirect("/Auth/Restricted");
+        return;
+    }
+
+    if (path.StartsWithSegments("/Staff") && userRole != "staff")
+    {
+        context.Response.Redirect("/Auth/Restricted");
+        return;
+    }
+
+    if (
+     (path.StartsWithSegments("/Customer") ||
+      path.StartsWithSegments("/Account") ||
+      path.StartsWithSegments("/Reservations")) &&
+     string.IsNullOrEmpty(userRole))
+    {
+        context.Response.Redirect("/Auth/Restricted");
+        return;
+    }
+
+
+    await next();
+});
 
 app.MapControllerRoute(
     name: "default",

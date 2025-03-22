@@ -23,17 +23,16 @@ namespace Restaurant_Manager.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Menu()
         {
             return View();
         }
 
-       
-        public IActionResult Test()
+        public IActionResult SpecialOffers()
         {
-            var users = _context.Users.ToList();
-            return View(users); 
+            return View();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

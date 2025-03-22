@@ -1,0 +1,71 @@
+﻿body {
+    background-color: #f5efe6;
+    margin: 0;
+    padding: 0;
+}
+
+.logo-link {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-logo {
+    max-height: 150px;
+    height: auto;
+    cursor: pointer;
+    margin-top: 50px;
+}
+
+.custom-navbar {
+    height: 130px;
+    background-color: #556b2f !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border: none;
+    box-shadow: none;
+}
+.shared-button-style {
+    color: #3d2f1b;
+    background: linear-gradient(135deg, #f3e5ab, #d6a75c);
+    border: 1px solid #c9a25a;
+    border-radius: 10px;
+    font-weight: 500;
+    height: 50px;
+    min-width: 120px; 
+    padding: 0 16px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+    .shared-button-style:hover {
+        background: linear-gradient(135deg, #d6a75c, #f3e5ab);
+        transform: translateY(-1px);
+    }
+    .shared-button-style,
+    .shared-button-style:hover,
+    .shared-button-style:focus {
+        text-decoration: none;
+    }
+
+
+.button-wrapper, .button2-wrapper {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.button-wrapper {
+    margin-left: 100px;
+}
+
+.button2-wrapper {
+    margin-right: 100px;
+}

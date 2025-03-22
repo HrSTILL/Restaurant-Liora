@@ -7,6 +7,8 @@
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/home/homenavbar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
 
     @RenderSection("Styles", required: false)
 </head>
@@ -14,8 +16,9 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light custom-navbar">
             <div class="button-wrapper">
-                <a href="/Home/Menu" class="shared-button-style">Menu</a>
-                <a href="/Home/SpecialOffers" class="shared-button-style">Special Offers</a>
+                <a href="/Customer/Menu" class="shared-button-style">Menu</a>
+                <a href="/Customer/SpecialOffers" class="shared-button-style">Special Offers</a>
+                <a href="/Reservations/CustomerReservations" class="shared-button-style">Reservations</a>
             </div>
 
             <div class="container-fluid justify-content-center">
@@ -25,8 +28,16 @@
             </div>
 
             <div class="button2-wrapper">
-                <a href="/Auth/Login" class="shared-button-style">Login</a>
-                <a href="/Auth/Register" class="shared-button-style">Register</a>
+                <a href="/Account/CustomerAccount" class="shared-button-style">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="/Customer/CustomerCart" class="shared-button-style">
+                   <i class="fas fa-shopping-cart"></i> 
+                </a>
+                <form asp-action="Logout" asp-controller="Auth" method="post" style="display:inline;">
+                    <button type="submit" class="shared-button-style btn-nav">Logout</button>
+                </form>
+
             </div>
         </nav>
     </header>
@@ -39,7 +50,7 @@
         </main>
     </div>
 
-    
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

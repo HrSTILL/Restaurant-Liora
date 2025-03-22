@@ -24,4 +24,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images_Menu_rm\" />
+  </ItemGroup>
+
 </Project>
