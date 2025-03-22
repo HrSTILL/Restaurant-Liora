@@ -8,4 +8,14 @@ public class StaffController : Controller
     {
         return View();
     }
+
+    public IActionResult StaffOrders()
+    {
+        return View();
+    }
+
+    public IActionResult StaffReservations()
+    {
+        return View();
+    }
 }
