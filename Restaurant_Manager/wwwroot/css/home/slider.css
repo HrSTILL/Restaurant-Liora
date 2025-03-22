@@ -1,0 +1,211 @@
+﻿.container {
+    padding: 1.5rem;
+}
+
+.slider-wrapper {
+    width: 100%;
+    max-width: 95vw;
+    margin: 0 auto;
+    position: relative;
+}
+
+.slider {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    height: 55vh;
+    border-radius: 0.5rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+}
+
+    .slider::-webkit-scrollbar {
+        display: none;
+    }
+
+    .slider img {
+        flex: 0 0 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        scroll-snap-align: start;
+    }
+
+.slider-nav {
+    display: flex;
+    column-gap: 1rem;
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+    .slider-nav a {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background-color: #fff;
+        opacity: 0.75;
+        transition: opacity ease 250ms;
+    }
+
+        .slider-nav a:hover {
+            opacity: 1;
+        }
+
+
+.welcome-section {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: #faf3e0;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+}
+
+.brand-name {
+    color: #6b8e23;
+    font-family: 'Georgia', serif;
+}
+
+.button {
+    background-color: #d4af37;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+    .button:hover {
+        background-color: #c69c2d;
+    }
+
+.baba-recipes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 4rem 2rem;
+    background-color: #fffaf0;
+    flex-wrap: wrap;
+}
+
+    .baba-recipes .content {
+        max-width: 600px;
+    }
+
+    .baba-recipes .feature-img {
+        width: 300px;
+        border-radius: 1rem;
+    }
+
+.menu-preview {
+    padding: 4rem 2rem;
+    background-color: #fdfdfb;
+    text-align: center;
+}
+
+.menu-cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.card {
+    width: 280px;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    text-align: left;
+}
+
+    .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .card h3 {
+        margin: 1rem;
+    }
+
+    .card p {
+        margin: 0 1rem 1rem 1rem;
+        font-size: 0.95rem;
+    }
+
+.button.secondary {
+    margin-top: 2rem;
+    background-color: #6b8e23;
+    display: inline-block; 
+}
+
+
+.testimonial-banner {
+    background-color: #ece4d9;
+    padding: 3rem 2rem;
+    font-style: italic;
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.reservation-section {
+    background-color: #fff9ed;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.reservation-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.reservation-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #2c2c2c;
+}
+
+.reservation-section p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #444;
+}
+
+.reserve-button {
+    background-color: #6b8e23;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .reserve-button:hover {
+        background-color: #587a1d;
+    }
+
+.phone-alt {
+    margin-top: 1.5rem;
+    font-style: italic;
+    font-size: 1rem;
+    color: #333;
+}

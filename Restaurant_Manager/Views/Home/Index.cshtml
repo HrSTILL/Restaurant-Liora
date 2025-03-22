@@ -2,7 +2,69 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-  <p>Hello</p>
-</div>
+@section Styles{
+    <link href="~/css/home/slider.css" rel="stylesheet" />
+    <script src="~/js/slider.js"></script>
+
+}
+
+<section class="container">
+    <div class="slider-wrapper">
+        <div class="slider">
+            <img id="slide-1" src="~/Images/greek_salad.png" alt="Greek Salad"/>
+            <img id="slide-2" src="~/Images/steak.png" alt="Steak"/>
+            <img id="slide-3" src="~/Images/tiramisu.png" alt="Tiramisu"/>
+            <img id="slide-4" src="~/Images/fish_fillet.png" alt="Fish Fillet"/>
+            <img id="slide-5" src="~/Images/desserts_strawberry.png" alt="Strawberry deserts"/>
+        </div>
+        <div class="slider-nav">
+            <a href="#slide-1"></a>
+            <a href="#slide-2"></a>
+            <a href="#slide-3"></a>
+            <a href="#slide-4"></a>
+            <a href="#slide-5"></a>
+        </div>
+    </div>
+</section>
+
+<section class="welcome-section">
+    <div class="hero-text">
+        <h1>Welcome to <span class="brand-name">Liora</span></h1>
+        <p>A cozy Bulgarian restaurant where every dish tells a story. From traditional flavors passed down by Baba to modern culinary creations, Liora is where heart, heritage, and hospitality meet. Whether you're here for a quick bite or a long evening of laughter and wine, we’re honored to serve you.</p>
+        <a href="#menu-section" class="button">Explore Our Menu</a>
+    </div>
+</section>
+
+<section class="baba-recipes">
+    <div class="content">
+        <h2>Baba’s Recipes, Modern Touch</h2>
+        <p>At Liora, we cook with soul. Many of our dishes come from handwritten recipes by Baba — slow-roasted lamb, hearty moussaka, fresh garden salads — brought to life with love and a modern presentation. Taste the warmth of home with every bite.</p>
+    </div>
+    <img src="~/Images/mussaka.jpg" alt="Baba cooking" class="feature-img" />
+</section>
+
+<section class="menu-preview" id="menu-section">
+    <h2>Our Signature Dishes</h2>
+    <div class="menu-cards">
+        <div class="card">
+            <img src="~/Images/greek_salad.png" alt="Greek Salad" />
+            <h3>Greek Salad</h3>
+            <p>Fresh cucumbers, tomatoes, olives & feta. Simple. Bold. Mediterranean.</p>
+        </div>
+        <div class="card">
+            <img src="~/Images/fish_fillet.png" alt="Fish Fillet" />
+            <h3>Fish Fillet with Lemon Sauce</h3>
+            <p>Delicately grilled with a bright lemon zest finish. Light, elegant, unforgettable.</p>
+        </div>
+        <div class="card">
+            <img src="~/Images/tiramisu.png" alt="Tiramisu" />
+            <h3>Tiramisu</h3>
+            <p>A classic Italian dessert done the Liora way — rich, creamy, and made daily.</p>
+        </div>
+    </div>
+    <a href="/Home/Menu" class="button secondary">View Full Menu</a>
+</section>
+
+<section class="testimonial-banner">
+    <blockquote>“It tastes exactly like my Baba used to make.”</blockquote>
+</section>
