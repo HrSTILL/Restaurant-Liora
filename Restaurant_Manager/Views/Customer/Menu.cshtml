@@ -1,3 +1,101 @@
 ﻿@{
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
+
+@model Dictionary<string, List<MenuItem>>
+@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+
+@section Styles {
+    <link href="~/css/menu.css" rel="stylesheet" />
+}
+
+@functions {
+    string GetName(string category) => category.ToLower() switch
+    {
+        "salad" => "Salads and Appetizers",
+        "main" => "Main Courses",
+        "dessert" => "Desserts",
+        "drink" => "Drinks",
+        _ => category
+    };
+}
+
+<div class="menu-wrapper">
+    @{
+        int sectionIndex = 0;
+    }
+
+    @foreach (var category in Model)
+    {
+        var bgClass = (sectionIndex % 4) switch
+        {
+            0 => "bg-1",
+            1 => "bg-2",
+            2 => "bg-3",
+            3 => "bg-4",
+            _ => ""
+        };
+        @if (@GetName(category.Key) != "special")
+        {
+        <div class="menu-section @bgClass">
+            <h2 class="menu-category">@GetName(category.Key)</h2>
+            <div class="menu-grid">
+               
+                    @foreach (var item in category.Value)
+                    {
+                        <div class="menu-card">
+                            <img src="@item.ImageUrl" class="menu-img clickable" onclick="openDishModal(@item.Id)" />
+                            <h3>@item.Name</h3>
+                            <p>@item.Description</p>
+                            @if (User.Identity?.IsAuthenticated ?? false)
+                            {
+                                <form method="post" asp-action="Order" asp-controller="Order">
+                                    <input type="hidden" name="menuItemId" value="@item.Id" />
+                                    <strong class="price">@item.Price.ToString("C")</strong><br />
+                                    <button type="submit" class="order-btn">Add To Cart</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <strong class="price">@item.Price.ToString("C")</strong><br />
+                                <a href="/Auth/Login" class="order-btn">Login to Order</a>
+                            }
+                        </div>
+                    }
+                
+            </div>
+        </div>
+        }
+        sectionIndex++;
+    }
+</div>
+
+<div id="dishModal" style="display:none;">
+    <div class="dish-modal-content">
+        <span class="close-btn" onclick="closeDishModal()">×</span>
+        <h2 id="dishModalName"></h2>
+        <img id="dishModalImage" />
+        <p id="dishModalDescription"></p>
+        <p><strong>Calories:</strong> <span id="dishModalCalories"></span></p>
+        <p><strong>Allergens:</strong> <span id="dishModalAllergens"></span></p>
+        <p><strong>Tags:</strong> <span id="dishModalTags"></span></p>
+        <p><strong>Gluten-Free:</strong> <span id="dishModalGlutenFree"></span></p>
+        <p><strong>Prep Time:</strong> <span id="dishModalPrepTime"></span></p>
+        <p><strong>Price:</strong> <span id="dishModalPrice"></span></p>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+            window.menuData = @Html.Raw(JsonConvert.SerializeObject(
+        Model.SelectMany(x => x.Value),
+        new JsonSerializerSettings
+        {
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
+        }
+    ));
+    </script>
+    <script src="~/js/menu.js" asp-append-version="true"></script>
+}

@@ -51,9 +51,21 @@
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
     .login-btn:hover {
         background: linear-gradient(135deg, #d6a75c, #f3e5ab);
         transform: translateY(-1px);
+    }
+
+.register-redirect {
+    margin-top: 20px;
+    text-align: center;
+}
+
+    .register-redirect p {
+        margin-bottom: 20px;
+        color: #3d2f1b;
+        font-size: 0.95rem;
     }

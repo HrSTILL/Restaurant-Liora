@@ -9,6 +9,12 @@
     position: relative;
 }
 
+.slider-container, .slider {
+    position: relative;
+    z-index: 1; 
+}
+
+
 .slider {
     display: flex;
     overflow-x: auto;
@@ -20,6 +26,7 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
     width: 100%;
+    
 }
 
     .slider::-webkit-scrollbar {

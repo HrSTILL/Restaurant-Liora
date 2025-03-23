@@ -7,6 +7,7 @@
 <div class="login-container">
     <div class="login-box">
         <h2 class="login-title">Login</h2>
+
         <form asp-action="Login" method="post" class="login-form">
             <input asp-for="Username" class="login-input" placeholder="Username" />
             <span asp-validation-for="Username"></span>
@@ -16,6 +17,10 @@
 
             <button type="submit" class="login-btn">Login</button>
         </form>
+
+        <div class="register-redirect">
+            <p>Don't have an account?</p>
+            <a href="/Auth/Register" class="login-btn">Register Here</a>
+        </div>
     </div>
 </div>
-

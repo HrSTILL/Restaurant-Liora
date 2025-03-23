@@ -1,3 +1,74 @@
 ﻿@{
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
+@model List<MenuItem>
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+
+@section Styles {
+    <link href="/css/specialoffers.css" rel="stylesheet" />
+}
+
+<div class="menu-wrapper">
+    <h2 class="special-heading">Special Offers</h2>
+    <div class="menu-section">
+        <div class="menu-grid">
+            @foreach (var item in Model.Where(x => x.Category == "special"))
+            {
+
+                var originalPrice = item.Price;
+                var oldPrice = originalPrice + 5;
+
+                <div class="menu-card">
+                    <img src="@item.ImageUrl" class="menu-img clickable" onclick="openDishModal(@item.Id)" />
+                    <h3>@item.Name</h3>
+                    <p>@item.Description</p>
+
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <form method="post" asp-action="Order" asp-controller="Order">
+                            <input type="hidden" name="menuItemId" value="@item.Id" />
+                            <p class="old-price">@oldPrice.ToString("C")</p>
+                            <p class="special-price">@originalPrice.ToString("C") 🔥</p><br />
+                            <button type="submit" class="order-btn">Add To Cart</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <p class="old-price">@oldPrice.ToString("C")</p>
+                        <span class="special-price">@item.Price.ToString("C") 🔥</span>
+
+                        <br />
+                        <a href="/Auth/Login" class="order-btn">Login to Order</a>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<div id="dishModal" style="display:none;">
+    <div class="dish-modal-content">
+        <span class="close-btn" onclick="closeDishModal()">×</span>
+        <h2 id="dishModalName"></h2>
+        <img id="dishModalImage" />
+        <p id="dishModalDescription"></p>
+        <p><strong>Calories:</strong> <span id="dishModalCalories"></span></p>
+        <p><strong>Allergens:</strong> <span id="dishModalAllergens"></span></p>
+        <p><strong>Tags:</strong> <span id="dishModalTags"></span></p>
+        <p><strong>Gluten-Free:</strong> <span id="dishModalGlutenFree"></span></p>
+        <p><strong>Prep Time:</strong> <span id="dishModalPrepTime"></span></p>
+        <p><strong>Price:</strong> <span id="dishModalPrice"></span></p>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        window.menuData = @Html.Raw(JsonConvert.SerializeObject(Model, new JsonSerializerSettings
+                 {
+                     ContractResolver = new CamelCasePropertyNamesContractResolver()
+                 }));
+    </script>
+    <script src="~/js/menu.js" asp-append-version="true"></script>
+}
