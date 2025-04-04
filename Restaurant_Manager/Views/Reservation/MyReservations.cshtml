@@ -1,0 +1,48 @@
+﻿@model Restaurant_Manager.ViewModels.CustomerReservationsViewModel
+
+@{
+    ViewData["Title"] = "My Reservations";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+
+    var pending = Model.Pending;
+    var confirmed = Model.Confirmed;
+    var completed = Model.Completed;
+    var cancelled = Model.Cancelled;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/customer/customerreservations.css" asp-append-version="true" />
+}
+
+<div class="my-reservations">
+    <h2>📅 My Reservations 📅</h2>
+
+    @if (!pending.Any() && !confirmed.Any() && !completed.Any() && !cancelled.Any())
+    {
+        <p>You haven't made any reservations yet.</p>
+    }
+
+    @if (pending.Any())
+    {
+        <h3>🟡 Pending</h3>
+        @Html.Partial("_ReservationTable", pending)
+    }
+
+    @if (confirmed.Any())
+    {
+        <h3>🟢 Confirmed</h3>
+        @Html.Partial("_ReservationTable", confirmed)
+    }
+
+    @if (completed.Any())
+    {
+        <h3>✅ Completed</h3>
+        @Html.Partial("_ReservationTable", completed)
+    }
+
+    @if (cancelled.Any())
+    {
+        <h3>🔴 Cancelled</h3>
+        @Html.Partial("_ReservationTable", cancelled)
+    }
+</div>

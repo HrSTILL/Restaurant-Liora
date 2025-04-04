@@ -1,0 +1,119 @@
+﻿@model Restaurant_Manager.ViewModels.CustomerReservationsViewModel
+
+@{
+    ViewData["Title"] = "My Reservations";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+
+    var pending = Model.Pending;
+    var confirmed = Model.Confirmed;
+    var completed = Model.Completed;
+    var cancelled = Model.Cancelled;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/customer/customerreservations.css" asp-append-version="true" />
+    <script src="~/js/reservation.js" defer></script>
+}
+@using System.Globalization
+
+<div class="reservation-form-wrapper">
+    <h2 class="reservation-heading">Make a Reservation</h2>
+    <form asp-action="Create" method="post" class="reservation-form">
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" class="form-input" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PhoneNumber">Phone Number</label>
+            <input asp-for="PhoneNumber" class="form-input" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-input" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DurationType">Duration</label>
+            <select asp-for="DurationType" class="form-input">
+                <option value="Standard">Standard (1.5 hrs)</option>
+                <option value="Extended">Extended (3 hrs) + 70 лв.</option>
+                <option value="ExtendedPlus">Extended Plus (6 hrs) + 180 лв.</option>
+            </select>
+        </div>
+
+        <div class="seating-options">
+            <label>
+                <input type="radio" name="SeatingArea" value="Indoor" @(Model.SeatingArea == "Indoor" ? "checked" : "") /> Indoor
+            </label>
+            <label>
+                <input type="radio" name="SeatingArea" value="Outdoor" @(Model.SeatingArea == "Outdoor" ? "checked" : "") /> Outdoor
+            </label>
+        </div>
+
+        <input type="hidden" id="ReservationDate" name="ReservationDate" />
+        <input type="hidden" id="ReservationHour" name="ReservationHour" />
+        <input type="hidden" id="NumberOfPeople" name="NumberOfPeople" />
+
+        <div class="form-group">
+            <button type="button" class="open-modal-button">Select Reservation Time & Number of People</button>
+        </div>
+
+        <div id="reservationSummary" class="summary-box"></div>
+
+        <br />
+
+        <div class="form-button">
+            <button type="submit" class="reserve-btn">Reserve Table</button>
+        </div>
+    </form>
+</div>
+
+<div id="reservationModal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close-btn">×</button>
+
+        <div class="modal-step step-month">
+            <h2>Select a Month</h2>
+            <div class="modal-grid">
+                @for (int m = 1; m <= 12; m++)
+                {
+                    var currentMonth = DateTime.Now.Month;
+                    bool isPast = m < currentMonth;
+
+                    <button type="button" class="modal-btn @(isPast ? "disabled" : "")"
+                            data-month="@m" disabled="@(isPast ? "disabled" : null)">
+                        @CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(m)
+                    </button>
+                }
+            </div>
+        </div>
+
+
+        <div class="modal-step step-day" style="display:none;">
+            <h2>Select a Date</h2>
+            <div class="modal-grid" id="dateGrid"></div>
+            <button class="back-btn">Back</button>
+        </div>
+
+        <div class="modal-step step-time" style="display:none;">
+            <h2>Select a Time</h2>
+            <div class="modal-grid" id="timeGrid"></div>
+            <button class="back-btn">Back</button>
+        </div>
+
+        <div class="modal-step step-people" style="display:none;">
+            <h2>Number of People</h2>
+            <div class="modal-grid" id="peopleGrid"></div>
+            <button class="back-btn">Back</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

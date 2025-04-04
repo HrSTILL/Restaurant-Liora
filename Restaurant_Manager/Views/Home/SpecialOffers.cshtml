@@ -3,12 +3,12 @@
 @using Newtonsoft.Json.Serialization
 
 @section Styles {
-    <link href="/css/specialoffers.css" rel="stylesheet" />
+    <link href="/css/home/homespecialoffers.css" rel="stylesheet" />
 }
 
 <div class="menu-wrapper">
-    <h2 class="special-heading">Special Offers</h2>
     <div class="menu-section">
+    <h2 class="special-heading">Special Offers</h2>
     <div class="menu-grid">
         @foreach (var item in Model.Where(x => x.Category == "special"))
         {
@@ -21,21 +21,13 @@
                 <h3>@item.Name</h3>
                 <p>@item.Description</p>
 
-                @if (User.Identity?.IsAuthenticated ?? false)
-                {
-                    <form method="post" asp-action="Order" asp-controller="Order">
-                        <input type="hidden" name="menuItemId" value="@item.Id" />
-                        <p class="old-price">@oldPrice.ToString("C")</p>
-                        <p class="special-price">@originalPrice.ToString("C") 🔥</p><br/>
-                            <button type="submit" class="order-btn">Add To Cart</button>
-                    </form>
-                }
-                else
-                {
-                    <p class="old-price">@oldPrice.ToString("C")</p>
-                    <span class="special-price">@item.Price.ToString("C") 🔥</span><br />
-                    <a href="/Auth/Login" class="order-btn">Login to Order</a>
-                }
+                        <div class="price-wrapper">
+                            <span class="old-price">@oldPrice.ToString("F2")</span>
+                            <span class="special-price">@originalPrice.ToString("F2") 🔥
+                            </span>
+                        </div> <br />
+                      
+                        <a href="/Auth/Login" class="order-btn">Login to Order</a>
             </div>
         }
     </div>
@@ -55,6 +47,9 @@
         <p><strong>Gluten-Free:</strong> <span id="dishModalGlutenFree"></span></p>
         <p><strong>Prep Time:</strong> <span id="dishModalPrepTime"></span></p>
         <p><strong>Price:</strong> <span id="dishModalPrice"></span></p>
+      
+        <a href="/Auth/Login" class="order-btn">Login to Order</a>
+
     </div>
 </div>
 

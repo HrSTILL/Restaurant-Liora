@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 public class RestaurantTable
 {
@@ -12,7 +11,7 @@ public class RestaurantTable
     public int Seats { get; set; }
 
     [Required]
-    public string Status { get; set; } = "free";  
+    public string Area { get; set; } = "Indoor"; 
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

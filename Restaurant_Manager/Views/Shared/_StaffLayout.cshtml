@@ -12,21 +12,18 @@
 </head>
 <body>
     <header>
-
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light custom-navbar">
             <div class="button-wrapper">
+                <div class="container-fluid justify-content-center">
+                    <a asp-controller="Staff" asp-action="StaffDash" class="navbar-brand logo-link">
+                        <img src="~/Images/Liora_Logo_Cropped.png" alt="Logo" class="top-logo" />
+                    </a>
+                </div>
                 <a href="/Staff/StaffReservations" class="shared-button-style">Reservations</a>
-            </div>
-
-            <div class="container-fluid justify-content-center">
-                <a asp-controller="Staff" asp-action="StaffDash" class="navbar-brand logo-link">
-                    <img src="~/Images/Liora_Logo_Cropped.png" alt="Logo" class="top-logo" />
-                </a>
             </div>
 
             <div class="button2-wrapper">
                 <a href="/Staff/StaffOrders" class="shared-button-style">Orders</a>
-             
             </div>
         </nav>
     </header>

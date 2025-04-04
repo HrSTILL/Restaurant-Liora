@@ -8,7 +8,7 @@
 @using Newtonsoft.Json.Serialization
 
 @section Styles {
-    <link href="~/css/menu.css" rel="stylesheet" />
+    <link href="~/css/customer/customermenu.css" rel="stylesheet" />
 }
 
 @functions {
@@ -49,19 +49,13 @@
                             <img src="@item.ImageUrl" class="menu-img clickable" onclick="openDishModal(@item.Id)" />
                             <h3>@item.Name</h3>
                             <p>@item.Description</p>
-                            @if (User.Identity?.IsAuthenticated ?? false)
-                            {
+                            <strong class="price">@item.Price.ToString("C")</strong><br />
+                           
                                 <form method="post" asp-action="Order" asp-controller="Order">
                                     <input type="hidden" name="menuItemId" value="@item.Id" />
-                                    <strong class="price">@item.Price.ToString("C")</strong><br />
                                     <button type="submit" class="order-btn">Add To Cart</button>
                                 </form>
-                            }
-                            else
-                            {
-                                <strong class="price">@item.Price.ToString("C")</strong><br />
-                                <a href="/Auth/Login" class="order-btn">Login to Order</a>
-                            }
+                          
                         </div>
                     }
                 
@@ -84,6 +78,18 @@
         <p><strong>Gluten-Free:</strong> <span id="dishModalGlutenFree"></span></p>
         <p><strong>Prep Time:</strong> <span id="dishModalPrepTime"></span></p>
         <p><strong>Price:</strong> <span id="dishModalPrice"></span></p>
+
+        @if (User.Identity?.IsAuthenticated ?? false)
+        {
+            <form id="modalOrderForm" method="post" asp-action="Order" asp-controller="Order">
+                <input type="hidden" id="modalMenuItemId" name="menuItemId" />
+                <button type="submit" class="order-btn">Add To Cart</button>
+            </form>
+        }
+        else
+        {
+            <a href="/Auth/Login" class="order-btn">Login to Order</a>
+        }
     </div>
 </div>
 

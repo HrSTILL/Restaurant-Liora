@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Reservation Confirmed";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/customer/customerreservations.css" asp-append-version="true" />
+}
+
+<div class="reservation-success">
+    <h2>✅ Reservation Confirmed!</h2>
+    <p>Thank you for booking with us. Your reservation has been successfully created.</p>
+    <p>We look forward to serving you at your chosen time.</p>
+    <a href="/Customer/Index">Back to Home</a>
+    <a href="/Reservation/MyReservations">View My Reservations</a>
+</div>

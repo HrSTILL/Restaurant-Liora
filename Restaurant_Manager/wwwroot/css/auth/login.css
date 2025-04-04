@@ -4,7 +4,7 @@
     align-items: center;
     height: 85vh;
     background-color: #f5efe6; 
-    margin-top: -100px;
+    margin-top: -50px;
 }
 
 .login-box {
@@ -69,3 +69,62 @@
         color: #3d2f1b;
         font-size: 0.95rem;
     }
+
+@media (max-width: 992px) {
+    .login-box {
+        padding: 30px;
+        max-width: 90%;
+    }
+
+    .login-title {
+        font-size: 1.4rem;
+    }
+
+    .login-input,
+    .login-btn {
+        font-size: 0.95rem;
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .login-box {
+        padding: 25px;
+    }
+
+    .login-title {
+        font-size: 1.3rem;
+    }
+
+    .login-input,
+    .login-btn {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    .register-redirect p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .login-box {
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .login-title {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    .login-input,
+    .login-btn {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+
+    .register-redirect p {
+        font-size: 0.8rem;
+    }
+}

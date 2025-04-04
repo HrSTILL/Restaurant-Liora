@@ -94,7 +94,7 @@ app.Use(async (context, next) =>
     if (
      (path.StartsWithSegments("/Customer") ||
       path.StartsWithSegments("/Account") ||
-      path.StartsWithSegments("/Reservations")) &&
+      path.StartsWithSegments("/Reservation")) &&
      string.IsNullOrEmpty(userRole))
     {
         context.Response.Redirect("/Auth/Restricted");

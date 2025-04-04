@@ -1,7 +1,7 @@
 ﻿window.openDishModal = function (id) {
     const item = window.menuData.find(m => m.id === id);
 
-    document.body.style.overflow = "hidden"; // Спира Scroll-a на страницата.
+    document.body.style.overflow = "hidden"; 
 
     document.getElementById("dishModalName").innerText = item.name;
     document.getElementById("dishModalImage").src = item.imageUrl;
@@ -24,7 +24,7 @@
         const modal = document.getElementById("dishModal");
         if (!modal) return;
 
-        document.body.style.overflow = "auto"; // Пуска Scroll-a на страницата.
+        document.body.style.overflow = "auto"; 
 
         modal.classList.remove("visible");
         setTimeout(() => {

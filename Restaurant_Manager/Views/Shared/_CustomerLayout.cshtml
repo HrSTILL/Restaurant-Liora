@@ -4,45 +4,29 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Restaurant_Manager</title>
-    <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/home/homenavbar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/customer/customernavbar.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-
     @RenderSection("Styles", required: false)
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light custom-navbar">
-            <div class="button-wrapper">
+        <nav class="custom-navbar">
+            <a asp-controller="Customer" asp-action="Index" class="navbar-brand logo-link">
+                <img src="~/Images/Liora_Logo_Cropped.png" alt="Logo" class="top-logo" />
+            </a>
+            <div class="nav-links d-flex align-items-center gap-3 ms-auto">
                 <a href="/Customer/Menu" class="shared-button-style">Menu</a>
                 <a href="/Customer/SpecialOffers" class="shared-button-style">Special Offers</a>
-                <a href="/Reservations/CustomerReservations" class="shared-button-style">Reservations</a>
-            </div>
-
-            <div class="container-fluid justify-content-center">
-                <a asp-controller="Customer" asp-action="Index" class="navbar-brand logo-link">
-                    <img src="~/Images/Liora_Logo_Cropped.png" alt="Logo" class="top-logo" />
-                </a>
-            </div>
-
-            <div class="button2-wrapper">
-                <a href="/Account/CustomerAccount" class="shared-button-style">
-                    <i class="fas fa-user"></i>
-                </a>
-                <a href="/Customer/CustomerCart" class="shared-button-style">
-                   <i class="fas fa-shopping-cart"></i> 
-                </a>
+                <a href="/Reservation/CustomerReservations" class="shared-button-style">Reservations</a>
+                <a href="/Account/CustomerAccount" class="shared-button-style"><i class="fas fa-user"></i></a>
+                <a href="/Customer/CustomerCart" class="shared-button-style"><i class="fas fa-shopping-cart"></i></a>
                 <form asp-action="Logout" asp-controller="Auth" method="post" style="display:inline;">
                     <button type="submit" class="shared-button-style btn-nav">Logout</button>
                 </form>
-
             </div>
         </nav>
     </header>
-
-
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -50,10 +34,8 @@
         </main>
     </div>
 
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
