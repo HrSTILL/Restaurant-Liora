@@ -1,0 +1,42 @@
+﻿@model List<Restaurant_Manager.Models.Order>
+
+<table class="order-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Placed On</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Items</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>#@order.Id</td>
+                <td>@order.CreatedAt.ToString("g")</td>
+                <td>@order.TotalPrice.ToString("C")</td>
+                <td style="text-transform: capitalize;">@order.Status</td>
+                <td>
+                    <ul class="order-items">
+                        @foreach (var item in order.OrderItems)
+                        {
+                            <li>@item.MenuItem.Name x @item.Quantity</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    @if (order.Status == "pending")
+                    {
+                        <form asp-controller="Order" asp-action="CancelOrder" method="post">
+                            <input type="hidden" name="id" value="@order.Id" />
+                            <button type="submit" class="cancel-btn">Cancel Order</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

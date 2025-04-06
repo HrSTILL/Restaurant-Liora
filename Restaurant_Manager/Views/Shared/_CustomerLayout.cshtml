@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Restaurant_Manager.Utils
+@{
+    var cart = Context.Session.GetObjectFromJson<List<Restaurant_Manager.ViewModels.CartItem>>("Cart") ?? new List<Restaurant_Manager.ViewModels.CartItem>();
+    var cartCount = cart.Sum(i => i.Quantity);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -6,6 +12,7 @@
     <title>@ViewData["Title"] - Restaurant_Manager</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/customer/customernavbar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/cart/customercart.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     @RenderSection("Styles", required: false)
 </head>
@@ -20,7 +27,10 @@
                 <a href="/Customer/SpecialOffers" class="shared-button-style">Special Offers</a>
                 <a href="/Reservation/CustomerReservations" class="shared-button-style">Reservations</a>
                 <a href="/Account/CustomerAccount" class="shared-button-style"><i class="fas fa-user"></i></a>
-                <a href="/Customer/CustomerCart" class="shared-button-style"><i class="fas fa-shopping-cart"></i></a>
+                <a href="/Cart/CustomerCart" class="shared-button-style position-relative">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartBadge" class="cart-badge" style="@(cartCount > 0 ? "" : "display:none")">@cartCount</span>
+                </a>
                 <form asp-action="Logout" asp-controller="Auth" method="post" style="display:inline;">
                     <button type="submit" class="shared-button-style btn-nav">Logout</button>
                 </form>

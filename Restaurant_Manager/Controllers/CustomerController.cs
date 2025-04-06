@@ -37,9 +37,5 @@ namespace Restaurant_Manager.Controllers
 
             return View(specials);
         }
-        public IActionResult CustomerCart()
-        {
-            return View();
-        }
     }
 }

@@ -8,7 +8,7 @@
 @using Newtonsoft.Json.Serialization
 
 @section Styles {
-    <link href="~/css/customer/customermenu.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/customer/customermenu.css" asp-append-version="true" />
 }
 
 @functions {
@@ -50,11 +50,8 @@
                             <h3>@item.Name</h3>
                             <p>@item.Description</p>
                             <strong class="price">@item.Price.ToString("C")</strong><br />
-                           
-                                <form method="post" asp-action="Order" asp-controller="Order">
-                                    <input type="hidden" name="menuItemId" value="@item.Id" />
-                                    <button type="submit" class="order-btn">Add To Cart</button>
-                                </form>
+
+                            <button onclick="tryAddToCart(@item.Id)" class="order-btn">Add To Cart</button>
                           
                         </div>
                     }
@@ -81,10 +78,7 @@
 
         @if (User.Identity?.IsAuthenticated ?? false)
         {
-            <form id="modalOrderForm" method="post" asp-action="Order" asp-controller="Order">
-                <input type="hidden" id="modalMenuItemId" name="menuItemId" />
-                <button type="submit" class="order-btn">Add To Cart</button>
-            </form>
+            <button onclick="tryAddToCartFromModal()" class="order-btn">Add To Cart</button>
         }
         else
         {
@@ -92,6 +86,21 @@
         }
     </div>
 </div>
+
+
+<div id="reservationPromptModal" class="reservation-modal-overlay">
+    <div class="reservation-modal-content">
+        <h2>⚠ No Active Reservation</h2>
+        <p>You don't have an active reservation right now.</p>
+        <p>You must reserve a table before adding items to your cart.</p>
+        <div class="reservation-modal-actions">
+            <a href="/Reservation/CustomerReservations" class="modal-btn confirm">Make a Reservation</a>
+            <button onclick="closeReservationPrompt()" class="modal-btn cancel">Maybe Later</button>
+        </div>
+    </div>
+</div>
+
+
 
 @section Scripts {
     <script>

@@ -1,0 +1,33 @@
+﻿@section Styles {
+    <link rel="stylesheet" href="~/css/order/ordersuccess.css" asp-append-version="true" />
+}
+
+<div class="order-success-wrapper">
+    <h2>🎉 Order Placed Successfully! 🎉</h2>
+    <p>Thank you for your order. Below are the details:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>@item.MenuItem.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Subtotal.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p class="total"><strong>Total:</strong> @Model.TotalPrice.ToString("C")</p>
+
+    <a href="/Customer/Menu" class="btn">Back to Menu</a>
+    <a href="/Order/MyOrders" class="btn">My Orders</a>
+</div>

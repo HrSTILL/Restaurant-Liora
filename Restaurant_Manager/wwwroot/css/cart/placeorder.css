@@ -1,0 +1,76 @@
+﻿.place-order-wrapper {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 40px;
+    background: #fffaf0;
+    border: 2px solid #d6a75c;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    font-family: 'Georgia', serif;
+}
+
+    .place-order-wrapper h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #3d2f1b;
+    }
+
+.place-order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+    .place-order-table th,
+    .place-order-table td {
+        padding: 12px 16px;
+        text-align: center;
+        border-bottom: 1px solid #d6a75c;
+    }
+
+.order-summary {
+    text-align: right;
+    font-size: 1.2rem;
+    color: #3d2f1b;
+    margin-bottom: 20px;
+    margin-right:25px;
+}
+
+.confirm-btn, .back-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-right: 12px;
+}
+
+.confirm-btn {
+    background: linear-gradient(135deg, #f3e5ab, #d6a75c);
+    color: #3d2f1b;
+    border: none;
+}
+
+    .confirm-btn:hover {
+        background: linear-gradient(135deg, #d6a75c, #f3e5ab);
+    }
+
+.back-btn {
+    background: none;
+    border: 2px solid #d6a75c;
+    color: #3d2f1b;
+}
+
+    .back-btn:hover {
+        background: #f3e5ab;
+    }
+
+.order-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between; 
+    margin-top: 20px;
+    flex-wrap: wrap;
+}

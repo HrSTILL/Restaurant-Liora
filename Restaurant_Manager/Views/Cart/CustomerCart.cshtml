@@ -1,0 +1,58 @@
+﻿@model List<Restaurant_Manager.ViewModels.CartItem>
+
+@{
+    ViewData["Title"] = "Your Cart";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/cart/customercart.css" asp-append-version="true" />
+}
+
+<div class="cart-wrapper">
+    <h2 class="cart-heading">🛒 Your Cart 🛒</h2>
+
+    @if (!Model.Any())
+    {
+        <p class="empty-cart">Your cart is empty.</p>
+    }
+    else
+    {
+        <div class="cart-items">
+            @foreach (var item in Model)
+            {
+                <div class="cart-item">
+                    <img src="@item.ImageUrl" alt="@item.Name" class="cart-img" />
+                    <div class="cart-info">
+                        <h4>@item.Name</h4>
+                        @if (!string.IsNullOrEmpty(item.Tags))
+                        {
+                            <strong class="cart-tags">Tags: @item.Tags</strong>
+                        }
+                        <p>@item.Price.ToString("C")</p>
+                        <div class="quantity-box">
+                            <form method="post" asp-action="UpdateQuantity" class="quantity-form">
+                                <input type="hidden" name="menuItemId" value="@item.MenuItemId" />
+                                <button type="submit" name="quantity" value="@(item.Quantity - 1)" class="qty-btn">➖</button>
+                                <span>@item.Quantity</span>
+                                <button type="submit" name="quantity" value="@(item.Quantity + 1)" class="qty-btn">➕</button>
+                            </form>
+                        </div>
+                    </div>
+                    <form asp-action="RemoveFromCart" method="post" class="remove-form">
+                        <input type="hidden" name="menuItemId" value="@item.MenuItemId" />
+                        <button type="submit" class="remove-btn">❌</button>
+                    </form>
+                </div>
+            }
+        </div>
+
+        <div class="cart-actions">
+            <form asp-controller="Cart" asp-action="ClearCart" method="post">
+                <button type="submit" class="clear-btn">Clear Cart</button>
+            </form>
+
+            <a asp-controller="Cart" asp-action="PlaceOrder" class="place-order-btn">Place Order</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,148 @@
+﻿.cart-wrapper {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 30px;
+    background: #fffaf0;
+    border: 1px solid #d6a75c;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.cart-heading {
+    text-align: center;
+    font-size: 2rem;
+    color: #3d2f1b;
+    margin-bottom: 30px;
+    font-family: 'Georgia', serif;
+}
+
+.empty-cart {
+    text-align: center;
+    color: #6d5844;
+    font-size: 1.2rem;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart-item {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: background-color 0.3s, border 0.1s;
+    position: relative;
+}
+
+    .cart-item:hover {
+        background-color: #fff4d9;
+        border: 1.5px solid #d6a75c;
+    }
+
+.cart-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.cart-info {
+    flex: 1;
+}
+
+    .cart-info h4 {
+        margin: 0;
+        color: #3d2f1b;
+        font-size: 1.2rem;
+    }
+
+    .cart-info p {
+        color: #6c584c;
+        margin: 5px 0;
+    }
+
+    .cart-info .tags {
+        font-size: 0.9rem;
+        color: #7a5f3d;
+        margin-top: 5px;
+    }
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 10px;
+}
+
+
+.qty-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1;
+    margin: 0 4px;
+    transition: transform 0.2s ease;
+}
+
+    .qty-btn:hover {
+        transform: scale(1.2);
+    }
+
+
+.qty-display {
+    width: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 1rem;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.remove-btn:hover{
+    opacity:75%;
+}
+
+.cart-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.clear-btn,
+.place-order-btn {
+    padding: 10px 24px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #3d2f1b;
+    background: linear-gradient(135deg, #f3e5ab, #d6a75c);
+    transition: transform 0.2s ease;
+    margin: 5px;
+    text-decoration: none;
+}
+
+    .clear-btn:hover,
+    .place-order-btn:hover {
+        background: linear-gradient(135deg, #d6a75c, #f3e5ab);
+        transform: translateY(-2px);
+    }
+
+

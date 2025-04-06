@@ -114,6 +114,18 @@
     </div>
 </div>
 
+@if (TempData["OverlapError"] != null)
+{
+    <div class="modal-overlay show" id="overlapModal">
+        <div class="modal-content">
+            <h2>Reservation Conflict</h2>
+            <p>@TempData["OverlapError"]</p>
+            <button class="modal-close-btn-2" onclick="closeOverlapModal()">Close</button>
+        </div>
+    </div>
+}
+
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

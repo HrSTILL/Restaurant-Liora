@@ -1,0 +1,49 @@
+﻿@model Restaurant_Manager.ViewModels.CustomerOrdersViewModel
+
+@{
+    ViewData["Title"] = "My Orders";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/order/myorders.css" asp-append-version="true" />
+}
+
+<div class="my-orders">
+    <h2>🧾 My Orders 🧾</h2>
+
+    @if (!Model.Pending.Any() && !Model.Preparing.Any() && !Model.Served.Any() && !Model.Completed.Any() && !Model.Cancelled.Any())
+    {
+        <p class="no-orders">You haven't placed any orders yet.</p>
+    }
+
+    @if (Model.Pending.Any())
+    {
+        <h3>🟡 Pending</h3>
+        @Html.Partial("_OrderTable", Model.Pending)
+    }
+
+    @if (Model.Preparing.Any())
+    {
+        <h3>🍳 Preparing</h3>
+        @Html.Partial("_OrderTable", Model.Preparing)
+    }
+
+    @if (Model.Served.Any())
+    {
+        <h3>🍽️ Served</h3>
+        @Html.Partial("_OrderTable", Model.Served)
+    }
+
+    @if (Model.Completed.Any())
+    {
+        <h3>✅ Completed</h3>
+        @Html.Partial("_OrderTable", Model.Completed)
+    }
+
+    @if (Model.Cancelled.Any())
+    {
+        <h3>🔴 Cancelled</h3>
+        @Html.Partial("_OrderTable", Model.Cancelled)
+    }
+</div>

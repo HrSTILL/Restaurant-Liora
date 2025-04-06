@@ -7,6 +7,7 @@
 
 .menu-section {
     padding: 30px;
+    border: 1px solid #d6a75c;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     background-color: #fffaf0;
@@ -28,6 +29,7 @@
 
 .menu-card {
     background: #fff8f6;
+    border: 2px solid #d6a75c;
     border-radius: 12px;
     padding: 20px;
     text-align: center;
@@ -110,10 +112,15 @@
     align-items: center;
     z-index: 9999;
     padding: 20px;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(10px);
 }
 
     #dishModal.show {
         display: flex;
+        pointer-events: auto;
     }
 
     #dishModal.visible {
@@ -123,6 +130,7 @@
 .dish-modal-content {
     background: #fdfaf6;
     padding: 30px;
+    border: 3px solid #d6a75c;
     border-radius: 16px;
     max-width: 600px;
     width: 90%;
@@ -198,7 +206,15 @@
     }
 }
 
-
+body.modal-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+ 
+html {
+    overflow-y: auto;
+}
 
 
 @media (max-width: 576px) {
@@ -223,3 +239,82 @@
         padding-top: 200px;
     }
 }
+
+
+.reservation-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+    .reservation-modal-overlay.show {
+        display: flex;
+    }
+
+.reservation-modal-content {
+    background: #fffaf0;
+    padding: 40px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+    .reservation-modal-content h2 {
+        margin-bottom: 10px;
+        color: #3d2f1b;
+    }
+
+    .reservation-modal-content p {
+        color: #5a4531;
+        margin-bottom: 20px;
+    }
+
+.reservation-modal-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .modal-btn.confirm {
+        background: linear-gradient(135deg, #f3e5ab, #d6a75c);
+        text-decoration:none;
+        color: #3d2f1b;
+    }
+
+    .modal-btn.cancel {
+        background-color: #fff8f6;
+        border: 2px solid #d6a75c;
+        color: #3d2f1b;
+        font-weight: bold;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+        .modal-btn.cancel:hover {
+            background-color: #f3e5ab;
+            transform: scale(1.03);
+        }
+
+
+    .modal-btn:hover {
+        transform: translateY(-1px);
+    }

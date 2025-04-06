@@ -167,3 +167,22 @@
     document.querySelector(".step-time .back-btn").addEventListener("click", () => showStep(".step-day"));
     document.querySelector(".step-people .back-btn").addEventListener("click", () => showStep(".step-time"));
 });
+
+function closeOverlapModal() {
+    const modal = document.getElementById("overlapModal");
+    if (modal) {
+        modal.classList.remove("show");
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 200);
+    }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+    const hasOverlap = '@TempData["OverlapError"]' !== '';
+    if (hasOverlap) {
+        document.getElementById("overlapModal").style.display = "flex";
+    }
+});
+ 
+

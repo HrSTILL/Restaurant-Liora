@@ -2,23 +2,16 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class Order
+namespace Restaurant_Manager.Models
 {
-    public int Id { get; set; }
-
-    [Required]
-    public int UserId { get; set; }
-
-    [ForeignKey("UserId")]
-    public User User { get; set; }
-
-    [Required]
-    public string Status { get; set; } = "pending"; 
-
-    [Required]
-    public decimal TotalPrice { get; set; }
-
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    public ICollection<OrderItem> OrderItems { get; set; }
+    public class Order
+    {
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
+        public decimal TotalPrice { get; set; }
+        public string Status { get; set; }
+        public DateTime CreatedAt { get; set; }
+    }
 }

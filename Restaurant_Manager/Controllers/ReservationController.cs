@@ -37,7 +37,13 @@ public class ReservationController : Controller
         });
     }
 
-    public IActionResult ReservationSuccess() => View();
+    public IActionResult ReservationSuccess()
+    {
+        if (TempData["SuccessMessage"] == null)
+            return RedirectToAction("CustomerReservations");
+
+        return View();
+    }
 
     [HttpGet]
     public async Task<IActionResult> CustomerReservations()
@@ -99,42 +105,47 @@ public class ReservationController : Controller
             _ => int.MaxValue
         };
 
-        TimeSpan reservationDuration = model.DurationType switch
-        {
-            "Extended" => TimeSpan.FromHours(3),
-            "ExtendedPlus" => TimeSpan.FromHours(6),
-            _ => TimeSpan.FromMinutes(90)
-        };
-
+        TimeSpan reservationDuration = GetDuration(model.DurationType);
         var startTime = reservationTime;
         var endTime = reservationTime.Add(reservationDuration);
+
+        var overlappingUserReservations = await _context.Reservations
+            .Where(r => r.UserId == userId && r.Status != "cancelled")
+            .ToListAsync();
+
+        bool hasOverlap = overlappingUserReservations.Any(r =>
+        {
+            var rStart = r.ReservationTime;
+            var rEnd = rStart + GetDuration(r.DurationType);
+            return rStart < endTime && rEnd > startTime;
+        });
+
+        if (hasOverlap)
+        {
+            TempData["OverlapError"] = "❌ You already have a reservation during this time.";
+            return RedirectToAction("CustomerReservations");
+        }
 
         var availableTables = await _context.RestaurantTables
             .Where(t => t.Seats >= model.NumberOfPeople && t.Seats <= maxSeats && t.Area == model.SeatingArea)
             .OrderBy(t => t.Seats)
             .ToListAsync();
 
-        var overlappingReservations = await _context.Reservations
+        var allReservations = await _context.Reservations
             .Where(r => r.Status != "cancelled")
-            .ToListAsync(); 
+            .ToListAsync();
 
-        var reservedTableIds = overlappingReservations
+        var reservedTableIds = allReservations
             .Where(r =>
             {
                 var rStart = r.ReservationTime;
-                var rEnd = rStart + (r.DurationType == "Extended"
-                    ? TimeSpan.FromHours(3)
-                    : r.DurationType == "ExtendedPlus"
-                        ? TimeSpan.FromHours(6)
-                        : TimeSpan.FromMinutes(90));
+                var rEnd = rStart + GetDuration(r.DurationType);
                 return rStart < endTime && rEnd > startTime;
             })
             .Select(r => r.TableId)
             .ToList();
 
-        var freeTables = availableTables
-            .Where(t => !reservedTableIds.Contains(t.Id))
-            .ToList();
+        var freeTables = availableTables.Where(t => !reservedTableIds.Contains(t.Id)).ToList();
 
         if (!freeTables.Any())
         {
@@ -178,4 +189,11 @@ public class ReservationController : Controller
         TempData["SuccessMessage"] = "Reservation created successfully!";
         return RedirectToAction("ReservationSuccess");
     }
+
+    private TimeSpan GetDuration(string type) => type switch
+    {
+        "Extended" => TimeSpan.FromHours(3),
+        "ExtendedPlus" => TimeSpan.FromHours(6),
+        _ => TimeSpan.FromMinutes(90)
+    };
 }

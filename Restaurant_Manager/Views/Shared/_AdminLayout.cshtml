@@ -12,27 +12,23 @@
 </head>
 <body>
     <header>
-        
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light custom-navbar">
-            <div class="button-wrapper">
-                <div class="container-fluid justify-content-center">
-                    <a asp-controller="Admin" asp-action="AdminDash" class="navbar-brand logo-link">
-                        <img src="~/Images/Liora_Logo_Cropped.png" alt="Logo" class="top-logo" />
-                    </a>
-                </div>
+            <nav class="custom-navbar">
+            <a asp-controller="Admin" asp-action="AdminDash" class="navbar-brand logo-link">
+                <img src="~/Images/Liora_Logo_Cropped.png" alt="Logo" class="top-logo" />
+            </a>
+                <div class="nav-links d-flex align-items-center gap-3 ms-auto">
                 <a href="/Admin/AdminMenu" class="shared-button-style">Menu</a>
                 <a href="/Admin/AdminSpecialOffers" class="shared-button-style">Special Offers</a>
                 <a href="/Admin/AdminOrders" class="shared-button-style">Orders</a>
                 <a href="/Admin/AdminReservations" class="shared-button-style">Reservations</a>
-            </div>
-
-            <div class="button2-wrapper">
-            <a href="/Admin/AdminReports" class="shared-button-style">Reports</a>
-            <a href="/Admin/AdminTables" class="shared-button-style">Tables</a>
-            <a href="/Admin/ManageStaff" class="shared-button-style">Manage Staff</a>
-            <a href="/Admin/ManageUsers" class="shared-button-style">Manage Users</a>
-            </div>
-        </nav>
+                <a href="/Admin/AdminReports" class="shared-button-style">Reports</a>
+                <a href="/Admin/ManageStaff" class="shared-button-style">Manage Staff</a>
+                <a href="/Admin/ManageUsers" class="shared-button-style">Manage Users</a>
+                <form asp-action="Logout" asp-controller="Auth" method="post" style="display:inline;">
+                    <button type="submit" class="shared-button-style btn-nav">Logout</button>
+                </form>
+                </div>
+            </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">

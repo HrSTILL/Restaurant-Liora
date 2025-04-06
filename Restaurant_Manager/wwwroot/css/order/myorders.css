@@ -1,0 +1,63 @@
+﻿.my-orders {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #fffaf0;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    font-family: 'Georgia', serif;
+}
+
+    .my-orders h2 {
+        text-align: center;
+        font-size: 2rem;
+        color: #3d2f1b;
+        margin-bottom: 30px;
+    }
+
+    .my-orders h3 {
+        margin-top: 40px;
+        color: #3d2f1b;
+        border-bottom: 1px solid #d6a75c;
+        padding-bottom: 5px;
+    }
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+    .order-table th,
+    .order-table td {
+        padding: 12px 14px;
+        border-bottom: 1px solid #e4d4ba;
+        text-align: left;
+    }
+
+    .order-table th {
+        background-color: #f3e5ab;
+        font-weight: bold;
+    }
+
+.order-items {
+    padding-left: 20px;
+    list-style: disc;
+    margin: 0;
+}
+
+.cancel-btn {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+    .cancel-btn:hover {
+        color: darkred;
+        transform: scale(1.05);
+    }
