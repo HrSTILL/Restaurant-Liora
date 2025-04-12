@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Restaurant_Manager.Data;
 using Restaurant_Manager.Models;
+using Restaurant_Manager.Models.ViewModels;
 using Restaurant_Manager.Utils;
 using Restaurant_Manager.ViewModels;
 using System;
@@ -43,10 +44,39 @@ namespace Restaurant_Manager.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddToCartAjax([FromBody] AddToCartRequest data)
+        public async Task<JsonResult> AddToCartAjax([FromBody] AddToCartRequest data)
         {
-            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+            var userIdStr = HttpContext.Session.GetString("UserId");
+            if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out int userId))
+                return Json(new { success = false, message = "Not logged in" });
 
+            if (!await IsUserReservationActive(userId))
+                return Json(new { success = false, message = "No valid reservation." });
+
+            var now = DateTime.Now;
+
+            var reservationsToday = await _context.Reservations
+                .Where(r => r.UserId == userId &&
+                            (r.Status == "pending" || r.Status == "confirmed") &&
+                            r.ReservationTime.Date == now.Date)
+                .ToListAsync();
+
+            var hasValidReservation = reservationsToday
+                .Select(r => new
+                {
+                    Start = r.ReservationTime.AddMinutes(-30),
+                    End = r.ReservationTime.Add(GetReservationDuration(r.DurationType))
+                })
+                .Any(x => now >= x.Start && now <= x.End);
+
+            if (!hasValidReservation)
+            {
+                HttpContext.Session.Remove("Cart");
+                HttpContext.Session.SetString("CartStatus", "Disabled");
+                return Json(new { success = false, message = "No valid reservation." });
+            }
+
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
             var item = _context.MenuItems.FirstOrDefault(m => m.Id == data.MenuItemId);
             if (item == null)
                 return Json(new { success = false });
@@ -65,15 +95,16 @@ namespace Restaurant_Manager.Controllers
                     Tags = item.Tags
                 });
 
-            HttpContext.Session.SetObjectAsJson("Cart", cart);
+            HttpContext.Session.SetObjectAsJson(CartSessionKey, cart);
             return Json(new { success = true, itemCount = cart.Sum(i => i.Quantity) });
         }
+
+
 
         public class AddToCartRequest
         {
             public int MenuItemId { get; set; }
         }
-
 
         [HttpPost]
         public IActionResult RemoveFromCart(int menuItemId)
@@ -102,12 +133,50 @@ namespace Restaurant_Manager.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> UpdateQuantityAjax([FromBody] UpdateQuantityRequestViewModel request)
+        {
+            var userIdStr = HttpContext.Session.GetString("UserId");
+            if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out int userId) || !await IsUserReservationActive(userId))
+                return Json(new { success = false, message = "No valid reservation." });
+
+            var cart = GetCart();
+            var item = cart.FirstOrDefault(x => x.MenuItemId == request.MenuItemId);
+            if (item != null && request.Quantity > 0)
+            {
+                item.Quantity = request.Quantity;
+                SaveCart(cart);
+                return Json(new { success = true });
+            }
+
+            return Json(new { success = false });
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> RemoveFromCartAjax([FromBody] RemoveRequestViewModel data)
+        {
+            var userIdStr = HttpContext.Session.GetString("UserId");
+            if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out int userId) || !await IsUserReservationActive(userId))
+                return Json(new { success = false, message = "No valid reservation." });
+
+            var cart = GetCart();
+            var item = cart.FirstOrDefault(x => x.MenuItemId == data.MenuItemId);
+
+            if (item != null)
+            {
+                cart.Remove(item);
+                SaveCart(cart);
+                return Json(new { success = true, newCount = cart.Sum(i => i.Quantity) });
+            }
+
+            return Json(new { success = false });
+        }
+
+        [HttpPost]
         public IActionResult ClearCart()
         {
             HttpContext.Session.Remove("Cart");
             return RedirectToAction("CustomerCart");
         }
-
 
         [HttpGet]
         public IActionResult PlaceOrder()
@@ -130,30 +199,12 @@ namespace Restaurant_Manager.Controllers
             if (!cart.Any())
                 return RedirectToAction("CustomerCart");
 
-            var now = DateTime.Now;
-
-            var reservationsToday = await _context.Reservations
-                .Where(r => r.UserId == userId && r.ReservationTime.Date == now.Date)
-                .ToListAsync();
-
-            var validReservation = reservationsToday
-                .Select(r => new
-                {
-                    Reservation = r,
-                    Start = r.ReservationTime.AddMinutes(-30),
-                    End = r.ReservationTime.Add(GetReservationDuration(r.DurationType))
-                })
-                .Where(x => now >= x.Start && now <= x.End)
-                .OrderBy(x => Math.Abs((x.Reservation.ReservationTime - now).Ticks))
-                .FirstOrDefault();
-
-            if (validReservation == null)
+            if (!await IsUserReservationActive(userId))
             {
+                HttpContext.Session.Remove(CartSessionKey);
                 TempData["Error"] = "You don’t have an active reservation right now.";
                 return RedirectToAction("CustomerCart");
             }
-
-            var reservation = validReservation.Reservation;
 
             var order = new Order
             {
@@ -173,8 +224,8 @@ namespace Restaurant_Manager.Controllers
             await _context.SaveChangesAsync();
 
             HttpContext.Session.Remove(CartSessionKey);
-
             TempData["LastOrderId"] = order.Id;
+
             return RedirectToAction("OrderSuccess", "Order");
         }
 
@@ -185,11 +236,16 @@ namespace Restaurant_Manager.Controllers
             if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out int userId))
                 return Json(new { success = false });
 
-            var now = DateTime.Now;
-            var today = DateTime.Today;
+            return Json(new { success = await IsUserReservationActive(userId) });
+        }
 
+        private async Task<bool> IsUserReservationActive(int userId)
+        {
+            var now = DateTime.Now;
             var reservationsToday = await _context.Reservations
-                .Where(r => r.UserId == userId && r.ReservationTime.Date == today)
+                .Where(r => r.UserId == userId &&
+                            (r.Status == "pending" || r.Status == "confirmed") &&
+                            r.ReservationTime.Date == now.Date)
                 .ToListAsync();
 
             var isActive = reservationsToday
@@ -200,8 +256,15 @@ namespace Restaurant_Manager.Controllers
                 })
                 .Any(x => now >= x.Start && now <= x.End);
 
-            return Json(new { success = isActive });
+            if (!isActive)
+            {
+                HttpContext.Session.Remove("Cart");
+                HttpContext.Session.SetString("CartStatus", "Disabled");
+            }
+
+            return isActive;
         }
+
 
         private TimeSpan GetReservationDuration(string type) => type switch
         {

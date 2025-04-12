@@ -23,20 +23,22 @@
 
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 24px;
 }
 
 .menu-card {
+    width: 100%;
     background: #fff8f6;
     border: 2px solid #d6a75c;
     border-radius: 12px;
-    padding: 20px;
+    padding: 16px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     height: 100%;
+    min-height: 360px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: transform 0.2s ease;
 }
@@ -46,26 +48,32 @@
     }
 
 .menu-img {
-    width: 100%;
-    height: auto;
+    height: 220px;
+    width: auto;
     object-fit: contain;
-    border-radius: 10px;
     cursor: pointer;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     display: block;
+    transition: transform 0.3s ease;
+    background-color: #fff8f6;
+    padding: 8px;
+    border-radius: 16px;
 }
 
+    .menu-img:hover {
+        transform: scale(1.02);
+    }
 
 .menu-card h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #3d2f1b;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .menu-card p {
     color: #6c584c;
-    font-size: 0.95rem;
-    margin-bottom: 10px;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
 }
 
 .old-price {
@@ -81,9 +89,9 @@
     background: linear-gradient(135deg, #f3e5ab, #d6a75c);
     color: #3d2f1b;
     border: none;
-    padding: 12px 24px;
+    padding: 10px 20px;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.95rem;
     border-radius: 8px;
     cursor: pointer;
     text-align: center;
@@ -91,7 +99,7 @@
     transition: all 0.3s ease;
     margin-top: auto;
     width: 100%;
-    max-width: 280px;
+    max-width: 240px;
     align-self: center;
 }
 

@@ -3,7 +3,8 @@
     margin: 60px auto;
     padding: 30px;
     background-color: #fffaf0;
-    border-radius: 12px;
+    border-radius: 16px;
+    border: 1px solid #d6a75c;
     box-shadow: 0 8px 24px rgba(0,0,0,0.08);
     font-family: 'Georgia', serif;
 }
@@ -25,20 +26,37 @@
 .order-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
-    margin-bottom: 30px;
+    margin: 20px 0;
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
 }
 
-    .order-table th,
-    .order-table td {
-        padding: 12px 14px;
-        border-bottom: 1px solid #e4d4ba;
+    .order-table thead {
+        background-color: #f3e5ab;
+        color: #3d2f1b;
         text-align: left;
     }
 
+    .order-table th,
+    .order-table td {
+        padding: 14px 20px;
+        border-bottom: 1px solid #eee;
+        font-variant-numeric: tabular-nums;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
     .order-table th {
-        background-color: #f3e5ab;
         font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .order-table td {
+        color: #4a3b2b;
+        vertical-align: middle;
     }
 
 .order-items {
@@ -48,16 +66,18 @@
 }
 
 .cancel-btn {
-    background: none;
-    border: none;
+    background-color: transparent;
     color: red;
-    font-size: 1rem;
+    border: none;
+    font-size: 1.1rem;
     cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
     font-weight: bold;
-    text-decoration: none;
 }
 
     .cancel-btn:hover {
-        color: darkred;
+        background-color: rgba(255, 0, 0, 0.1);
         transform: scale(1.05);
     }

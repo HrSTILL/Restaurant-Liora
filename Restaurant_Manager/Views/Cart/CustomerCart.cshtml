@@ -8,6 +8,10 @@
 @section Styles {
     <link rel="stylesheet" href="~/css/cart/customercart.css" asp-append-version="true" />
 }
+@section Scripts {
+    <script src="~/js/cart.js" asp-append-version="true"></script>
+    <script src="~/js/menu.js" asp-append-version="true"></script>
+}
 
 <div class="cart-wrapper">
     <h2 class="cart-heading">🛒 Your Cart 🛒</h2>
@@ -31,18 +35,12 @@
                         }
                         <p>@item.Price.ToString("C")</p>
                         <div class="quantity-box">
-                            <form method="post" asp-action="UpdateQuantity" class="quantity-form">
-                                <input type="hidden" name="menuItemId" value="@item.MenuItemId" />
-                                <button type="submit" name="quantity" value="@(item.Quantity - 1)" class="qty-btn">➖</button>
-                                <span>@item.Quantity</span>
-                                <button type="submit" name="quantity" value="@(item.Quantity + 1)" class="qty-btn">➕</button>
-                            </form>
+                            <button class="qty-btn" type="button" onclick="updateCartQuantity(@item.MenuItemId, @item.Quantity - 1)">➖</button>
+                            <span>@item.Quantity</span>
+                            <button class="qty-btn" type="button" onclick="updateCartQuantity(@item.MenuItemId, @item.Quantity + 1)">➕</button>
                         </div>
                     </div>
-                    <form asp-action="RemoveFromCart" method="post" class="remove-form">
-                        <input type="hidden" name="menuItemId" value="@item.MenuItemId" />
-                        <button type="submit" class="remove-btn">❌</button>
-                    </form>
+                    <button onclick="removeFromCart(@item.MenuItemId, this)" class="remove-btn">❌</button>
                 </div>
             }
         </div>

@@ -449,3 +449,21 @@ select.form-input {
         background: linear-gradient(135deg, #d6a75c, #f3e5ab);
         transform: translateY(-1px);
     }
+
+
+.cancel-btn {
+    background-color: transparent;
+    color: red;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    font-weight: bold;
+}
+
+    .cancel-btn:hover {
+        background-color: rgba(255, 0, 0, 0.1);
+        transform: scale(1.05);
+    }

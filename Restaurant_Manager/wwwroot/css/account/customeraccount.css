@@ -1,0 +1,68 @@
+﻿.account-outer {
+    background-color: #fdf7ef;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(170, 132, 83, 0.1);
+    max-width: 1200px;
+    margin: 2rem auto;
+    border: 2px solid #d6a75c;
+}
+
+.account-wrapper {
+    text-align: center;
+}
+
+.account-heading {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+    font-family: 'Georgia', serif;
+}
+
+.account-card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    justify-items: center;
+}
+
+.account-card {
+    background-color: #fff;
+    border: 2px solid #d6a75c;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 230px;
+    width: 100%;
+    max-width: 220px;
+}
+
+    .account-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .account-card .icon {
+        font-size: 2.5rem;
+        color: #aa8453;
+        margin-bottom: 1rem;
+    }
+
+@media (max-width: 992px) {
+    .account-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .account-card-grid {
+        grid-template-columns: 1fr;
+    }
+}

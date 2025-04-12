@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Restaurant_Manager.Controllers;
 using Restaurant_Manager.Data;
 using Restaurant_Manager.Models;
 using Restaurant_Manager.ViewModels;
@@ -196,4 +197,49 @@ public class ReservationController : Controller
         "ExtendedPlus" => TimeSpan.FromHours(6),
         _ => TimeSpan.FromMinutes(90)
     };
+
+    [HttpPost]
+    public async Task<IActionResult> Cancel(int id)
+    {
+        var reservation = await _context.Reservations.FindAsync(id);
+        if (reservation == null || reservation.Status != "pending")
+        {
+            return RedirectToAction("MyReservations");
+        }
+
+        reservation.Status = "cancelled";
+        await _context.SaveChangesAsync();
+
+        var userIdStr = HttpContext.Session.GetString("UserId");
+        if (!string.IsNullOrEmpty(userIdStr) && int.TryParse(userIdStr, out int userId))
+        {
+            var now = DateTime.Now;
+
+            var reservationsToday = await _context.Reservations
+                .Where(r => r.UserId == userId && r.ReservationTime.Date == now.Date)
+                .ToListAsync();
+
+            var hasValid = reservationsToday
+                .Select(r => new
+                {
+                    Start = r.ReservationTime.AddMinutes(-30),
+                    End = r.ReservationTime.Add(r.DurationType switch
+                    {
+                        "Extended" => TimeSpan.FromHours(3),
+                        "ExtendedPlus" => TimeSpan.FromHours(6),
+                        _ => TimeSpan.FromMinutes(90)
+                    })
+                })
+                .Any(x => now >= x.Start && now <= x.End);
+
+            if (!hasValid)
+            {
+                HttpContext.Session.Remove("Cart");
+                HttpContext.Session.SetString("CartStatus", "Disabled");
+            }
+        }
+
+        TempData["SuccessMessage"] = "Reservation cancelled successfully.";
+        return RedirectToAction("MyReservations");
+    }
 }

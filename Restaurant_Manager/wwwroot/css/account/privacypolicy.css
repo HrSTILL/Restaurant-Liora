@@ -1,0 +1,76 @@
+﻿body {
+    background-color: #fffaf0;
+    color: #3d2f1b;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 60px 20px;
+    font-family: 'Georgia', serif;
+}
+
+h1, h2 {
+    color: #6b8e23;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 40px;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #5a4531;
+    margin-bottom: 20px;
+}
+
+.contact-box {
+    max-width: 600px;
+    margin: 40px auto 60px;
+    padding: 25px 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+
+    .contact-box h3 {
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+        color: #4CAF50;
+    }
+
+.contact-info p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+
+
+    .contact-info a:hover {
+        text-decoration: underline;
+    }
+
+.brand-name {
+    color: #d6a75c;
+}
+
+footer {
+    margin-top: 60px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #888;
+    padding-bottom: 20px;
+}

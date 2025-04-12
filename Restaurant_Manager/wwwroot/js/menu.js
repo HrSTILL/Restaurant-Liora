@@ -1,8 +1,17 @@
-﻿window.openDishModal = function (id) {
-    const item = window.menuData.find(m => m.id === id);
+﻿let scrollY = 0;
 
-    document.body.style.top = `-${window.scrollY}px`;
-    document.body.classList.add("modal-open");
+window.openDishModal = function (id) {
+    const item = window.menuData.find(m => m.id === id);
+    if (!item) return;
+
+    scrollY = window.scrollY;
+
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.overflow = 'hidden';
+    document.body.style.width = '100%';
 
     document.getElementById("dishModalName").innerText = item.name;
     document.getElementById("dishModalImage").src = item.imageUrl;
@@ -12,10 +21,11 @@
     document.getElementById("dishModalAllergens").innerText = item.allergens || "None";
     document.getElementById("dishModalTags").innerText = item.tags || "";
     document.getElementById("dishModalGlutenFree").innerText = item.isGlutenFree ? "Yes ✅" : "No ❌";
-    document.getElementById("dishModalPrepTime").innerText = item.prepTimeMinutes ? `${item.prepTimeMinutes} minutes` : "N/A";
+    document.getElementById("dishModalPrepTime").innerText = `${item.prepTimeMinutes} minutes` || "N/A";
 
     const modal = document.getElementById("dishModal");
     modal.style.display = "flex";
+
     requestAnimationFrame(() => {
         modal.classList.add("show", "visible");
     });
@@ -31,12 +41,18 @@ window.closeDishModal = function () {
         modal.classList.remove("show");
         modal.style.display = "none";
 
-        const scrollY = document.body.style.top;
-        document.body.classList.remove("modal-open");
-        document.body.style.top = "";
-        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.overflow = '';
+        document.body.style.width = '';
+
+        window.scrollTo({ top: scrollY, behavior: "instant" });
     }, 200);
 };
+
+
 
 document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
@@ -64,6 +80,7 @@ window.tryAddToCart = async function (menuItemId) {
         const checkResult = await checkRes.json();
 
         if (!checkResult.success) {
+            updateCartCount(0);
             showReservationPrompt();
             return;
         }
@@ -79,12 +96,20 @@ window.tryAddToCart = async function (menuItemId) {
         if (result.success) {
             updateCartCount(result.itemCount);
         } else {
-            alert("Failed to add item.");
+            if (result.message === "No valid reservation.") {
+                updateCartCount(0);
+                showReservationPrompt();
+            } else {
+                alert("⚠️ Failed to add item: " + (result.message || "Unknown error"));
+            }
         }
     } catch (err) {
-        console.error("Error during cart operation:", err);
+        console.error("Add to cart error:", err);
+        alert("Something went wrong while adding to cart.");
     }
 };
+
+
 
 window.tryAddToCartFromModal = function () {
     const name = document.getElementById("dishModalName").innerText;

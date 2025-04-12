@@ -1,5 +1,43 @@
 ﻿@{
+    ViewData["Title"] = "My Account";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
 
-<p>account</p>
+@section Styles {
+    <link rel="stylesheet" href="~/css/account/customeraccount.css" asp-append-version="true" />
+}
+
+<div class="account-outer">
+    <div class="account-wrapper">
+        <h2 class="account-heading">My Account</h2>
+
+        <div class="account-card-grid">
+            <a href="/Reservation/MyReservations" class="account-card">
+                <i class="fas fa-calendar-check icon"></i>
+                <h3>Reservations</h3>
+                <p>View and manage your reservations</p>
+            </a>
+            <a href="/Order/MyOrders" class="account-card">
+                <i class="fas fa-receipt icon"></i>
+                <h3>Orders</h3>
+                <p>Track your past and current orders</p>
+            </a>
+            <a href="/Account/EditProfile" class="account-card">
+                <i class="fas fa-user-edit icon"></i>
+                <h3>Edit Profile</h3>
+                <p>Update your personal information</p>
+            </a>
+            <a href="/Account/ChangePassword" class="account-card">
+                <i class="fas fa-key icon"></i>
+                <h3>Change Password</h3>
+                <p>Secure your account with a new password</p>
+            </a>
+
+            <a href="/Account/PrivacyPolicy" class="account-card">
+                <i class="fas fa-shield-alt icon"></i>
+                <h3>Privacy Policy</h3>
+                <p>Read about how we protect your data</p>
+            </a>
+        </div>
+    </div>
+</div>
