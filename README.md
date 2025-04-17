@@ -8,7 +8,7 @@
 
 ## Project Overview
 The idea of the project is to develop a full-stack web platform for managing restaurant operations, including reservations, orders, menu management, and reporting.  
-Built using ASP.NET MVC with a connected SQL database for reliable data handling and storage.
+Built using ASP.NET MVC with a connected SQL database for data handling and storage.
 
 - Language: C#, JavaScript
 - Web Languages: HTML5 & CSS3
@@ -17,7 +17,7 @@ Built using ASP.NET MVC with a connected SQL database for reliable data handling
 
 ## Important Dates
 
-📅 **Start Date:** March 2025
+📅 **Start Date:** March 2025 <br/>
 🏁 **End Date:** May 2025
 
 ## Description
