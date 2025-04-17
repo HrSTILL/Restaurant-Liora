@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  <img src="Images/liora-banner.png" alt="Project Banner" width="800" />
+  <img src="Images/Liora_Logo_Cropped.png" alt="Project Banner" width="800" />
 </p>
 
 ## Project Overview
