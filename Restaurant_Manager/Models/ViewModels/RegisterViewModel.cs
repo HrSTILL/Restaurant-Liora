@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 public class RegisterViewModel
 {
@@ -9,12 +10,15 @@ public class RegisterViewModel
     public string Email { get; set; } = string.Empty;
 
     [Required, MaxLength(100)]
+    [RegularExpression(@"^[A-Za-zА-Яа-я]+$", ErrorMessage = "First name must contain only letters.")]
     public string FirstName { get; set; } = string.Empty;
 
     [Required, MaxLength(100)]
+    [RegularExpression(@"^[A-Za-zА-Яа-я]+$", ErrorMessage = "Last name must contain only letters.")]
     public string LastName { get; set; } = string.Empty;
 
-    [MaxLength(20)]
+    [Required, StringLength(10, MinimumLength = 10, ErrorMessage = "Phone number must be exactly 10 digits.")]
+    [RegularExpression(@"^0\d{9}$", ErrorMessage = "Phone must start with 0 and contain only digits.")]
     public string Phone { get; set; } = string.Empty;
 
     [Required, MinLength(6)]

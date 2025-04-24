@@ -1,0 +1,41 @@
+﻿@model Restaurant_Manager.ViewModels.MenuItemFormViewModel
+
+<div class="modal-overlay" id="editMenuItemModal">
+    <div class="modal-content">
+        <h2>Edit Menu Item</h2>
+
+        <form id="editMenuItemForm" enctype="multipart/form-data">
+            <input type="hidden" id="editItemId" name="Id" />
+
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="editName" name="Name" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="editDescription" name="Description" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Price</label>
+                <input type="number" id="editPrice" name="Price" class="form-control" step="0.01" required />
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <input type="text" id="editCategory" name="Category" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label>Tags</label>
+                <input type="text" id="editTags" name="Tags" class="form-control" />
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="shared-button-style">Save Changes</button>
+                <button type="button" onclick="closeEditModal()" class="shared-button-style">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

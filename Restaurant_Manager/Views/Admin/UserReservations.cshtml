@@ -1,0 +1,50 @@
+﻿@model Restaurant_Manager.ViewModels.CustomerReservationsViewModel
+
+@{
+    ViewData["Title"] = "User Reservations";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/customer/user-reservations.css" asp-append-version="true" />
+}
+
+<div class="my-reservations">
+    <a href="/Admin/ManageUsers" class="btn btn-back">Back</a>
+
+    <h2>User Reservations</h2>
+    <p class="user-info">
+        <span><strong>Name:</strong> @Model.FullName</span>
+        <span><strong>Email:</strong> @Model.Email</span>
+        <span><strong>Phone:</strong> @Model.PhoneNumber</span>
+    </p>
+
+    @if (!Model.Pending.Any() && !Model.Confirmed.Any() && !Model.Completed.Any() && !Model.Cancelled.Any())
+    {
+        <p class="no-reservations">This user has no reservations.</p>
+    }
+
+    @if (Model.Pending.Any())
+    {
+        <h3>🟡 Pending</h3>
+        @Html.Partial("_ReservationTable", Model.Pending)
+    }
+
+    @if (Model.Confirmed.Any())
+    {
+        <h3>🟢 Confirmed</h3>
+        @Html.Partial("_ReservationTable", Model.Confirmed)
+    }
+
+    @if (Model.Completed.Any())
+    {
+        <h3>✅ Completed</h3>
+        @Html.Partial("_ReservationTable", Model.Completed)
+    }
+
+    @if (Model.Cancelled.Any())
+    {
+        <h3>🔴 Cancelled</h3>
+        @Html.Partial("_ReservationTable", Model.Cancelled)
+    }
+</div>

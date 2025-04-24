@@ -1,3 +1,67 @@
-﻿@{
+﻿@model List<MenuItem>
+
+@{
+    ViewData["Title"] = "Manage Menu Items";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/adminmenu.css" asp-append-version="true" />
+}
+
+<div class="admin-container">
+    <h2>Manage Menu Items</h2>
+
+    <a asp-action="CreateMenuItem" class="btn shared-button-style">Create New Item</a>
+
+    <div class="top-bar">
+        <div class="search-form">
+            <input type="text" id="searchInput" placeholder="Search menu items..." />
+            <button onclick="filterMenu()">🔍</button>
+        </div>
+        <div class="search-form">
+            <select id="categoryFilter" onchange="filterMenu()">
+                <option value="all">All Categories</option>
+                <option value="salad">Salads and Appetizers</option>
+                <option value="main">Main Courses</option>
+                <option value="dessert">Desserts</option>
+                <option value="drink">Drinks</option>
+            </select>
+        </div>
+    </div>
+
+    <table class="admin-table" id="menuTable">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="menuTableBody">
+            @foreach (var item in Model.Where(m => !string.Equals(m.Category, "special", StringComparison.OrdinalIgnoreCase)))
+            {
+                <tr data-name="@item.Name.ToLower()" data-category="@item.Category.ToLower()">
+                    <td><img src="@item.ImageUrl" width="80" height="80" /></td>
+                    <td>@item.Name</td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td>@item.Category</td>
+                    <td>
+                        <a asp-action="EditMenuItem" asp-route-id="@item.Id" class="btn shared-button-style">Edit</a>
+                        <button class="btn shared-button-style" onclick="confirmDelete(@item.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<partial name="_MenuItemModals" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/admin-menu.js" asp-append-version="true"></script>
 }

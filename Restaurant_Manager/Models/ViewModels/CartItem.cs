@@ -1,4 +1,6 @@
-﻿namespace Restaurant_Manager.ViewModels
+﻿using Restaurant_Manager.Models;
+
+namespace Restaurant_Manager.ViewModels
 {
     public class CartItem
     {

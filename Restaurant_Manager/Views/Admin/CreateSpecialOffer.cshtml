@@ -1,0 +1,101 @@
+﻿@model Restaurant_Manager.ViewModels.MenuItemFormViewModel
+@{
+    ViewData["Title"] = "Create Menu Item";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/menu-form.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+}
+
+<div class="form-wrapper">
+    <div class="form-card">
+        <h2>Create New Special Offer</h2>
+
+        <form asp-action="CreateSpecialOffer" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Name">Title</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImageFile">Upload Image</label>
+                <input asp-for="ImageFile" type="file" class="form-control" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="Category" value="special" />
+
+            <div class="form-group">
+                <label asp-for="Allergens"></label>
+                <select asp-for="Allergens" asp-items="Model.AllergenOptions" class="form-control" multiple size="5"></select>
+                <span asp-validation-for="Allergens" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Calories"></label>
+                <input asp-for="Calories" class="form-control" />
+                <span asp-validation-for="Calories" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IsGlutenFree">Is Gluten Free</label>
+                <select asp-for="IsGlutenFree" class="form-control">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+                <span asp-validation-for="IsGlutenFree" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PrepTime"></label>
+                <input asp-for="PrepTime" class="form-control" />
+                <span asp-validation-for="PrepTime" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Tags">Tags</label>
+                <input asp-for="Tags" class="form-control" />
+                <span asp-validation-for="Tags" class="text-danger"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn shared-button-style">Save</button>
+                <a asp-action="AdminMenu" class="shared-button-style">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const allergensSelect = document.querySelector('select[name="Allergens"]');
+            if (allergensSelect) {
+                new Choices(allergensSelect, {
+                    removeItemButton: true,
+                    placeholder: true,
+                    placeholderValue: 'Select allergens',
+                    searchPlaceholderValue: 'Search allergens',
+                });
+            }
+        });
+    </script>
+}

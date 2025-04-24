@@ -12,13 +12,13 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/customer/customerreservations.css" asp-append-version="true" />
-    <script src="~/js/reservation.js" defer></script>
 }
 @using System.Globalization
 
 <div class="reservation-form-wrapper">
     <h2 class="reservation-heading">Make a Reservation</h2>
     <form asp-action="Create" method="post" class="reservation-form">
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Name">Name</label>
             <input asp-for="Name" class="form-input" />
@@ -125,7 +125,35 @@
     </div>
 }
 
-
 @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@4.0.0/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/js/reservation.js" asp-append-version="true"></script>
+
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        console.log("jQuery loaded:", typeof $ !== "undefined");
+        console.log("jQuery Validate loaded:", typeof $.fn.validate !== "undefined");
+        console.log("Unobtrusive Validate loaded:", typeof $.validator !== "undefined");
+
+        document.querySelector("form").addEventListener("submit", function (e) {
+            const isValid = $(this).valid();
+            console.log("Form is valid:", isValid);
+            if (!isValid) {
+                console.warn("Validation failed, preventing submission.");
+                e.preventDefault();
+            }
+        });
+    </script>
 }
+
+<style>
+    .text-danger {
+        display: inline !important;
+        color: red !important;
+    }
+</style>
+

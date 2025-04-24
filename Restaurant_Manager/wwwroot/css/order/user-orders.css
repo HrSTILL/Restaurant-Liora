@@ -1,0 +1,109 @@
+﻿.my-orders {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #fffaf0;
+    border-radius: 16px;
+    border: 1px solid #d6a75c;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    font-family: 'Georgia', serif;
+}
+
+    .my-orders h2 {
+        text-align: center;
+        font-size: 2rem;
+        color: #3d2f1b;
+        margin-bottom: 30px;
+    }
+
+    .my-orders h3 {
+        margin-top: 40px;
+        color: #3d2f1b;
+        border-bottom: 1px solid #d6a75c;
+        padding-bottom: 5px;
+    }
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+    .order-table thead {
+        background-color: #f3e5ab;
+        color: #3d2f1b;
+        text-align: left;
+    }
+
+    .order-table th,
+    .order-table td {
+        padding: 14px 20px;
+        border-bottom: 1px solid #eee;
+        font-variant-numeric: tabular-nums;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .order-table th {
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .order-table td {
+        color: #4a3b2b;
+        vertical-align: middle;
+    }
+
+.order-items {
+    padding-left: 20px;
+    list-style: disc;
+    margin: 0;
+}
+
+.cancel-btn {
+    background-color: transparent;
+    color: red;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    font-weight: bold;
+}
+
+    .cancel-btn:hover {
+        background-color: rgba(255, 0, 0, 0.1);
+        transform: scale(1.05);
+    }
+
+.user-info span {
+    margin-right: 20px;
+    display: inline-block;
+}
+
+.btn-back {
+    display: inline-block;
+    background-color: #f3e5ab;
+    color: #3d2f1b;
+    border: 2px solid #d6a75c;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+    margin-top: 30px;
+}
+
+    .btn-back:hover {
+        background-color: #d6a75c;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }

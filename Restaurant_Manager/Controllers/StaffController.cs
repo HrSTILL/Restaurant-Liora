@@ -18,4 +18,8 @@ public class StaffController : Controller
     {
         return View();
     }
+    public IActionResult StaffReports()
+    {
+        return View();
+    }
 }

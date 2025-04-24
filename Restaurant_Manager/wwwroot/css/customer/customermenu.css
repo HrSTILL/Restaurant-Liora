@@ -23,24 +23,24 @@
 
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
+    justify-items: center;
 }
 
 .menu-card {
-    width: 100%;
-    background: #fff8f6;
-    border: 2px solid #d6a75c;
-    border-radius: 12px;
-    padding: 16px;
-    text-align: center;
+    width: 360px;
+    height: 280px;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 100%;
-    min-height: 360px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    border-radius: 12px;
+    border: 2px solid #d6a75c;
+    background: #fffaf0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s;
 }
 
     .menu-card:hover {
@@ -48,16 +48,16 @@
     }
 
 .menu-img {
-    height: 220px;
-    width: auto;
+    height: 380px;
+    width: 120px;
     object-fit: contain;
-    cursor: pointer;
-    margin-bottom: 12px;
     display: block;
-    transition: transform 0.3s ease;
-    background-color: #fff8f6;
-    padding: 8px;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: transparent;
     border-radius: 16px;
+    image-rendering: auto;
 }
 
     .menu-img:hover {
@@ -65,9 +65,11 @@
     }
 
 .menu-card h3 {
-    font-size: 1.2rem;
-    color: #3d2f1b;
-    margin-bottom: 8px;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    margin-bottom: 6px;
+    word-break: break-word;
+    max-width: 100%;
 }
 
 .menu-card p {
@@ -76,10 +78,24 @@
     margin-bottom: 8px;
 }
 
+.menu-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.price-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
 .old-price {
     color: #333;
     text-decoration: line-through;
-    margin-right: 10px;
     font-weight: normal;
     font-size: 1rem;
     opacity: 0.7;
@@ -97,10 +113,10 @@
     text-align: center;
     text-decoration: none;
     transition: all 0.3s ease;
-    margin-top: auto;
     width: 100%;
     max-width: 240px;
     align-self: center;
+    margin-top: 20px;
 }
 
     .order-btn:hover {
@@ -112,23 +128,23 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.6);
-    display: none;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
     padding: 20px;
-    transition: opacity 0.3s ease;
-    opacity: 0;
-    pointer-events: none;
+    z-index: 9999;
     backdrop-filter: blur(10px);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
     #dishModal.show {
-        display: flex;
-        pointer-events: auto;
+        visibility: visible;
+        opacity: 1;
     }
 
     #dishModal.visible {
@@ -140,60 +156,65 @@
     padding: 30px;
     border: 3px solid #d6a75c;
     border-radius: 16px;
-    max-width: 600px;
     width: 90%;
-    position: relative;
+    max-width: 800px;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
-    animation: fadeSlideIn 0.4s ease-in-out;
-    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-height: 90vh;
-    overflow: hidden;
+    animation: fadeSlideIn 0.4s ease-in-out;
+    position: relative;
 }
 
-
-    .dish-modal-content:hover {
-        transform: scale(1.01);
+    .dish-modal-content h2 {
+        color: #3d2f1b;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        text-align: center;
     }
 
     .dish-modal-content img {
         width: 100%;
-        max-height: 480px;
-        height: auto;
+        max-width: 450px;
+        max-height: 400px;
         object-fit: contain;
         border-radius: 12px;
-        margin-bottom: 15px;
-        display: block;
+        margin: 20px 0;
     }
 
+.dish-modal-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 700px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    gap: 60px;
+}
 
+.dish-details-left, .dish-details-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 1rem;
+    color: #5a4531;
+}
 
-    .dish-modal-content h2 {
-        color: #3d2f1b;
-        font-size: 1.6rem;
-        margin: 5px 0 10px;
-        text-align: center;
-    }
-
-    .dish-modal-content p {
-        margin: 4px 0;
-        color: #5a4531;
-        font-size: 0.95rem;
-        text-align: left;
-        width: 100%;
-        max-width: 500px;
-        line-height: 1.4;
+    .dish-details-left p, .dish-details-right p {
+        margin: 0;
     }
 
 .close-btn {
     position: absolute;
-    top: 12px;
-    right: 18px;
-    font-size: 1.5rem;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
     font-weight: bold;
     color: #3d2f1b;
+    background: none;
+    border: none;
     cursor: pointer;
     z-index: 10000;
 }
@@ -201,53 +222,6 @@
     .close-btn:hover {
         color: red;
     }
-
-@keyframes fadeSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-body.modal-open {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-}
- 
-html {
-    overflow-y: auto;
-}
-
-
-@media (max-width: 576px) {
-    .nav-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .shared-button-style {
-        width: 100%;
-        max-width: 300px;
-        height: 40px;
-        font-size: 0.85rem;
-    }
-
-    .top-logo {
-        max-height: 55px;
-    }
-
-    main {
-        padding-top: 200px;
-    }
-}
-
 
 .reservation-modal-overlay {
     position: fixed;
@@ -260,10 +234,14 @@ html {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
     .reservation-modal-overlay.show {
         display: flex;
+        opacity: 1;
     }
 
 .reservation-modal-content {
@@ -274,17 +252,19 @@ html {
     max-width: 500px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeSlideIn 0.4s ease-in-out;
 }
 
     .reservation-modal-content h2 {
         margin-bottom: 10px;
         color: #3d2f1b;
+        font-size: 1.8rem;
     }
 
     .reservation-modal-content p {
         color: #5a4531;
         margin-bottom: 20px;
+        font-size: 1rem;
     }
 
 .reservation-modal-actions {
@@ -305,24 +285,45 @@ html {
 
     .modal-btn.confirm {
         background: linear-gradient(135deg, #f3e5ab, #d6a75c);
-        text-decoration:none;
         color: #3d2f1b;
+        text-decoration: none;
     }
 
     .modal-btn.cancel {
         background-color: #fff8f6;
         border: 2px solid #d6a75c;
         color: #3d2f1b;
-        font-weight: bold;
-        transition: background-color 0.2s ease, transform 0.2s ease;
     }
-
-        .modal-btn.cancel:hover {
-            background-color: #f3e5ab;
-            transform: scale(1.03);
-        }
-
 
     .modal-btn:hover {
         transform: translateY(-1px);
     }
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .dish-modal-details {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+body.modal-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+html {
+    overflow-y: auto;
+}

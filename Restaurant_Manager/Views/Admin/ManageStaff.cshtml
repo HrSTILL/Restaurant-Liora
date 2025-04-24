@@ -1,3 +1,74 @@
-﻿@{
+﻿@using Restaurant_Manager.Utils;
+@model PaginatedList<Restaurant_Manager.ViewModels.UserViewModel>
+
+@{
+    ViewData["Title"] = "Manage Staff";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    string search = ViewData["Search"] as string ?? "";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/manage-staff.css" asp-append-version="true" />
+}
+
+<div class="admin-container">
+    <h2>Manage Staff</h2>
+
+    <div class="top-bar">
+        <form method="get" asp-action="ManageStaff" class="search-form">
+            <input type="text" name="search" value="@search" placeholder="Search staff..." />
+            <button type="submit" class="btn action-btn">🔍</button>
+        </form>
+    </div>
+
+    <div class="action-buttons">
+        <button class="btn action-btn" onclick="openCreateModal()">New Staff</button>
+        <button class="btn action-btn" id="editBtn" disabled onclick="openEditModal()">Edit</button>
+        <button class="btn action-btn" id="deleteBtn" disabled onclick="confirmDelete()">Delete</button>
+    </div>
+
+    <table class="admin-table" id="userTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr data-id="@user.Id">
+                    <td>@user.Id</td>
+                    <td>@user.Username</td>
+                    <td>@user.FirstName @user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Phone</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        @if (Model.HasPreviousPage)
+        {
+            <a asp-action="ManageStaff" asp-route-page="@(Model.PageIndex - 1)" asp-route-search="@search" class="btn pagination-btn">Prev</a>
+        }
+
+        <span>Page @Model.PageIndex of @Model.TotalPages</span>
+
+        @if (Model.HasNextPage)
+        {
+            <a asp-action="ManageStaff" asp-route-page="@(Model.PageIndex + 1)" asp-route-search="@search" class="btn pagination-btn">Next</a>
+        }
+    </div>
+</div>
+
+<partial name="_UserModals" />
+
+
+@section Scripts {
+    <script src="~/js/admin-users.js" asp-append-version="true"></script>
 }

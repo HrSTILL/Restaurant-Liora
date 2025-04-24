@@ -1,0 +1,227 @@
+﻿.admin-container {
+    max-width: 1100px;
+    margin: 60px auto;
+    background: #fffaf0;
+    border: 1px solid #d6a75c;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+    .admin-container h2 {
+        text-align: center;
+        font-size: 2rem;
+        color: #3d2f1b;
+        margin-bottom: 30px;
+    }
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+    .search-form input[type="text"] {
+        padding: 10px 14px;
+        border-radius: 8px 0 0 8px;
+        border: 1px solid #ccc;
+        outline: none;
+        width: 300px;
+    }
+
+    .search-form button {
+        background-color: #d6a75c;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 0 8px 8px 0;
+        cursor: pointer;
+        color: #fff;
+    }
+
+        .search-form button:hover {
+            background-color: #b89045;
+        }
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    background: #f3e5ab;
+    color: #3d2f1b;
+    font-weight: bold;
+    border: 1px solid #d6a75c;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+    .action-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        text-decoration: none;
+    }
+
+    .action-btn:hover:not(:disabled) {
+        background: #d6a75c;
+        color: white;
+        text-decoration: none;
+    }
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+    .admin-table th,
+    .admin-table td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+
+    .admin-table thead {
+        background-color: #f3e5ab;
+        color: #3d2f1b;
+    }
+
+    .admin-table tr:hover {
+        background-color: #fdf5e6;
+        cursor: pointer;
+    }
+
+    .admin-table tr.selected {
+        background-color: #ffe28a;
+    }
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.pagination-controls {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.page-info {
+    font-weight: 500;
+}
+
+    .pagination a {
+        color: #3d2f1b;
+        margin: 0 10px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .pagination a:hover {
+            text-decoration: underline;
+        }
+
+.admin-table thead tr:hover {
+    background-color: inherit !important;
+    cursor: default;
+}
+
+.admin-table thead tr {
+    pointer-events: none;
+}
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+    .modal-overlay.show {
+        display: flex;
+    }
+
+.modal-content {
+    background: #fffaf0;
+    padding: 30px;
+    border-radius: 14px;
+    border: 1px solid #d6a75c;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+
+    .modal-content input,
+    .modal-content select {
+        margin: 10px 0;
+        padding: 10px;
+        width: 90%;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .modal-content button {
+        padding: 10px 20px;
+        margin: 8px 5px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        background-color: #d6a75c;
+        color: #3d2f1b;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+    }
+
+        .modal-content button:hover {
+            background-color: #b89045;
+            color: white;
+        }
+
+.modal-close-btn {
+    background-color: #ccc;
+}
+
+    .modal-close-btn:hover {
+        background-color: #aaa;
+    }
+
+.modal-btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.btn-details {
+    background: linear-gradient(135deg, #f3e5ab, #d6a75c);
+    color: #3d2f1b;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 10px 24px;
+    transition: 0.3s;
+}
+
+    .btn-details:hover {
+        background: linear-gradient(135deg, #d6a75c, #f3e5ab);
+        transform: translateY(-1px);
+    }
+

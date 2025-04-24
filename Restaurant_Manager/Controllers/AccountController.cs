@@ -4,7 +4,7 @@ using Restaurant_Manager.Data;
 using Restaurant_Manager.ViewModels;
 using System.Text;
 using System.Security.Cryptography;
-
+using Restaurant_Manager.Utils;
 
 namespace Restaurant_Manager.Controllers
 {
@@ -21,6 +21,7 @@ namespace Restaurant_Manager.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public async Task<IActionResult> EditProfile()
         {
@@ -29,7 +30,8 @@ namespace Restaurant_Manager.Controllers
                 return RedirectToAction("Login", "Auth");
 
             var user = await _context.Users.FindAsync(userId);
-            if (user == null) return RedirectToAction("Login", "Auth");
+            if (user == null)
+                return RedirectToAction("Login", "Auth");
 
             var model = new EditProfileViewModel
             {
@@ -46,7 +48,10 @@ namespace Restaurant_Manager.Controllers
         public async Task<IActionResult> EditProfile(EditProfileViewModel model)
         {
             if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Please correct the highlighted fields.";
                 return View(model);
+            }
 
             var userIdStr = HttpContext.Session.GetString("UserId");
             if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out int userId))
@@ -63,7 +68,7 @@ namespace Restaurant_Manager.Controllers
 
             await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "✅ Profile updated successfully.";
+            TempData["Success"] = "Profile updated successfully.";
             return RedirectToAction("CustomerAccount");
         }
 
@@ -82,7 +87,10 @@ namespace Restaurant_Manager.Controllers
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
+            {
+                TempData["Error"] = "Please correct the highlighted fields.";
                 return View(model);
+            }
 
             var userIdStr = HttpContext.Session.GetString("UserId");
             if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out int userId))
@@ -94,25 +102,24 @@ namespace Restaurant_Manager.Controllers
 
             using var sha256 = SHA256.Create();
             var oldHash = Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(model.OldPassword)));
+
             if (user.PasswordHash != oldHash)
             {
-                ModelState.AddModelError("OldPassword", "Current password is incorrect.");
+                TempData["Error"] = "Current password is incorrect.";
                 return View(model);
             }
 
             if (model.NewPassword != model.ConfirmPassword)
             {
-                ModelState.AddModelError("ConfirmPassword", "New passwords do not match.");
+                TempData["Error"] = "New passwords do not match.";
                 return View(model);
             }
 
             user.PasswordHash = Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(model.NewPassword)));
             await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "✅ Password changed successfully.";
+            TempData["Success"] = "Password changed successfully.";
             return RedirectToAction("CustomerAccount");
         }
-
-
     }
 }

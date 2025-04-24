@@ -1,36 +1,40 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-public class MenuItem
+
+namespace Restaurant_Manager.Models
 {
-    public int Id { get; set; }
+    public class MenuItem
+    {
+        public int Id { get; set; }
 
-    [Required]
-    [MaxLength(100)]
-    public string Name { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string Name { get; set; }
 
-    [Required]
-    public string Description { get; set; }
+        [Required]
+        public string Description { get; set; }
 
-    [Required]
-    public decimal Price { get; set; }
+        [Required]
+        public decimal Price { get; set; }
 
-    [Required]
-    public string ImageUrl { get; set; }
+        [Required]
+        public string ImageUrl { get; set; }
 
-    [Required]
-    public string Category { get; set; }
+        [Required]
+        public string Category { get; set; }
 
-    [Required]
-    public int Calories { get; set; }
-    [Required]
-    public string Allergens { get; set; }
-    [Required]
-    public string Tags { get; set; }
-    [Required]
-    public bool IsGlutenFree { get; set; }
-    [Required]
-    public int PrepTimeMinutes { get; set; }
+        [Required]
+        public int Calories { get; set; }
 
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public string Allergens { get; set; }
+
+        public string Tags { get; set; }
+        [Required]
+        public bool IsGlutenFree { get; set; }
+        [Required]
+        public int PrepTimeMinutes { get; set; }
+
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    }
 }

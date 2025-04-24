@@ -1,3 +1,51 @@
-﻿@{
+﻿@model List<Restaurant_Manager.Models.Order>
+
+@{
+    ViewData["Title"] = "All Orders";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/admin-orders-reservations.css" asp-append-version="true" />
+}
+
+<div class="admin-container">
+    <h2>All Orders</h2>
+
+    <div class="search-form">
+        <input type="text" id="searchOrdersInput" placeholder="Search by user name..." />
+        <button onclick="filterOrders()">🔍</button>
+    </div>
+
+    <table class="admin-table" id="ordersTable">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="ordersTableBody">
+            @foreach (var order in Model)
+            {
+                <tr data-name="@((order.User.FirstName + " " + order.User.LastName).ToLower())">
+                    <td>@order.User.FirstName @order.User.LastName</td>
+                    <td>@order.User.Email</td>
+                    <td style="text-transform: capitalize;">@order.Status</td>
+                    <td>@order.TotalPrice.ToString("C")</td>
+                    <td>@order.CreatedAt.ToString("g")</td>
+                    <td>
+                        <a class="small-btn" href="/Admin/UserOrders/@order.UserId">View Orders</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="~/js/admin-searchbar.js" asp-append-version="true"></script>
 }

@@ -100,7 +100,7 @@ window.tryAddToCart = async function (menuItemId) {
                 updateCartCount(0);
                 showReservationPrompt();
             } else {
-                alert("⚠️ Failed to add item: " + (result.message || "Unknown error"));
+                alert("Failed to add item: " + (result.message || "Unknown error"));
             }
         }
     } catch (err) {
@@ -129,3 +129,13 @@ function updateCartCount(count) {
         setTimeout(() => badge.classList.remove("shake"), 400);
     }
 }
+
+document.querySelectorAll(".menu-card").forEach(card => {
+    card.addEventListener("click", function () {
+        const id = this.getAttribute("data-id");
+        if (id) {
+            openDishModal(parseInt(id));
+        }
+    });
+});
+

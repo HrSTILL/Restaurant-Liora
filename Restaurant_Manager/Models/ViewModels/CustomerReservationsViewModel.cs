@@ -34,6 +34,8 @@ namespace Restaurant_Manager.ViewModels
         [Required]
         public string SeatingArea { get; set; }
 
+        public string? FullName { get; set; }
+
         public List<Reservation> Pending { get; set; } = new();
         public List<Reservation> Confirmed { get; set; } = new();
         public List<Reservation> Completed { get; set; } = new();

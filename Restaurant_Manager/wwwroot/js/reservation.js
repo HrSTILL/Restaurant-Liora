@@ -7,14 +7,18 @@
     let selectedTime = null;
     let selectedPeople = null;
 
-    openBtn.addEventListener("click", () => {
-        modal.classList.add("show");
-        showStep(".step-month");
-    });
+    if (openBtn) {
+        openBtn.addEventListener("click", () => {
+            modal.classList.add("show");
+            showStep(".step-month");
+        });
+    }
 
-    closeBtn.addEventListener("click", () => {
-        modal.classList.remove("show");
-    });
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+            modal.classList.remove("show");
+        });
+    }
 
     function showStep(selector) {
         document.querySelectorAll(".modal-step").forEach(step => step.style.display = "none");
@@ -126,27 +130,26 @@
             btn.addEventListener("click", () => {
                 selectedPeople = i;
                 applySelectionToForm();
-                modal.classList.remove("show");
+                closeReservationModal();
             });
             grid.appendChild(btn);
         }
     }
 
     function applySelectionToForm() {
+        if (!selectedDate || !selectedTime || !selectedPeople) return;
+
         const year = selectedDate.getFullYear();
         const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
         const day = String(selectedDate.getDate()).padStart(2, '0');
-
         const dateStr = `${year}-${month}-${day}`;
 
         const parts = selectedTime.match(/(\d+):(\d+) (AM|PM)/);
         let hour = parseInt(parts[1]);
         const minute = parseInt(parts[2]);
         const ampm = parts[3];
-
         if (ampm === "PM" && hour < 12) hour += 12;
         if (ampm === "AM" && hour === 12) hour = 0;
-
         const timeStr = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}:00`;
 
         document.getElementById("ReservationDate").value = dateStr;
@@ -154,14 +157,19 @@
         document.getElementById("NumberOfPeople").value = selectedPeople;
 
         document.getElementById("reservationSummary").innerHTML = `
-        <p><strong>Date:</strong> ${dateStr}</p>
-        <p><strong>Time:</strong> ${selectedTime}</p>
-        <p><strong>People:</strong> ${selectedPeople}</p>
-    `;
+            <p><strong>Date:</strong> ${dateStr}</p>
+            <p><strong>Time:</strong> ${selectedTime}</p>
+            <p><strong>People:</strong> ${selectedPeople}</p>
+        `;
     }
 
-
-
+    function closeReservationModal() {
+        const modal = document.getElementById("reservationModal");
+        if (modal) {
+            modal.classList.remove("show");
+            modal.style.display = "none";
+        }
+    }
 
     document.querySelector(".step-day .back-btn").addEventListener("click", () => showStep(".step-month"));
     document.querySelector(".step-time .back-btn").addEventListener("click", () => showStep(".step-day"));
@@ -180,9 +188,8 @@ function closeOverlapModal() {
 
 window.addEventListener("DOMContentLoaded", () => {
     const hasOverlap = '@TempData["OverlapError"]' !== '';
-    if (hasOverlap) {
-        document.getElementById("overlapModal").style.display = "flex";
+    const modal = document.getElementById("overlapModal");
+    if (hasOverlap && modal) {
+        modal.style.display = "flex";
     }
 });
- 
-

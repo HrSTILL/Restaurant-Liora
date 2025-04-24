@@ -1,0 +1,60 @@
+﻿@{
+    var createAction = ViewContext.RouteData.Values["action"].ToString() == "ManageUsers"
+        ? "CreateUser"
+        : "CreateStaff";
+}
+
+<div class="modal-overlay" id="createUserModal">
+    <div class="modal-content">
+        <h2>Create New User</h2>
+        <form id="createUserForm" method="post" asp-controller="Admin" asp-action="@createAction">
+            <input name="Username" placeholder="Username" required />
+            <input name="FirstName" placeholder="First Name" required />
+            <input name="LastName" placeholder="Last Name" required />
+            <input name="Email" type="email" placeholder="Email" required />
+            <input name="Phone" placeholder="Phone" required />
+            <input name="Password" type="password" placeholder="Password" required />
+            <button type="submit">Create</button>
+            <button type="button" class="modal-close-btn" onclick="closeModal('createUserModal')">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="editUserModal">
+    <div class="modal-content">
+        <h2>Edit User</h2>
+        <form id="editUserForm" method="post" action="/Admin/EditUser">
+            <input type="hidden" name="Id" id="editUserId" />
+            <input name="Username" id="editUsername" placeholder="Username" required />
+            <input name="FirstName" id="editFirstName" placeholder="First Name" required />
+            <input name="LastName" id="editLastName" placeholder="Last Name" required />
+            <input name="Email" type="email" id="editEmail" placeholder="Email" required />
+            <input name="Phone" id="editPhone" placeholder="Phone" required />
+            <button type="submit">Save</button>
+            <button type="button" class="modal-close-btn" onclick="closeModal('editUserModal')">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="deleteUserModal">
+    <div class="modal-content">
+        <h2>Confirm Deletion</h2>
+        <form id="deleteUserForm" method="post">
+            <input type="hidden" name="id" id="deleteUserId" />
+            <p>Are you sure you want to delete this user?</p>
+            <button type="submit">Delete</button>
+            <button type="button" class="modal-close-btn" onclick="closeModal('deleteUserModal')">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<div id="detailsModal" class="modal-overlay">
+    <div class="modal-content">
+        <h2>User Details</h2>
+        <div class="modal-btn-group">
+            <button class="btn btn-details" onclick="goToOrders()">Orders</button>
+            <button class="btn btn-details" onclick="goToReservations()">Reservations</button>
+        </div>
+        <button class="modal-close-btn" onclick="closeDetailsModal()">Close</button>
+    </div>
+</div>

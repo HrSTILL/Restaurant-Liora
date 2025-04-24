@@ -26,14 +26,20 @@ public class AuthController : Controller
     {
         if (!ModelState.IsValid)
         {
+            TempData["Error"] = "Please correct the highlighted fields.";
             return View(model);
         }
 
-        if (_context.Users.Any(u => u.Email == model.Email || u.Username == model.Username))
+
+        if (_context.Users.Any(u =>
+         u.Email == model.Email ||
+         u.Username == model.Username ||
+         u.Phone == model.Phone))
         {
-            ModelState.AddModelError("", "Username or Email already exists.");
+            TempData["Error"] = "Username, Email, or Phone already exists.";
             return View(model);
         }
+
 
         var user = new User
         {
@@ -64,12 +70,15 @@ public class AuthController : Controller
     public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
     {
         if (!ModelState.IsValid)
+        {
+            TempData["Error"] = "Please fill in all required fields.";
             return View(model);
+        }
 
         var user = _context.Users.FirstOrDefault(u => u.Username == model.Username);
         if (user == null || !user.VerifyPassword(model.Password))
         {
-            ModelState.AddModelError("", "Invalid username or password.");
+            TempData["Error"] = "Invalid username or password.";
             return View(model);
         }
 
@@ -88,7 +97,7 @@ public class AuthController : Controller
         HttpContext.Session.SetString("Username", user.Username);
         HttpContext.Session.SetString("Role", user.Role);
 
-        Console.WriteLine($"[LOGIN DEBUG] User: {user.Username}, Role: {user.Role}");
+        TempData["Success"] = "Logged in successfully.";
 
         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
             return Redirect(returnUrl);
@@ -102,17 +111,12 @@ public class AuthController : Controller
         };
     }
 
-
-
-
     [HttpGet("check-session")]
     public IActionResult CheckSession()
     {
         var userId = HttpContext.Session.GetString("UserId");
         var username = HttpContext.Session.GetString("Username");
         var role = HttpContext.Session.GetString("Role");
-
-        Console.WriteLine($"Session Data -> UserId: {userId}, Username: {username}, Role: {role}");
 
         return Ok(new
         {

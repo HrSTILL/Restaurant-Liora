@@ -11,6 +11,8 @@
     <div class="account-wrapper">
         <h2 class="account-heading">My Account</h2>
 
+        <p class="account-username">Welcome, @Context.Session.GetString("Username")</p>
+
         <div class="account-card-grid">
             <a href="/Reservation/MyReservations" class="account-card">
                 <i class="fas fa-calendar-check icon"></i>
@@ -41,3 +43,14 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @if (TempData["Error"] != null)
+    {
+        <script>showToast("@TempData["Error"]");</script>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <script>showToast("@TempData["Success"]");</script>
+    }
+}

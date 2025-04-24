@@ -37,44 +37,53 @@
             3 => "bg-4",
             _ => ""
         };
-        @if (@GetName(category.Key) != "special")
+
+        if (GetName(category.Key) != "special")
         {
-        <div class="menu-section @bgClass">
-            <h2 class="menu-category">@GetName(category.Key)</h2>
-            <div class="menu-grid">
-               
+            <div class="menu-section @bgClass">
+                <h2 class="menu-category">@GetName(category.Key)</h2>
+                <div class="menu-grid">
                     @foreach (var item in category.Value)
                     {
-                        <div class="menu-card">
-                            <img src="@item.ImageUrl" class="menu-img clickable" onclick="openDishModal(@item.Id)" />
-                            <h3>@item.Name</h3>
-                            <p>@item.Description</p>
-                            <strong class="price">@item.Price.ToString("C")</strong><br />
+                        <div class="menu-card" data-id="@item.Id">
+                            <img src="@item.ImageUrl" class="menu-img clickable" />
+                            <div class="menu-content">
+                                <h3>@item.Name</h3>
+                                <p>@item.Description</p>
+                                <strong class="price">@item.Price.ToString("C")</strong><br />
 
-                            <button onclick="tryAddToCart(@item.Id)" class="order-btn">Add To Cart</button>
-                          
+                                <button onclick="event.stopPropagation(); tryAddToCart(@item.Id)" class="order-btn">Add To Cart</button>
+                            </div>
                         </div>
                     }
-                
+                </div>
             </div>
-        </div>
         }
         sectionIndex++;
     }
 </div>
 
-<div id="dishModal" style="display:none;">
+<div id="dishModal">
     <div class="dish-modal-content">
         <span class="close-btn" onclick="closeDishModal()">×</span>
+
         <h2 id="dishModalName"></h2>
-        <img id="dishModalImage" />
-        <p id="dishModalDescription"></p>
-        <p><strong>Calories:</strong> <span id="dishModalCalories"></span></p>
-        <p><strong>Allergens:</strong> <span id="dishModalAllergens"></span></p>
-        <p><strong>Tags:</strong> <span id="dishModalTags"></span></p>
-        <p><strong>Gluten-Free:</strong> <span id="dishModalGlutenFree"></span></p>
-        <p><strong>Prep Time:</strong> <span id="dishModalPrepTime"></span></p>
-        <p><strong>Price:</strong> <span id="dishModalPrice"></span></p>
+        <img id="dishModalImage" alt="Dish Image" />
+
+        <div class="dish-modal-details">
+            <div class="dish-details-left">
+                <p id="dishModalDescription"></p>
+                <p><strong>Calories:</strong> <span id="dishModalCalories"></span></p>
+                <p><strong>Allergens:</strong> <span id="dishModalAllergens"></span></p>
+            </div>
+
+            <div class="dish-details-right">
+                <p><strong>Tags:</strong> <span id="dishModalTags"></span></p>
+                <p><strong>Gluten-Free:</strong> <span id="dishModalGlutenFree"></span></p>
+                <p><strong>Prep Time:</strong> <span id="dishModalPrepTime"></span></p>
+                <p><strong>Price:</strong> <span id="dishModalPrice"></span></p>
+            </div>
+        </div>
 
         @if (User.Identity?.IsAuthenticated ?? false)
         {
@@ -87,7 +96,6 @@
     </div>
 </div>
 
-
 <div id="reservationPromptModal" class="reservation-modal-overlay">
     <div class="reservation-modal-content">
         <h2>⚠ No Active Reservation</h2>
@@ -99,8 +107,6 @@
         </div>
     </div>
 </div>
-
-
 
 @section Scripts {
     <script>

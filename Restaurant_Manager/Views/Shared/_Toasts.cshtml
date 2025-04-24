@@ -1,0 +1,29 @@
+﻿@if (TempData["Success"] != null || TempData["Error"] != null)
+{
+    <input type="checkbox" name="t-success" id="t-success" checked />
+    <input type="checkbox" name="t-error" id="t-error" checked />
+
+    <div class="toast-panel">
+        @if (TempData["Success"] != null)
+        {
+            <div class="toast-item success">
+                <div class="toast success">
+                    <label for="t-success" class="close"></label>
+                    <h3>Success!</h3>
+                    <p>@TempData["Success"]</p>
+                </div>
+            </div>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="toast-item error">
+                <div class="toast error">
+                    <label for="t-error" class="close"></label>
+                    <h3>Error!</h3>
+                    <p>@TempData["Error"]</p>
+                </div>
+            </div>
+        }
+    </div>
+}

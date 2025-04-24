@@ -1,3 +1,55 @@
-﻿@{
+﻿@model List<MenuItem>
+
+@{
+    ViewData["Title"] = "Manage Special Offers";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/adminmenu.css" asp-append-version="true" />
+}
+
+<div class="admin-container">
+    <h2>Manage Special Offers</h2>
+
+    <a asp-action="CreateSpecialOffer" class="btn shared-button-style">Create New Offer</a>
+
+    <div class="top-bar">
+        <div class="search-form">
+            <input type="text" id="searchSpecialsInput" placeholder="Search special offers..." />
+            <button onclick="filterSpecials()">🔍</button>
+        </div>
+    </div>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Where(m => m.Category.ToLower() == "special"))
+            {
+                <tr data-name="@item.Name.ToLower()">
+                    <td><img src="@item.ImageUrl" width="80" height="80" /></td>
+                    <td>@item.Name</td>
+                    <td>@item.Price.ToString("C")</td>
+                    <td>
+                        <a asp-action="EditSpecialOffer" asp-route-id="@item.Id" class="btn shared-button-style">Edit</a>
+                        <button class="btn shared-button-style danger" onclick="confirmDelete(@item.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<partial name="_MenuItemModals" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/admin-specials.js" asp-append-version="true"></script>
 }

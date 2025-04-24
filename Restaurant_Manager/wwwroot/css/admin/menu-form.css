@@ -1,0 +1,123 @@
+﻿.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    background-color: #f9f3e9;
+}
+
+.form-card {
+    background-color: #fffaf0;
+    padding: 2rem 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 700px;
+}
+
+    .form-card h2 {
+        text-align: center;
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        color: #2f2f2f;
+    }
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #444;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+    .form-control:focus {
+        border-color: #c49b5f;
+        outline: none;
+    }
+
+textarea.form-control {
+    resize: vertical;
+}
+
+.text-danger {
+    font-size: 0.9rem;
+    color: #c0392b;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.shared-button-style {
+    color: #3d2f1b;
+    background: linear-gradient(135deg, #f3e5ab, #d6a75c);
+    border: 1px solid #c9a25a;
+    border-radius: 10px;
+    font-weight: 500;
+    height: 50px;
+    min-width: 120px;
+    padding: 0 16px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+    .shared-button-style:hover,
+    .shared-button-style:focus {
+        background: linear-gradient(135deg, #d6a75c, #f3e5ab);
+        transform: translateY(-1px);
+        text-decoration: none;
+    }
+
+.choices__inner {
+    width: 100% !important;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: 0.5rem !important;
+    border: 1px solid #ccc !important;
+    background-color: transparent !important;
+    font-size: 1rem !important;
+    transition: border-color 0.3s ease !important;
+    min-height: 45px !important;
+}
+
+    .choices__inner.is-focused {
+        border-color: #c49b5f !important;
+    }
+
+.choices__list--multiple .choices__item {
+    background: linear-gradient(135deg, #f3e5ab, #d6a75c) !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 8px !important;
+    padding: 5px 10px !important;
+    margin: 3px !important;
+    font-weight: 500 !important;
+}
+
+    .choices__list--multiple .choices__item .choices__button {
+        color: #fff !important;
+        opacity: 0.8 !important;
+    }

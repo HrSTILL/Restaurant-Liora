@@ -1,3 +1,55 @@
-﻿@{
+﻿@model List<Reservation>
+
+@{
+    ViewData["Title"] = "All Reservations";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/admin-orders-reservations.css" asp-append-version="true" />
+}
+
+<div class="admin-container">
+    <h2>All Reservations</h2>
+
+    <div class="search-form">
+        <input type="text" id="reservationSearchInput" placeholder="Search by user name or email..." />
+        <button onclick="filterReservations()">🔍</button>
+    </div>
+
+    <table class="admin-table" id="reservationTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Table #</th>
+                <th>People</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reservation in Model)
+            {
+                <tr data-user="@((reservation.User.FirstName + " " + reservation.User.LastName + " " + reservation.User.Email).ToLower())">
+                    <td>@reservation.User.FirstName @reservation.User.LastName</td>
+                    <td>@reservation.User.Email</td>
+                    <td>@reservation.User.Phone</td>
+                    <td>@reservation.Table.TableNumber</td>
+                    <td>@reservation.NumberOfPeople</td>
+                    <td>@reservation.ReservationTime.ToString("g")</td>
+                    <td>@reservation.Status</td>
+                    <td>
+                        <a href="/Admin/UserReservations/@reservation.UserId" class="small-btn">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="~/js/admin-searchbar.js" asp-append-version="true"></script>
 }

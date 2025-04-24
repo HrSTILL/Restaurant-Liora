@@ -15,24 +15,26 @@
         <div class="menu-grid">
             @foreach (var item in Model.Where(x => x.Category == "special"))
             {
-
                 var originalPrice = item.Price;
                 var oldPrice = originalPrice + 5;
 
-                <div class="menu-card">
-                    <img src="@item.ImageUrl" class="menu-img clickable" onclick="openDishModal(@item.Id)" />
+                <div class="menu-card" onclick="openDishModal(@item.Id)">
+                    <img src="@item.ImageUrl" class="menu-img" alt="@item.Name" />
+
                     <h3>@item.Name</h3>
                     <p>@item.Description</p>
 
                     <div class="price-wrapper">
-                        <span class="old-price">@oldPrice.ToString("F2")</span>
-                        <span class="special-price">@originalPrice.ToString("F2") 🔥</span>
-                    </div><br />
-                    <button class="order-btn" onclick="tryAddToCart(@item.Id)">Add To Cart</button>
+                        <span class="old-price">@oldPrice.ToString("F2") лв.</span>
+                        <span class="special-price">@originalPrice.ToString("F2") лв. 🔥</span>
+                    </div>
 
-                   
+                    <button class="order-btn" onclick="event.stopPropagation(); tryAddToCart(@item.Id)">
+                        Add To Cart
+                    </button>
                 </div>
             }
+
         </div>
     </div>
 </div>
