@@ -39,7 +39,6 @@ While design is clean and simple, future updates can introduce advanced UI/UX im
 ## Installation Instructions
 - Install Visual Studio with ASP.NET and SQL Server extensions.
 - Clone the repository.
-- Configure the database connection string in `appsettings.json`.
 - Build and run the project.
 
 ## License
