@@ -1,5 +1,6 @@
 ﻿@model List<Restaurant_Manager.ViewModels.CartItem>
 @{
+    ViewData["Title"] = "Place Order";
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
     decimal total = Model.Sum(i => i.Price * i.Quantity);
 }

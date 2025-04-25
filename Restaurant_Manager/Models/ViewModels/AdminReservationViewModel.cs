@@ -1,4 +1,5 @@
-﻿public class AdminReservationViewModel
+﻿using Restaurant_Manager.Models;
+public class AdminReservationViewModel
 {
     public int UserId { get; set; }
     public string FullName { get; set; }

@@ -1,0 +1,99 @@
+﻿.staff-user-orders {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fffaf0;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+    .staff-user-orders h2 {
+        text-align: center;
+        font-size: 2.2rem;
+        color: #3d2f1b;
+        margin-bottom: 40px;
+    }
+
+.staff-status-section h3 {
+    font-size: 1.6rem;
+    color: #3d2f1b;
+    margin: 2rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.staff-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+    .staff-table th, .staff-table td {
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1px solid #f1e9d2;
+        color: #3d2f1b;
+    }
+
+    .staff-table thead {
+        background-color: #f3e5ab;
+        color: #3d2f1b;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+    .staff-table tbody tr:hover {
+        background-color: #fdf5e6;
+    }
+
+.select-status {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-weight: 500;
+    font-size: 0.95rem;
+    width: 180px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .select-status:focus {
+        border-color: #d6a75c;
+        outline: none;
+        box-shadow: 0 0 5px rgba(214, 167, 92, 0.5);
+    }
+
+    .select-status:hover {
+        border-color: #c49b5f;
+        cursor: pointer;
+    }
+
+.staff-status-section {
+    margin-bottom: 2rem;
+}
+
+    .staff-status-section button {
+        background-color: #d6a75c;
+        color: white;
+        font-size: 1rem;
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .staff-status-section button:hover {
+            background-color: #c49b5f;
+        }
+
+.staff-no-entries {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #888;
+    margin: 40px 0;
+}

@@ -1,0 +1,104 @@
+﻿.staff-user-list {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fffaf0;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+    .staff-user-list h2 {
+        text-align: center;
+        color: #3d2f1b;
+        margin-bottom: 30px;
+        font-size: 2rem;
+    }
+
+.staff-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+    .staff-table th,
+    .staff-table td {
+        padding: 14px 18px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+        font-size: 0.95rem;
+    }
+
+    .staff-table thead {
+        background-color: #f3e5ab;
+        color: #3d2f1b;
+        font-size: 1rem;
+    }
+
+    .staff-table tbody tr:hover {
+        background-color: #fdf5e6;
+        cursor: pointer;
+    }
+
+.view-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #f3e5ab, #d6a75c);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #3d2f1b;
+    transition: 0.3s ease;
+}
+
+    .view-button:hover {
+        background: linear-gradient(135deg, #d6a75c, #f3e5ab);
+        transform: translateY(-2px);
+    }
+
+.staff-user-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fffaf0;
+    border-radius: 16px;
+    border: 1px solid #d6a75c;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+    .staff-user-container h2 {
+        text-align: center;
+        font-size: 2rem;
+        color: #3d2f1b;
+        margin-bottom: 30px;
+    }
+
+.staff-status-section {
+    margin-bottom: 50px;
+}
+
+    .staff-status-section h3 {
+        color: #6b4f1d;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+
+.select-status {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+    .select-status:focus {
+        border-color: #d6a75c;
+        outline: none;
+    }
+
+.staff-no-entries {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #999;
+    margin: 40px 0;
+}

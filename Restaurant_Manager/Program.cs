@@ -80,13 +80,13 @@ app.Use(async (context, next) =>
     var path = context.Request.Path;
     var userRole = context.Session.GetString("Role");
 
-    if ((path.StartsWithSegments("/Admin") || path.StartsWithSegments("/Staff")) && string.IsNullOrEmpty(userRole))
+    if ((path.StartsWithSegments("/Admin") || path.StartsWithSegments("/Reports") || path.StartsWithSegments("/Staff")) && string.IsNullOrEmpty(userRole))
     {
         context.Response.Redirect("/Auth/Login");
         return;
     }
 
-    if (path.StartsWithSegments("/Admin") && userRole != "admin")
+    if ((path.StartsWithSegments("/Admin") || path.StartsWithSegments("/Reports")) && userRole != "admin")
     {
         context.Response.Redirect("/Auth/Restricted");
         return;
@@ -98,19 +98,19 @@ app.Use(async (context, next) =>
         return;
     }
 
-    if (
-     (path.StartsWithSegments("/Customer") ||
-      path.StartsWithSegments("/Account") ||
-      path.StartsWithSegments("/Reservation")) &&
-      userRole != "customer")
+    if ((path.StartsWithSegments("/Customer") ||
+         path.StartsWithSegments("/Account") ||
+         path.StartsWithSegments("/Reservation") ||
+         path.StartsWithSegments("/Order") ||
+         path.StartsWithSegments("/Cart")) && userRole != "customer")
     {
         context.Response.Redirect("/Auth/Restricted");
         return;
     }
 
-
     await next();
 });
+
 
 app.MapControllerRoute(
     name: "default",

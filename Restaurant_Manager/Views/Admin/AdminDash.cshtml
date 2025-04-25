@@ -1,16 +1,46 @@
 ﻿@{
+    ViewData["Title"] = "Admin Dashboard";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@{
-    var username = Context.Session.GetString("Username");
-    var role = Context.Session.GetString("Role");
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/admin-dashboard.css" asp-append-version="true" />
 }
 
-<h2>Welcome, Admin!</h2>
-<p>You are logged in as an administrator.</p>
 
+<h1 class="text-center my-4">Admin Dashboard</h1>
 
-<p>Logged in as: @username</p>
-<p>Role: @role</p>
+<div class="admin-dashboard-container">
+    <div class="summary-cards-grid">
+        <div class="summary-card"><h4>Total Revenue</h4><p id="card-total-revenue">--</p></div>
+        <div class="summary-card"><h4>Total Orders</h4><p id="card-total-orders">--</p></div>
+        <div class="summary-card"><h4>Staff</h4><p id="card-total-staff">--</p></div>
+        <div class="summary-card"><h4>Specials</h4><p id="card-total-specials">--</p></div>
+        <div class="summary-card"><h4>Users</h4><p id="card-total-users">--</p></div>
+        <div class="summary-card"><h4>Reservations</h4><p id="card-total-reservations">--</p></div>
+    </div>
 
+    <div class="main-content-grid">
+        <div class="main-left">
+            <div class="chart-card"><h3>Revenue Chart</h3><canvas id="revenueChart"></canvas></div> <br />
+            <div class="chart-card"><h3>Reservation Chart</h3><canvas id="reservationChart"></canvas></div>
+        </div>
 
+        <div class="main-right">
+            <div class="small-card"><h4>Recent Orders</h4><div id="recent-orders-list">Loading...</div></div>
+            <div class="small-card"><h4>Upcoming Reservations</h4><div id="upcoming-reservations-list">Loading...</div></div>
+            <div class="small-card top-items-container"><h4 class="text-center">Top Items</h4><canvas id="topItemsChart" style="max-height: 300px;"></canvas></div>
+        </div>
+    </div>
+
+    <div class="activity-timeline">
+        <h3>Recent Activity</h3>
+        <ul id="activity-list"><li>Loading activities...</li></ul>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="~/js/admin-dashboard.js"></script>
+}

@@ -62,29 +62,34 @@
     </section>
 
     <section id="staff-reports" class="menu-preview">
-        <div class="menu-cards">
+        <div class="menu-cards report-style">
             <div class="card">
-                <img src="~/Images/report_sales.png" alt="Sales Report" />    @* Changed to Report *@
                 <h3>Sales Report</h3>
+                <canvas id="salesMiniChart" height="80"></canvas>
                 <p>Total income, top-selling dishes, and daily comparisons.</p>
             </div>
             <div class="card">
-                <img src="~/Images/report_occupancy.png" alt="Occupancy" />    @* Changed to Report *@
                 <h3>Occupancy</h3>
+                <canvas id="occupancyMiniChart" height="80"></canvas>
                 <p>Track table usage and reservation peaks across hours.</p>
             </div>
             <div class="card">
-                <img src="~/Images/report_preferences.png" alt="Preferences" /> @* Changed to Report *@
                 <h3>Customer Preferences</h3>
+                <canvas id="preferencesMiniChart" height="80"></canvas>
                 <p>Analyze favorite meals, allergens, and dining patterns.</p>
             </div>
             <a href="/Staff/StaffReports" class="button">View Detailed Reports</a>
         </div>
     </section>
+
+
     <br />
     <section class="testimonial-banner">
         <blockquote>“We don’t just serve food — we serve experience.”</blockquote>
     </section>
 </div>
 
-
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/js/staff-dashboard.js" asp-append-version="true"></script>
+}

@@ -20,7 +20,6 @@ public class AdminController : Controller
     }
 
     public IActionResult AdminDash() => View();
-    public IActionResult AdminReports() => View();
 
     public IActionResult AdminMenu()
     {
@@ -582,4 +581,159 @@ public class AdminController : Controller
         new SelectListItem { Value = "Peanuts", Text = "Peanuts" },
         new SelectListItem { Value = "Sesame", Text = "Sesame" }
     };
+
+    [HttpGet]
+    public JsonResult GetDashboardSummary()
+    {
+        var startOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+
+        var totalRevenue = _context.Orders
+            .Where(o => o.Status == "completed" && o.CreatedAt >= startOfMonth)
+            .Sum(o => (decimal?)o.TotalPrice) ?? 0;
+
+        var totalOrders = _context.Orders
+            .Count(o => o.Status == "completed" && o.CreatedAt >= startOfMonth);
+
+        var totalStaff = _context.Users.Count(u => u.Role == "staff");
+
+        var totalSpecials = _context.MenuItems
+            .Count(mi => mi.Category.ToLower() == "special");
+
+        var totalUsers = _context.Users.Count(u => u.Role == "customer");
+
+        var totalReservations = _context.Reservations
+            .Count(r => r.Status != "cancelled" && r.ReservationTime >= startOfMonth);
+
+        return Json(new
+        {
+            totalRevenue,
+            totalOrders,
+            totalStaff,
+            totalSpecials,
+            totalUsers,
+            totalReservations
+        });
+    }
+
+    [HttpGet]
+    public JsonResult GetDashboardRevenueChart()
+    {
+        var last7Days = DateTime.Now.AddDays(-6);
+
+        var revenueData = _context.Orders
+            .Where(o => o.Status == "completed" && o.CreatedAt.Date >= last7Days)
+            .AsEnumerable()
+            .GroupBy(o => o.CreatedAt.Date)
+            .Select(g => new
+            {
+                Date = g.Key.ToString("yyyy-MM-dd"),
+                TotalRevenue = g.Sum(x => x.TotalPrice)
+            })
+            .OrderBy(x => x.Date)
+            .ToList();
+
+        return Json(revenueData);
+    }
+
+    [HttpGet]
+    public JsonResult GetDashboardReservationChart()
+    {
+        var last7Days = DateTime.Now.AddDays(-6);
+
+        var reservationData = _context.Reservations
+            .Where(r => r.Status != "cancelled" && r.ReservationTime.Date >= last7Days)
+            .AsEnumerable()
+            .GroupBy(r => r.ReservationTime.Date)
+            .Select(g => new
+            {
+                Date = g.Key.ToString("yyyy-MM-dd"),
+                Count = g.Count()
+            })
+            .OrderBy(x => x.Date)
+            .ToList();
+
+        return Json(reservationData);
+    }
+
+    [HttpGet]
+    public JsonResult GetTopMenuItems()
+    {
+        var topItems = _context.OrderItems
+            .GroupBy(oi => oi.MenuItem.Name)
+            .Select(g => new
+            {
+                ItemName = g.Key,
+                Quantity = g.Sum(oi => oi.Quantity)
+            })
+            .OrderByDescending(x => x.Quantity)
+            .Take(5)
+            .ToList();
+
+        return Json(topItems);
+    }
+
+    [HttpGet]
+    public JsonResult GetRecentOrders()
+    {
+        var recentOrders = _context.Orders
+            .Where(o => o.Status == "completed")
+            .OrderByDescending(o => o.CreatedAt)
+            .Take(5)
+            .Select(o => new
+            {
+                CustomerName = o.User.FirstName + " " + o.User.LastName,
+                Total = o.TotalPrice,
+                Date = o.CreatedAt.ToString("yyyy-MM-dd HH:mm")
+            })
+            .ToList();
+
+        return Json(recentOrders);
+    }
+
+    [HttpGet]
+    public JsonResult GetUpcomingReservations()
+    {
+        var upcomingReservations = _context.Reservations
+            .Where(r => r.Status != "cancelled" && r.ReservationTime >= DateTime.Now)
+            .OrderBy(r => r.ReservationTime)
+            .Take(5)
+            .Select(r => new
+            {
+                CustomerName = r.Name,
+                People = r.NumberOfPeople,
+                Time = r.ReservationTime.ToString("yyyy-MM-dd HH:mm")
+            })
+            .ToList();
+
+        return Json(upcomingReservations);
+    }
+
+    [HttpGet]
+    public JsonResult GetRecentActivities()
+    {
+        var activities = new List<string>();
+
+        var recentOrders = _context.Orders
+            .Where(o => o.Status == "completed")
+            .Include(o => o.User)
+            .OrderByDescending(o => o.CreatedAt)
+            .Take(3)
+            .Select(o => $"🛒 Order completed - {o.User.FirstName} {o.User.LastName} - {o.TotalPrice} лв")
+            .ToList();
+
+        var recentReservations = _context.Reservations
+            .Where(r => r.Status != "cancelled")
+            .OrderByDescending(r => r.ReservationTime)
+            .Take(2)
+            .Select(r => $"📅 Reservation - {r.Name} for {r.NumberOfPeople} people")
+            .ToList();
+
+        activities.AddRange(recentOrders);
+        activities.AddRange(recentReservations);
+
+        return Json(activities);
+    }
+
+
+
 }

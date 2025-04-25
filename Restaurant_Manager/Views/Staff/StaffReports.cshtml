@@ -1,3 +1,37 @@
 ﻿@{
+    ViewData["Title"] = "Staff Reports";
     Layout = "~/Views/Shared/_StaffLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/staff/staff-reports.css" asp-append-version="true" />
+}
+
+<h1 class="text-center my-4">Staff Reports</h1>
+
+<div class="staff-reports-container">
+
+    <div class="summary-cards-grid">
+        <div class="summary-card"><h4>Total Revenue</h4><p id="card-total-revenue">--</p></div>
+        <div class="summary-card"><h4>Total Orders</h4><p id="card-total-orders">--</p></div>
+        <div class="summary-card"><h4>Total Reservations</h4><p id="card-total-reservations">--</p></div>
+    </div>
+
+    <div class="charts-wrapper">
+        <div class="chart-card">
+            <h3>Revenue (Last 7 Days)</h3>
+            <canvas id="revenueChart"></canvas>
+        </div>
+        <br />
+        <div class="chart-card">
+            <h3>Reservations (Last 7 Days)</h3>
+            <canvas id="reservationChart"></canvas>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/js/staff-reports.js"></script>
 }

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Restaurant_Manager.Models.Reservation>
+
+<table class="staff-table">
+    <thead>
+        <tr>
+            <th>Reservation ID</th>
+            <th>Table Number</th>
+            <th>Reservation Time</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.Id</td>
+                <td>@reservation.Table?.TableNumber</td>
+                <td>@reservation.ReservationTime.ToString("g")</td>
+                <td>
+                    <select class="form-select" onchange="changeReservationStatus(@reservation.Id, this)">
+                        <option value="pending" selected="@((reservation.Status == "pending") ? "selected" : null)">Pending</option>
+                        <option value="confirmed" selected="@((reservation.Status == "confirmed") ? "selected" : null)">Confirmed</option>
+                        <option value="completed" selected="@((reservation.Status == "completed") ? "selected" : null)">Completed</option>
+                        <option value="cancelled" selected="@((reservation.Status == "cancelled") ? "selected" : null)">Cancelled</option>
+                    </select>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

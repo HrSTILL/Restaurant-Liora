@@ -205,3 +205,18 @@
     border-radius: 1rem;
     box-shadow: 0 3px 8px rgba(0,0,0,0.04);
 }
+
+
+.menu-cards.report-style .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 350px; 
+    padding: 1rem;
+}
+
+.menu-cards.report-style canvas {
+    max-height: 120px;
+    margin: 0 auto;
+}
+

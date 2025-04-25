@@ -1,0 +1,65 @@
+﻿@model Restaurant_Manager.ViewModels.CustomerOrdersViewModel
+
+@{
+    ViewData["Title"] = "User Orders";
+    Layout = "~/Views/Shared/_StaffLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/staff/staff-orders.css" asp-append-version="true" />
+}
+
+<h2 class="text-center my-4">Orders for @Model.FullName</h2>
+
+<div class="staff-user-container">
+
+    @if (!Model.Pending.Any() && !Model.Preparing.Any() && !Model.Served.Any() && !Model.Completed.Any() && !Model.Cancelled.Any())
+    {
+        <p class="staff-no-entries">This user has no orders.</p>
+    }
+
+    @if (Model.Pending.Any())
+    {
+        <div class="staff-status-section">
+            <h3>🟡 Pending</h3>
+            @Html.Partial("_StaffOrderTable", Model.Pending)
+        </div>
+    }
+
+    @if (Model.Preparing.Any())
+    {
+        <div class="staff-status-section">
+            <h3>🍳 Preparing</h3>
+            @Html.Partial("_StaffOrderTable", Model.Preparing)
+        </div>
+    }
+
+    @if (Model.Served.Any())
+    {
+        <div class="staff-status-section">
+            <h3>🍽️ Served</h3>
+            @Html.Partial("_StaffOrderTable", Model.Served)
+        </div>
+    }
+
+    @if (Model.Completed.Any())
+    {
+        <div class="staff-status-section">
+            <h3>✅ Completed</h3>
+            @Html.Partial("_StaffOrderTable", Model.Completed)
+        </div>
+    }
+
+    @if (Model.Cancelled.Any())
+    {
+        <div class="staff-status-section">
+            <h3>🔴 Cancelled</h3>
+            @Html.Partial("_StaffOrderTable", Model.Cancelled)
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    <script src="~/js/staff-orders.js"></script>
+}

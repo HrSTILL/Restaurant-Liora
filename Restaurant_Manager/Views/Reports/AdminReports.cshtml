@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Admin Reports";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/admin-reports.css" asp-append-version="true" />
+}
+
+<h1 class="text-center my-4">Admin Reports</h1>
+
+<div class="container">
+
+    <div class="summary-cards-wrapper">
+        <div class="summary-card">
+            <h4>Total Revenue (This Month)</h4>
+            <p id="card-total-revenue">--</p>
+        </div>
+        <div class="summary-card">
+            <h4>Orders (This Month)</h4>
+            <p id="card-total-orders">--</p>
+        </div>
+        <div class="summary-card">
+            <h4>Reservations (This Month)</h4>
+            <p id="card-total-reservations">--</p>
+        </div>
+        <div class="summary-card">
+            <h4>Top Day by Revenue</h4>
+            <p id="card-top-day">--</p>
+        </div>
+    </div>
+
+    <section id="revenue-report" class="report-section">
+        <div class="mb-4 text-center">
+            <label for="revenueMode" class="me-2 fw-bold">Select Report:</label>
+            <select id="revenueMode" onchange="onRevenueModeChange()" class="form-select d-inline-block w-auto">
+                <option value="last7">📆 Last 7 Days</option>
+                <option value="top7">🔥 Top 7 Days This Month</option>
+                <option value="topDayEachMonth">📅 Top Day Each of Last 6 Months</option>
+                <option value="thisMonth">📊 This Month by Day</option>
+            </select>
+        </div>
+
+        <h2 class="text-center">Revenue</h2>
+        <div style="max-width: 800px; margin: 0 auto; height: 400px;">
+            <div class="chart-card">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+        <div id="revenue-table"></div>
+    </section>
+
+    <section id="reservation-report" class="report-section">
+        <div class="mb-4 text-center">
+            <label for="reservationMode" class="me-2 fw-bold">Select Reservation Report:</label>
+            <select id="reservationMode" onchange="onReservationModeChange()" class="form-select d-inline-block w-auto">
+                <option value="last7">📆 Last 7 Days</option>
+                <option value="top7">🔥 Top 7 Busiest Days This Month</option>
+                <option value="topDayEachMonth">📅 Top Day Each of Last 6 Months</option>
+                <option value="thisMonth">📊 This Month by Day</option>
+            </select>
+        </div>
+
+        <h2 class="text-center">Reservations</h2>
+        <div style="max-width: 800px; margin: 0 auto; height: 400px;">
+            <div class="chart-card">
+                <canvas id="reservationChart"></canvas>
+            </div>
+        </div>
+        <div id="reservation-table"></div>
+    </section>
+
+    <section id="popular-items-report" class="report-section">
+        <h2 class="text-center">Popular Items</h2>
+        <div style="max-width: 700px; margin: 0 auto; height: 400px;">
+            <div class="chart-card chart-card-pie">
+                <canvas id="popularItemsChart"></canvas>
+            </div>
+        </div>
+        <div id="popular-items-table"></div>
+    </section>
+
+    <div style="height: 100px;"></div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <script src="~/js/admin-reports.js"></script>
+}
