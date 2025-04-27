@@ -30,7 +30,7 @@ public class ReportsController : Controller
             case "last7":
                 var last7 = DateTime.Now.Date.AddDays(-6);
                 result = query
-                    .Where(o => o.CreatedAt.Date >= last7)
+                    .Where(o => o.CreatedAt.Date >= last7 && o.CreatedAt.Date <= DateTime.Today)
                     .GroupBy(o => o.CreatedAt.Date)
                     .Select(g => new
                     {
@@ -46,15 +46,18 @@ public class ReportsController : Controller
                 break;
 
             case "top7":
+                var currentMonthStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                var currentMonthEnd = currentMonthStart.AddMonths(1);
+
                 result = query
-                    .Where(o => o.CreatedAt.Month == DateTime.Now.Month && o.CreatedAt.Year == DateTime.Now.Year)
+                    .Where(o => o.CreatedAt >= currentMonthStart && o.CreatedAt < currentMonthEnd)
                     .GroupBy(o => o.CreatedAt.Date)
                     .Select(g => new
                     {
                         Date = g.Key,
                         TotalRevenue = g.Sum(o => o.TotalPrice)
                     })
-                    .AsEnumerable() 
+                    .AsEnumerable()
                     .OrderByDescending(x => x.TotalRevenue)
                     .Take(7)
                     .OrderBy(x => x.Date)
@@ -77,7 +80,7 @@ public class ReportsController : Controller
                                 Date = g.Key,
                                 TotalRevenue = g.Sum(o => o.TotalPrice)
                             })
-                            .AsEnumerable() 
+                            .AsEnumerable()
                             .OrderByDescending(x => x.TotalRevenue)
                             .FirstOrDefault()
                     )
@@ -90,9 +93,10 @@ public class ReportsController : Controller
                 break;
 
             case "thisMonth":
-                var start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                var startOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                var today = DateTime.Now.Date;
                 result = query
-                    .Where(o => o.CreatedAt >= start)
+                    .Where(o => o.CreatedAt.Date >= startOfMonth && o.CreatedAt.Date <= today)
                     .GroupBy(o => o.CreatedAt.Date)
                     .Select(g => new {
                         Date = g.Key,
@@ -239,30 +243,29 @@ public class ReportsController : Controller
     [HttpGet]
     public JsonResult GetSummaryCardsData()
     {
-        var start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+        var startOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+        var today = DateTime.Today;
 
-        var totalRevenue = _context.Orders
-            .Where(o => o.Status == "completed" && o.CreatedAt >= start)
-            .Sum(o => (decimal?)o.TotalPrice) ?? 0;
+        var completedOrdersThisMonth = _context.Orders
+            .Where(o => o.Status == "completed" && o.CreatedAt.Date >= startOfMonth && o.CreatedAt.Date <= today)
+            .ToList(); 
 
-        var totalOrders = _context.Orders
-            .Count(o => o.Status == "completed" && o.CreatedAt >= start);
+        var totalRevenue = completedOrdersThisMonth.Sum(o => o.TotalPrice);
+        var totalOrders = completedOrdersThisMonth.Count;
 
         var totalReservations = _context.Reservations
-            .Count(r => r.Status != "cancelled" && r.ReservationTime >= start);
+            .Where(r => r.Status != "cancelled" && r.ReservationTime.Date >= startOfMonth && r.ReservationTime.Date <= today)
+            .Count();
 
-        var topDay = _context.Orders
-            .Where(o => o.Status == "completed" && o.CreatedAt >= start)
+        var topDay = completedOrdersThisMonth
             .GroupBy(o => o.CreatedAt.Date)
             .Select(g => new
             {
                 Date = g.Key,
-                Revenue = g.Sum(x => x.TotalPrice)
+                Revenue = g.Sum(o => o.TotalPrice)
             })
-            .AsEnumerable()
             .OrderByDescending(x => x.Revenue)
-            .Select(x => x.Date.ToString("yyyy-MM-dd"))
-            .FirstOrDefault();
+            .FirstOrDefault()?.Date.ToString("yyyy-MM-dd") ?? "--";
 
         return Json(new
         {
@@ -272,4 +275,5 @@ public class ReportsController : Controller
             topDay
         });
     }
+
 }

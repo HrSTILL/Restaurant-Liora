@@ -4,13 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Restaurant_Manager</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/home/homenavbar.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/toast.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/notifications/toasts.css" asp-append-version="true" />
     @RenderSection("Styles", required: false)
 </head>
 <body>
+    <div class="notifications"></div>
     <header>
         <nav class="custom-navbar">
             <a asp-controller="Admin" asp-action="AdminDash" class="navbar-brand logo-link">
@@ -21,6 +22,7 @@
                 <a href="/Admin/AdminSpecialOffers" class="shared-button-style">Special Offers</a>
                 <a href="/Admin/AdminOrders" class="shared-button-style">Orders</a>
                 <a href="/Admin/AdminReservations" class="shared-button-style">Reservations</a>
+                <a href="/Admin/AdminIncome" class="shared-button-style">Income</a>
                 <a href="/Reports/AdminReports" class="shared-button-style">Reports</a>
                 <a href="/Admin/ManageStaff" class="shared-button-style">Manage Staff</a>
                 <a href="/Admin/ManageUsers" class="shared-button-style">Manage Users</a>
@@ -37,13 +39,24 @@
         </main>
     </div>
 
-    <partial name="_Toasts" />
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
-
+    <script src="~/js/notifications/toasts.js" asp-append-version="true"></script>
+    @if (TempData["ToastSuccess"] != null)
+    {
+        <script>
+            createToast('success', 'fa-solid fa-circle-check', 'Success', '@TempData["ToastSuccess"]');
+        </script>
+    }
+    @if (TempData["ToastError"] != null)
+    {
+        <script>
+            createToast('error', 'fa-solid fa-circle-exclamation', 'Error', '@TempData["ToastError"]');
+        </script>
+    }
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

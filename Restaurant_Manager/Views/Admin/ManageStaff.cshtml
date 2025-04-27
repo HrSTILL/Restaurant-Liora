@@ -4,7 +4,6 @@
 @{
     ViewData["Title"] = "Manage Staff";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    string search = ViewData["Search"] as string ?? "";
 }
 
 @section Styles {
@@ -15,11 +14,11 @@
     <h2>Manage Staff</h2>
 
     <div class="top-bar">
-        <form method="get" asp-action="ManageStaff" class="search-form">
-            <input type="text" name="search" value="@search" placeholder="Search staff..." />
-            <button type="submit" class="btn action-btn">🔍</button>
-        </form>
+        <div class="search-form">
+            <input type="text" id="staffSearchInput" placeholder="Search staff..." />
+        </div>
     </div>
+
 
     <div class="action-buttons">
         <button class="btn action-btn" onclick="openCreateModal()">New Staff</button>
@@ -54,21 +53,21 @@
     <div class="pagination">
         @if (Model.HasPreviousPage)
         {
-            <a asp-action="ManageStaff" asp-route-page="@(Model.PageIndex - 1)" asp-route-search="@search" class="btn pagination-btn">Prev</a>
+            <a asp-action="ManageStaff" asp-route-page="@(Model.PageIndex - 1)" class="btn pagination-btn">Prev</a>
         }
 
         <span>Page @Model.PageIndex of @Model.TotalPages</span>
 
         @if (Model.HasNextPage)
         {
-            <a asp-action="ManageStaff" asp-route-page="@(Model.PageIndex + 1)" asp-route-search="@search" class="btn pagination-btn">Next</a>
+            <a asp-action="ManageStaff" asp-route-page="@(Model.PageIndex + 1)" class="btn pagination-btn">Next</a>
         }
     </div>
 </div>
 
 <partial name="_UserModals" />
 
-
 @section Scripts {
     <script src="~/js/admin-users.js" asp-append-version="true"></script>
+    <script src="~/js/admin-staff-search.js" asp-append-version="true"></script>
 }

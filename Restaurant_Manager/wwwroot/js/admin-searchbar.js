@@ -1,19 +1,14 @@
-﻿function filterTable(inputId, tableId, attribute = "data-user") {
-    const inputElement = document.getElementById(inputId);
-    if (!inputElement) return;
+﻿document.addEventListener('DOMContentLoaded', function () {
+    const ordersInput = document.getElementById('searchOrdersInput');
+    if (ordersInput) {
+        ordersInput.addEventListener('input', filterOrders);
+    }
 
-    const input = inputElement.value.toLowerCase();
-    const rows = document.querySelectorAll(`#${tableId} tbody tr`);
-
-    rows.forEach(row => {
-        const userData = row.getAttribute(attribute)?.toLowerCase() || "";
-        if (userData.includes(input)) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
-    });
-}
+    const reservationsInput = document.getElementById('reservationSearchInput');
+    if (reservationsInput) {
+        reservationsInput.addEventListener('input', filterReservations);
+    }
+});
 
 function filterReservations() {
     filterTable("reservationSearchInput", "reservationTable", "data-user");
@@ -21,4 +16,15 @@ function filterReservations() {
 
 function filterOrders() {
     filterTable("searchOrdersInput", "ordersTable", "data-name");
+}
+
+function filterTable(inputId, tableId, dataAttr) {
+    const searchInput = document.getElementById(inputId);
+    const rows = document.querySelectorAll(`#${tableId} tbody tr`);
+
+    const search = searchInput.value.toLowerCase();
+    rows.forEach(row => {
+        const data = row.getAttribute(dataAttr) || '';
+        row.style.display = data.includes(search) ? '' : 'none';
+    });
 }

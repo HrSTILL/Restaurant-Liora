@@ -106,3 +106,34 @@
     margin-bottom: 20px;
     flex-wrap: wrap;
 }
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination-link {
+    padding: 8px 16px;
+    background: linear-gradient(to right, #f3d19c, #e0a95a);
+    border: none;
+    border-radius: 8px;
+    color: #5a3e1b;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.3s;
+}
+
+    .pagination-link:hover {
+        background: linear-gradient(to right, #e0a95a, #f3d19c);
+        transform: scale(1.05);
+        color: #000;
+    }
+
+.pagination span {
+    font-weight: bold;
+    color: #5a3e1b;
+}
+

@@ -24,7 +24,7 @@ function loadRevenueData(mode = "last7") {
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Revenue (лв)',
+                        label: 'Revenue ($)',
                         data: revenues,
                         backgroundColor: 'rgba(54, 162, 235, 0.6)',
                         borderColor: 'rgba(54, 162, 235, 1)',
@@ -90,7 +90,9 @@ function loadReservationData(mode = "last7") {
                         y: {
                             beginAtZero: true,
                             ticks: {
-                                precision: 0
+                                callback: function (value) {
+                                    return '$' + value.toLocaleString();
+                                }
                             }
                         }
                     }
@@ -197,35 +199,47 @@ function loadSummaryCards() {
     fetch('/Reports/GetSummaryCardsData')
         .then(response => response.json())
         .then(data => {
-            animateCount("card-total-revenue", data.totalRevenue, " лв");
-            animateCount("card-total-orders", data.totalOrders);
-            animateCount("card-total-reservations", data.totalReservations);
-            document.getElementById("card-top-day").innerText = data.topDay || "—";
+            animateCount("card-total-revenue", "$" + data.totalRevenue);
+            animateCount("card-total-orders", data.totalOrders, false);
+            animateCount("card-total-reservations", data.totalReservations, false);
+            document.getElementById("card-top-day").innerText = data.topDay || "--";
         })
         .catch(error => {
             console.error("Error loading summary cards data:", error);
         });
 }
 
-function animateCount(id, value, suffix = '', duration = 1000) {
+
+function animateCount(id, value, duration = 2000) {
     const el = document.getElementById(id);
-    const start = 0;
+
+    if (el == null) return;  
+
+    if (typeof value === 'string' && value.includes('$')) {
+        value = parseFloat(value.replace(/[^\d.-]/g, ''));
+    }
+
     const end = parseFloat(value);
     const increment = end / (duration / 16);
-    let current = start;
+    let current = 0;
 
     function update() {
         current += increment;
         if (current >= end) {
-            el.innerText = Math.round(end) + suffix;
+            el.innerText = end.toLocaleString();
         } else {
-            el.innerText = Math.round(current) + suffix;
+            el.innerText = current.toLocaleString();
             requestAnimationFrame(update);
         }
     }
 
-    update();
+    if (!isNaN(end)) {
+        update();
+    } else {
+        el.innerText = "--";
+    }
 }
+
 
 function onReservationModeChange() {
     const mode = document.getElementById("reservationMode").value;

@@ -9,30 +9,24 @@
             <th>Duration</th>
             <th>Area</th>
             <th>Status</th>
-            <th>Cancel</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var r in Model)
+        @foreach (var reservation in Model)
         {
             <tr>
-                <td>@r.Table?.TableNumber</td>
-                <td>@r.NumberOfPeople</td>
-                <td>@r.ReservationTime.ToString("g")</td>
-                <td>@r.DurationType</td>
-                <td>@r.SeatingArea</td>
-                <td style="text-transform: capitalize;">@r.Status</td>
+                <td>@reservation.Table?.TableNumber</td>
+                <td>@reservation.NumberOfPeople</td>
+                <td>@reservation.ReservationTime.ToString("g")</td>
+                <td>@reservation.DurationType</td>
+                <td>@reservation.SeatingArea</td>
                 <td>
-                    @if (r.Status == "pending")
-                    {
-                        <form asp-controller="Reservation" asp-action="Cancel" method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="@r.Id" />
-                            <button type="submit" class="cancel-btn">Cancel</button>
-                        </form>
-                    }
-                    else{
-                      <div style="text-align:center;">-</div>
-                    }
+                    <select class="form-select" onchange="changeReservationStatus(@reservation.Id, this)">
+                        <option value="pending" selected="@((reservation.Status == "pending") ? "selected" : null)">Pending</option>
+                        <option value="confirmed" selected="@((reservation.Status == "confirmed") ? "selected" : null)">Confirmed</option>
+                        <option value="completed" selected="@((reservation.Status == "completed") ? "selected" : null)">Completed</option>
+                        <option value="cancelled" selected="@((reservation.Status == "cancelled") ? "selected" : null)">Cancelled</option>
+                    </select>
                 </td>
             </tr>
         }

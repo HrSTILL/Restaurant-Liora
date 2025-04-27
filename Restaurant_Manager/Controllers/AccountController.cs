@@ -68,7 +68,7 @@ namespace Restaurant_Manager.Controllers
 
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = "Profile updated successfully.";
+            TempData["ToastSuccess"] = "Profile updated successfully.";
             return RedirectToAction("CustomerAccount");
         }
 
@@ -105,20 +105,20 @@ namespace Restaurant_Manager.Controllers
 
             if (user.PasswordHash != oldHash)
             {
-                TempData["Error"] = "Current password is incorrect.";
+                TempData["ToastError"] = "Current password is incorrect.";
                 return View(model);
             }
 
             if (model.NewPassword != model.ConfirmPassword)
             {
-                TempData["Error"] = "New passwords do not match.";
+                TempData["ToastError"] = "New passwords do not match.";
                 return View(model);
             }
 
             user.PasswordHash = Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(model.NewPassword)));
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = "Password changed successfully.";
+            TempData["ToastSuccess"] = "Password changed successfully.";
             return RedirectToAction("CustomerAccount");
         }
     }

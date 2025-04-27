@@ -12,12 +12,15 @@
 
             if (response.ok) {
                 closeDeleteModal();
-                location.reload();
+                createToast('success', 'fa-solid fa-circle-check', 'Success', 'Menu item deleted successfully!');
+                setTimeout(() => location.reload(), 1500); 
             } else {
-                alert("Failed to delete the special offer.");
+                createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'Failed to delete the menu item.');
             }
         });
     }
+
+    setupLiveSpecialSearch();
 });
 
 function confirmDelete(id) {
@@ -29,15 +32,23 @@ function closeDeleteModal() {
     document.getElementById("deleteMenuItemModal").classList.remove("show");
 }
 
+function setupLiveSpecialSearch() {
+    const searchInput = document.getElementById("searchSpecialsInput");
+    if (!searchInput) return;
 
-function filterSpecials() {
-    const searchValue = document.getElementById("searchSpecialsInput").value.toLowerCase();
-    const rows = document.querySelectorAll("tbody tr");
+    searchInput.addEventListener("input", function () {
+        const searchText = this.value.toLowerCase();
+        const rows = document.querySelectorAll("#specialOffersTableBody tr");
 
-    rows.forEach(row => {
-        const name = row.dataset.name;
-        const matchesSearch = name.includes(searchValue);
+        rows.forEach(row => {
+            const name = row.dataset.name || "";
+            const matchesSearch = name.includes(searchText);
 
-        row.style.display = matchesSearch ? "" : "none";
+            if (matchesSearch) {
+                row.style.display = ""; 
+            } else {
+                row.style.display = "none"; 
+            }
+        });
     });
 }

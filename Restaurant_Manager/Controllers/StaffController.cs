@@ -28,16 +28,17 @@ public class StaffController : Controller
     public JsonResult GetStaffSummary()
     {
         var startOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+        var today = DateTime.Today;
 
         var totalRevenue = _context.Orders
-            .Where(o => o.Status == "completed" && o.CreatedAt >= startOfMonth)
+            .Where(o => o.Status == "completed" && o.CreatedAt.Date >= startOfMonth && o.CreatedAt.Date <= today)
             .Sum(o => (decimal?)o.TotalPrice) ?? 0;
 
         var totalOrders = _context.Orders
-            .Count(o => o.Status == "completed" && o.CreatedAt >= startOfMonth);
+            .Count(o => o.Status == "completed" && o.CreatedAt.Date >= startOfMonth && o.CreatedAt.Date <= today);
 
         var totalReservations = _context.Reservations
-            .Count(r => r.Status != "cancelled" && r.ReservationTime >= startOfMonth);
+            .Count(r => r.Status != "cancelled" && r.ReservationTime.Date >= startOfMonth && r.ReservationTime.Date <= today);
 
         return Json(new
         {
@@ -46,6 +47,7 @@ public class StaffController : Controller
             totalReservations
         });
     }
+
 
     [HttpGet]
     public JsonResult GetStaffRevenueChart()
@@ -194,6 +196,7 @@ public class StaffController : Controller
         order.Status = newStatus;
         await _context.SaveChangesAsync();
 
+        TempData["ToastSuccess"] = "Status updated Successfully.";
         return Ok();
     }
 
@@ -206,6 +209,7 @@ public class StaffController : Controller
         reservation.Status = newStatus;
         await _context.SaveChangesAsync();
 
+        TempData["ToastSuccess"] = "Status updated Successfully.";
         return Ok();
     }
 }

@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="~/css/admin/admin-dashboard.css" asp-append-version="true" />
 }
 
-
-<h1 class="text-center my-4">Admin Dashboard</h1>
+<div class="admin-container">
+    <h1 class="text-center my-4">Admin Dashboard</h1>
 
 <div class="admin-dashboard-container">
     <div class="summary-cards-grid">
-        <div class="summary-card"><h4>Total Revenue</h4><p id="card-total-revenue">--</p></div>
-        <div class="summary-card"><h4>Total Orders</h4><p id="card-total-orders">--</p></div>
-        <div class="summary-card"><h4>Staff</h4><p id="card-total-staff">--</p></div>
-        <div class="summary-card"><h4>Specials</h4><p id="card-total-specials">--</p></div>
-        <div class="summary-card"><h4>Users</h4><p id="card-total-users">--</p></div>
-        <div class="summary-card"><h4>Reservations</h4><p id="card-total-reservations">--</p></div>
+            <div class="summary-card"><a style="text-decoration:none;" href="/Admin/AdminIncome"><h4>Monthly Revenue</h4><p id="card-total-revenue">--</p></a></div>
+        <div class="summary-card"><a style="text-decoration:none;" href="/Admin/AdminOrders"><h4>Monthly Orders</h4><p id="card-total-orders">--</p></a></div>
+        <div class="summary-card"><a style="text-decoration:none;" href="/Admin/AdminReservations"><h4>Monthly Reservations</h4><p id="card-total-reservations">--</p></a></div>
+        <div class="summary-card"><a style="text-decoration:none;" href="/Admin/ManageStaff"><h4>Staff</h4><p id="card-total-staff">--</p></a></div>
+        <div class="summary-card"><a style="text-decoration:none;" href="/Admin/ManageUsers"><h4>Users</h4><p id="card-total-users">--</p></a></div>
+        <div class="summary-card"><a style="text-decoration:none;" href="/Admin/AdminSpecialOffers"><h4>Special Offers</h4><p id="card-total-specials">--</p></a></div>
     </div>
 
     <div class="main-content-grid">
@@ -39,8 +39,9 @@
     </div>
 </div>
 
+</div>
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-    <script src="~/js/admin-dashboard.js"></script>
+    <script src="~/js/admin-dashboard.js" asp-append-version="true"></script>
 }

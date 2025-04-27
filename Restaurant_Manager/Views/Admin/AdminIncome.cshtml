@@ -1,0 +1,128 @@
+﻿@model Restaurant_Manager.Models.ViewModels.AdminIncomeViewModel
+@{
+    ViewBag.Title = "Admin Income";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/admin-income.css" asp-append-version="true" />
+}
+<div class="income-container">
+    <h2 class="mb-5 text-center">Income</h2>
+
+    <div class="income-summary">
+        <div class="income-card">
+            <h5>Total Income</h5>
+            <h3 id="income-total" data-value="@Model.TotalIncome">@Model.TotalIncome.ToString("C")</h3>
+        </div>
+        <div class="income-card">
+            <h5>Income This Month</h5>
+            <h3 id="income-this-month" data-value="@Model.IncomeThisMonth">@Model.IncomeThisMonth.ToString("C")</h3>
+        </div>
+        <div class="income-card">
+            <h5>Income Today</h5>
+            <h3 id="income-today" data-value="@Model.IncomeToday">@Model.IncomeToday.ToString("C")</h3>
+        </div>
+        <div class="income-card">
+            <h5>Highest Earning Day</h5>
+            <h3 id="income-highest-day" data-value="@Model.HighestIncomeDay?.TotalIncome ?? 0">@Model.HighestIncomeDay?.TotalIncome.ToString("C")</h3>
+            <p>@Model.HighestIncomeDay?.Date.ToString("MMM dd, yyyy")</p>
+        </div>
+    </div>
+
+
+    <div class="income-chart">
+        <h4>Daily Chart</h4>
+
+        @if (Model.Last10DaysIncome != null && Model.Last10DaysIncome.Any())
+        {
+            <canvas id="incomeChart"></canvas>
+        }
+        else
+        {
+            <p style="margin-top: 20px; color: #7c5c2b;">No income data available yet.</p>
+        }
+    </div>
+
+    <div class="income-table" id="dailyIncomeTable">
+        <div class="search-bar">
+            <input type="text" id="incomeSearch" placeholder="Search by date..." />
+        </div>
+
+        <h4>Daily Income</h4>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Total Income</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var income in Model.DailyIncomes)
+                {
+                    <tr onclick="location.href='@Url.Action("OrdersOnDay", "Admin", new { date = income.Date.ToString("yyyy-MM-dd") })'" style="cursor:pointer;">
+                        <td>@income.Date.ToString("MMM dd, yyyy")</td>
+                        <td>@income.TotalIncome.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+        <div class="pagination">
+            @if (Model.DailyIncomes.HasPreviousPage)
+            {
+                <a href="@Url.Action("AdminIncome", new { page = Model.DailyIncomes.PageIndex - 1 })" class="pagination-link btn action-btn">Prev</a>
+            }
+
+            <span>Page @Model.DailyIncomes.PageIndex of @Model.DailyIncomes.TotalPages</span>
+
+            @if (Model.DailyIncomes.HasNextPage)
+            {
+                <a href="@Url.Action("AdminIncome", new { page = Model.DailyIncomes.PageIndex + 1 })" class="pagination-link btn action-btn">Next</a>
+            }
+        </div>
+    </div>
+
+    <div class="income-table" id="monthlyIncomeTable">
+        <div class="year-selector">
+            <select id="yearDropdown">
+                @foreach (var year in Model.AvailableYears)
+                {
+                    <option value="@year" selected="@(year == Model.SelectedYear ? "selected" : null)">@year</option>
+                }
+            </select>
+        </div>
+
+        <h4>Monthly Income - @Model.SelectedYear</h4>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Total Income</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var month in Model.MonthlyIncomes)
+                {
+                    <tr>
+                        <td>@(new DateTime(1, month.Month, 1).ToString("MMMM"))</td>
+                        <td>@month.TotalIncome.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var incomeLabels = @Html.Raw(Json.Serialize(Model.Last10DaysIncome.OrderBy(x => x.Date).Select(x => x.Date.ToString("MMM dd"))));
+        var incomeDataPoints = @Html.Raw(Json.Serialize(Model.Last10DaysIncome.OrderBy(x => x.Date).Select(x => x.TotalIncome)));
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <script src="~/js/admin-income.js" asp-append-version="true" asp-append-version="true"></script>
+}

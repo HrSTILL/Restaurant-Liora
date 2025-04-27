@@ -188,6 +188,7 @@ public class ReservationController : Controller
         await _context.SaveChangesAsync();
 
         TempData["SuccessMessage"] = "Reservation created successfully!";
+        TempData["ToastSuccess"] = "Reservation created successfully!";
         return RedirectToAction("ReservationSuccess");
     }
 
@@ -239,7 +240,7 @@ public class ReservationController : Controller
             }
         }
 
-        TempData["SuccessMessage"] = "Reservation cancelled successfully.";
+        TempData["ToastSuccess"] = "Reservation cancelled successfully.";
         return RedirectToAction("MyReservations");
     }
 }

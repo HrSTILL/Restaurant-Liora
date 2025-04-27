@@ -11,16 +11,15 @@
     <link rel="stylesheet" href="~/css/admin/manage-users.css" asp-append-version="true" />
 }
 
-
 <div class="admin-container">
     <h2>Manage Users</h2>
 
     <div class="top-bar">
-        <form method="get" asp-action="ManageUsers" class="search-form">
-            <input type="text" name="search" value="@search" placeholder="Search users..." />
-            <button type="submit" class="btn action-btn">🔍</button>
-        </form>
+        <div class="search-form">
+            <input type="text" id="userSearchInput" placeholder="Search users..." />
+        </div>
     </div>
+
 
     <div class="action-buttons">
         <button class="btn action-btn" onclick="openCreateModal()">New User</button>
@@ -72,4 +71,5 @@
 
 @section Scripts {
     <script src="~/js/admin-users.js" asp-append-version="true"></script>
+    <script src="~/js/admin-users-search.js" asp-append-version="true"></script>
 }

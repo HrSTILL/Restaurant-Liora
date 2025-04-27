@@ -1,4 +1,5 @@
-﻿@model List<Reservation>
+﻿@model PaginatedList<Reservation>
+@using Restaurant_Manager.Utils
 
 @{
     ViewData["Title"] = "All Reservations";
@@ -14,12 +15,12 @@
 
     <div class="search-form">
         <input type="text" id="reservationSearchInput" placeholder="Search by user name or email..." />
-        <button onclick="filterReservations()">🔍</button>
     </div>
 
     <table class="admin-table" id="reservationTable">
         <thead>
             <tr>
+                <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
@@ -34,13 +35,14 @@
             @foreach (var reservation in Model)
             {
                 <tr data-user="@((reservation.User.FirstName + " " + reservation.User.LastName + " " + reservation.User.Email).ToLower())">
+                    <td>@reservation.Id</td>
                     <td>@reservation.User.FirstName @reservation.User.LastName</td>
                     <td>@reservation.User.Email</td>
                     <td>@reservation.User.Phone</td>
                     <td>@reservation.Table.TableNumber</td>
                     <td>@reservation.NumberOfPeople</td>
                     <td>@reservation.ReservationTime.ToString("g")</td>
-                    <td>@reservation.Status</td>
+                    <td style="text-transform: capitalize;">@reservation.Status</td>
                     <td>
                         <a href="/Admin/UserReservations/@reservation.UserId" class="small-btn">Details</a>
                     </td>
@@ -48,6 +50,20 @@
             }
         </tbody>
     </table>
+
+    <div class="pagination">
+        @if (Model.HasPreviousPage)
+        {
+            <a class="pagination-link btn action-btn" href="@Url.Action("AdminReservations", new { page = Model.PageIndex - 1 })">Prev</a>
+        }
+
+        <span>Page @Model.PageIndex of @Model.TotalPages</span>
+
+        @if (Model.HasNextPage)
+        {
+            <a class="pagination-link btn action-btn" href="@Url.Action("AdminReservations", new { page = Model.PageIndex + 1 })">Next</a>
+        }
+    </div>
 </div>
 
 @section Scripts {

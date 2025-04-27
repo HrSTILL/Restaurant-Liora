@@ -44,13 +44,3 @@
     </div>
 </div>
 
-@section Scripts {
-    @if (TempData["Error"] != null)
-    {
-        <script>showToast("@TempData["Error"]");</script>
-    }
-    @if (TempData["Success"] != null)
-    {
-        <script>showToast("@TempData["Success"]");</script>
-    }
-}

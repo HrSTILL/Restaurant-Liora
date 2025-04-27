@@ -12,10 +12,20 @@
 <div class="staff-reports-container">
 
     <div class="summary-cards-grid">
-        <div class="summary-card"><h4>Total Revenue</h4><p id="card-total-revenue">--</p></div>
-        <div class="summary-card"><h4>Total Orders</h4><p id="card-total-orders">--</p></div>
-        <div class="summary-card"><h4>Total Reservations</h4><p id="card-total-reservations">--</p></div>
+        <div class="summary-card">
+            <h4>Total Revenue</h4>
+            <p id="card-total-revenue" data-value="0">$0</p>
+        </div>
+        <div class="summary-card">
+            <h4>Total Orders</h4>
+            <p id="card-total-orders" data-value="0">0</p>
+        </div>
+        <div class="summary-card">
+            <h4>Total Reservations</h4>
+            <p id="card-total-reservations" data-value="0">0</p>
+        </div>
     </div>
+
 
     <div class="charts-wrapper">
         <div class="chart-card">
@@ -33,5 +43,5 @@
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="~/js/staff-reports.js"></script>
+    <script src="~/js/staff-reports.js" asp-append-version="true"></script>
 }

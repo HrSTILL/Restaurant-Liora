@@ -1,0 +1,189 @@
+﻿.income-container {
+    max-width: 1100px;
+    margin: 60px auto;
+    background: #fffaf0;
+    border: 1px solid #d6a75c;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.income-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.income-card {
+    flex: 1 1 calc(25% - 20px);
+    background: linear-gradient(135deg, #fff8e1, #f3e5ab);
+    border: 1px solid #d6a75c;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 25px 20px;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+    .income-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .income-card h5 {
+        font-size: 1.1rem;
+        color: #3d2f1b;
+        margin-bottom: 10px;
+    }
+
+    .income-card h3 {
+        font-size: 2rem;
+        color: #3d2f1b;
+        margin: 0;
+    }
+
+    .income-card p {
+        margin: 5px 0 0;
+        font-size: 0.95rem;
+        color: #7c5c2b;
+    }
+
+.income-chart {
+    background: #fffaf0;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+    .income-chart canvas {
+        max-height: 250px;
+        width: 100% !important;
+    }
+
+    .income-chart h4 {
+        text-align: center;
+        color: #3d2f1b;
+        margin-bottom: 20px;
+    }
+
+.income-table {
+    background: #fffaf0;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+}
+
+    .income-table h4 {
+        text-align: center;
+        color: #3d2f1b;
+        margin-bottom: 20px;
+    }
+
+    .income-table table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .income-table th, .income-table td {
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid #d6a75c;
+        color: #3d2f1b;
+    }
+
+    .income-table th {
+        background-color: #fdf5e6;
+        font-weight: bold;
+    }
+
+    .income-table tr:hover {
+        background-color: #fff0c2;
+        transition: 0.2s;
+    }
+
+.search-bar {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+    .search-bar input {
+        padding: 8px 16px;
+        border: 1px solid #d6a75c;
+        border-radius: 8px;
+        font-size: 1rem;
+        width: 250px;
+    }
+
+.year-selector {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+    .year-selector select {
+        padding: 8px 16px;
+        border: 1px solid #d6a75c;
+        border-radius: 8px;
+        background: #fff8e1;
+        font-size: 1rem;
+        color: #3d2f1b;
+        cursor: pointer;
+    }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 15px;
+}
+
+    .pagination a {
+        padding: 8px 16px;
+        border: 1px solid #d6a75c;
+        background: #fff8e1;
+        color: #3d2f1b;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: 0.3s;
+        font-weight: bold;
+    }
+
+        .pagination a:hover {
+            background: #ffe28a;
+            color: #000;
+        }
+
+    .pagination span {
+        font-weight: bold;
+        color: #3d2f1b;
+    }
+
+@media (max-width: 992px) {
+    .income-card {
+        flex: 1 1 calc(50% - 20px);
+    }
+
+    .search-bar input {
+        width: 200px;
+    }
+}
+
+@media (max-width: 600px) {
+    .income-card {
+        flex: 1 1 100%;
+    }
+
+    .search-bar input {
+        width: 100%;
+    }
+}

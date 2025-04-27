@@ -4,12 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Restaurant_Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/home/homenavbar.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/toast.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/notifications/toasts.css" asp-append-version="true" />
     @RenderSection("Styles", required: false)
 </head>
 <body>
+    <div class="notifications"></div>
     <header>
         <nav class="custom-navbar">
             <a asp-controller="Home" asp-action="Index" class="logo-link">
@@ -34,8 +36,20 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/notifications/toasts.js" asp-append-version="true"></script>
+    @if (TempData["ToastSuccess"] != null)
+    {
+        <script>
+            createToast('success', 'fa-solid fa-circle-check', 'Success', '@TempData["ToastSuccess"]');
+        </script>
+    }
+    @if (TempData["ToastError"] != null)
+    {
+        <script>
+            createToast('error', 'fa-solid fa-circle-exclamation', 'Error', '@TempData["ToastError"]');
+        </script>
+    }
     @await RenderSectionAsync("Scripts", required: false)
 
-    <partial name="_Toasts" />
 </body>
 </html>

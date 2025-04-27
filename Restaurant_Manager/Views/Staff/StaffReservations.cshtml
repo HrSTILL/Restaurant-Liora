@@ -23,16 +23,25 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var user in Model)
+             @if (Model != null && Model.Any())
+            {
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.FirstName @user.LastName</td>
+                        <td>@user.Email</td>
+                        <td>@user.Phone</td>
+                        <td>@user.TableNumbers</td>
+                        <td>
+                            <a href="/Staff/StaffUserReservations/@user.UserId" class="view-button">View Reservations</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
             {
                 <tr>
-                    <td>@user.FirstName @user.LastName</td>
-                    <td>@user.Email</td>
-                    <td>@user.Phone</td>
-                    <td>@user.TableNumbers</td>
-                    <td>
-                        <a href="/Staff/StaffUserReservations/@user.UserId" class="view-button">View Reservations</a>
-                    </td>
+                    <td colspan="5" style="text-align:center; padding:20px;font-weight:bold;">No reservations yet.</td>
                 </tr>
             }
         </tbody>

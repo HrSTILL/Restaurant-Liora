@@ -167,7 +167,6 @@ namespace Restaurant_Manager.Controllers
                 SaveCart(cart);
                 return Json(new { success = true, newCount = cart.Sum(i => i.Quantity) });
             }
-
             return Json(new { success = false });
         }
 
@@ -175,6 +174,7 @@ namespace Restaurant_Manager.Controllers
         public IActionResult ClearCart()
         {
             HttpContext.Session.Remove("Cart");
+            TempData["ToastSuccess"] = "Cart cleared successfully!";
             return RedirectToAction("CustomerCart");
         }
 
@@ -184,6 +184,7 @@ namespace Restaurant_Manager.Controllers
             var cart = GetCart();
             if (!cart.Any())
                 return RedirectToAction("CustomerCart");
+
 
             return View(cart);
         }
@@ -226,6 +227,7 @@ namespace Restaurant_Manager.Controllers
             HttpContext.Session.Remove(CartSessionKey);
             TempData["LastOrderId"] = order.Id;
 
+            TempData["ToastSuccess"] = "Order placed successfully!";
             return RedirectToAction("OrderSuccess", "Order");
         }
 

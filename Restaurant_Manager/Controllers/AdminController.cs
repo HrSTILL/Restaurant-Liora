@@ -8,6 +8,8 @@ using Restaurant_Manager.Utils;
 using Restaurant_Manager.ViewModels;
 using System.Security.Cryptography;
 using System.Text;
+using Restaurant_Manager.Models.ViewModels;
+using System.Globalization;
 
 [Authorize(Roles = "admin")]
 public class AdminController : Controller
@@ -63,7 +65,7 @@ public class AdminController : Controller
         _context.MenuItems.Add(item);
         await _context.SaveChangesAsync();
 
-        TempData["Success"] = "Menu item created successfully!";
+        TempData["ToastSuccess"] = "Menu item created successfully!";
         return RedirectToAction("AdminMenu");
     }
 
@@ -132,7 +134,7 @@ public class AdminController : Controller
 
         await _context.SaveChangesAsync();
 
-        TempData["Success"] = "Menu item updated successfully!";
+        TempData["ToastSuccess"] = "Menu item updated successfully!";
         return RedirectToAction("AdminMenu");
     }
 
@@ -144,6 +146,7 @@ public class AdminController : Controller
 
         _context.MenuItems.Remove(item);
         await _context.SaveChangesAsync();
+        TempData["ToastSuccess"] = "Menu item deleted successfully!";
         return Ok();
     }
 
@@ -219,7 +222,7 @@ public class AdminController : Controller
         _context.MenuItems.Add(item);
         await _context.SaveChangesAsync();
 
-        TempData["Success"] = "Special offer created successfully!";
+        TempData["ToastSuccess"] = "Special offer created successfully!";
         return RedirectToAction("AdminSpecialOffers");
     }
 
@@ -286,10 +289,11 @@ public class AdminController : Controller
 
         await _context.SaveChangesAsync();
 
-        TempData["Success"] = "Special offer updated successfully!";
+        TempData["ToastSuccess"] = "Special offer updated successfully!";
         return RedirectToAction("AdminSpecialOffers");
     }
-    public async Task<IActionResult> AdminOrders(string search = "")
+    [HttpGet]
+    public async Task<IActionResult> AdminOrders(string search = "", int page = 1)
     {
         var ordersQuery = _context.Orders
             .Include(o => o.User)
@@ -305,15 +309,16 @@ public class AdminController : Controller
                 o.User.Email.Contains(search));
         }
 
-        var orders = await ordersQuery
-            .OrderByDescending(o => o.CreatedAt)
-            .ToListAsync();
+        var orders = await PaginatedList<Order>.CreateAsync(
+            ordersQuery.OrderByDescending(o => o.CreatedAt),
+            page, 25);
 
         return View(orders);
     }
 
+
     [HttpGet]
-    public async Task<IActionResult> AdminReservations(string search = "")
+    public async Task<IActionResult> AdminReservations(string search = "", int page = 1)
     {
         var reservationsQuery = _context.Reservations
             .Include(r => r.User)
@@ -328,12 +333,95 @@ public class AdminController : Controller
                 r.User.Email.Contains(search));
         }
 
-        var reservations = await reservationsQuery
-            .OrderByDescending(r => r.ReservationTime)
-            .ToListAsync();
+        var reservations = await PaginatedList<Reservation>.CreateAsync(
+            reservationsQuery.OrderByDescending(r => r.ReservationTime),
+            page, 25);
 
         return View(reservations);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateOrderStatus(int id, string newStatus)
+    {
+        var order = await _context.Orders.FindAsync(id);
+        if (order == null) return NotFound();
+
+        order.Status = newStatus;
+        await _context.SaveChangesAsync();
+
+        TempData["ToastSuccess"] = "Status updated successfully!";
+        return Ok();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateReservationStatus(int id, string newStatus)
+    {
+        var reservation = await _context.Reservations.FindAsync(id);
+        if (reservation == null) return NotFound();
+
+        reservation.Status = newStatus;
+        await _context.SaveChangesAsync();
+
+        TempData["ToastSuccess"] = "Status updated successfully!";
+        return Ok();
+    }
+
+    public IActionResult AdminIncome(int page = 1, int? year = null)
+    {
+        var completedOrders = _context.Orders
+            .Where(o => o.Status.ToLower() == "completed")
+            .ToList();
+
+        var minDate = completedOrders.Any() ? completedOrders.Min(o => o.CreatedAt.Date) : DateTime.Today;
+        var maxDate = DateTime.Today;
+
+        var groupedIncome = completedOrders
+            .GroupBy(o => o.CreatedAt.Date)
+            .Select(g => new DailyIncome
+            {
+                Date = g.Key,
+                TotalIncome = g.Sum(x => x.TotalPrice)
+            })
+            .ToList();
+
+        var startOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+        var today = DateTime.Now.Date;
+
+        var viewModel = new AdminIncomeViewModel
+        {
+            TotalIncome = completedOrders.Sum(x => x.TotalPrice),
+            IncomeToday = completedOrders
+                .Where(x => x.CreatedAt.Date == DateTime.Today)
+                .Sum(x => x.TotalPrice),
+            IncomeThisMonth = completedOrders
+                .Where(x => x.CreatedAt.Date >= startOfMonth && x.CreatedAt.Date <= today)
+                .Sum(x => x.TotalPrice), 
+            HighestIncomeDay = groupedIncome.OrderByDescending(x => x.TotalIncome).FirstOrDefault(),
+            DailyIncomes = PaginatedList<DailyIncome>.Create(groupedIncome.OrderByDescending(x => x.Date).ToList(), page, 10),
+            Last10DaysIncome = groupedIncome.OrderBy(x => x.Date).TakeLast(10).ToList(),
+            AvailableYears = completedOrders
+                .Select(o => o.CreatedAt.Year)
+                .Distinct()
+                .OrderByDescending(y => y)
+                .ToList(),
+            SelectedYear = year ?? DateTime.Today.Year,
+            MonthlyIncomes = completedOrders
+                .Where(o => o.CreatedAt.Year == (year ?? DateTime.Today.Year))
+                .GroupBy(o => o.CreatedAt.Month)
+                .Select(g => new MonthlyIncome
+                {
+                    Month = g.Key,
+                    TotalIncome = g.Sum(x => x.TotalPrice)
+                })
+                .OrderBy(m => m.Month)
+                .ToList()
+        };
+
+        return View(viewModel);
+    }
+
+
+
 
     public async Task<IActionResult> ManageUsers(int page = 1, string search = "")
     {
@@ -413,6 +501,7 @@ public class AdminController : Controller
 
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
+        TempData["ToastSuccess"] = "User created successfully!";
         return Ok();
     }
 
@@ -434,6 +523,7 @@ public class AdminController : Controller
 
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
+        TempData["ToastSuccess"] = "Staff created successfully!";
         return Ok();
     }
 
@@ -452,6 +542,10 @@ public class AdminController : Controller
         user.Phone = model.Phone;
 
         await _context.SaveChangesAsync();
+        if(user.Role == "customer")
+        TempData["ToastSuccess"] = "User updated successfully.";
+        if(user.Role == "staff")
+        TempData["ToastSuccess"] = "Staff updated successfully.";
         return Ok();
     }
 
@@ -463,6 +557,10 @@ public class AdminController : Controller
 
         _context.Users.Remove(user);
         await _context.SaveChangesAsync();
+        if (user.Role == "customer")
+            TempData["ToastSuccess"] = "User deleted successfully.";
+        if (user.Role == "staff")
+            TempData["ToastSuccess"] = "Staff deleted successfully.";
         return Ok();
     }
 
@@ -494,10 +592,6 @@ public class AdminController : Controller
         return View("UserOrders", viewModel);
     }
 
-
-
-
-
     [HttpGet]
     public async Task<IActionResult> UserReservations(int id)
     {
@@ -522,10 +616,6 @@ public class AdminController : Controller
 
         return View("UserReservations", viewModel);
     }
-
-
-
-
 
     [HttpGet]
     public async Task<IActionResult> GetUserById(int id)
@@ -586,27 +676,24 @@ public class AdminController : Controller
     public JsonResult GetDashboardSummary()
     {
         var startOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+        var today = DateTime.Now.Date;
 
         var totalRevenue = _context.Orders
-            .Where(o => o.Status == "completed" && o.CreatedAt >= startOfMonth)
+            .Where(o => o.Status.ToLower() == "completed" && o.CreatedAt.Date >= startOfMonth && o.CreatedAt.Date <= today)
             .Sum(o => (decimal?)o.TotalPrice) ?? 0;
 
         var totalOrders = _context.Orders
-            .Count(o => o.Status == "completed" && o.CreatedAt >= startOfMonth);
+            .Count(o => o.Status.ToLower() == "completed" && o.CreatedAt.Date >= startOfMonth && o.CreatedAt.Date <= today);
 
         var totalStaff = _context.Users.Count(u => u.Role == "staff");
-
-        var totalSpecials = _context.MenuItems
-            .Count(mi => mi.Category.ToLower() == "special");
-
+        var totalSpecials = _context.MenuItems.Count(mi => mi.Category.ToLower() == "special");
         var totalUsers = _context.Users.Count(u => u.Role == "customer");
-
         var totalReservations = _context.Reservations
-            .Count(r => r.Status != "cancelled" && r.ReservationTime >= startOfMonth);
+            .Count(r => r.Status.ToLower() != "cancelled" && r.ReservationTime.Date >= startOfMonth && r.ReservationTime.Date <= today);
 
         return Json(new
         {
-            totalRevenue,
+            totalRevenue = Math.Round(totalRevenue, 2),
             totalOrders,
             totalStaff,
             totalSpecials,
@@ -615,13 +702,15 @@ public class AdminController : Controller
         });
     }
 
+
     [HttpGet]
     public JsonResult GetDashboardRevenueChart()
     {
-        var last7Days = DateTime.Now.AddDays(-6);
+        var startOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+        var endOfMonth = startOfMonth.AddMonths(1);
 
         var revenueData = _context.Orders
-            .Where(o => o.Status == "completed" && o.CreatedAt.Date >= last7Days)
+            .Where(o => o.Status == "completed" && o.CreatedAt >= startOfMonth && o.CreatedAt < endOfMonth)
             .AsEnumerable()
             .GroupBy(o => o.CreatedAt.Date)
             .Select(g => new
@@ -677,13 +766,14 @@ public class AdminController : Controller
     {
         var recentOrders = _context.Orders
             .Where(o => o.Status == "completed")
+            .Include(o => o.User)
             .OrderByDescending(o => o.CreatedAt)
             .Take(5)
+            .AsEnumerable()
             .Select(o => new
             {
-                CustomerName = o.User.FirstName + " " + o.User.LastName,
-                Total = o.TotalPrice,
-                Date = o.CreatedAt.ToString("yyyy-MM-dd HH:mm")
+                CustomerName = o.User != null ? (o.User.FirstName + " " + o.User.LastName) : "Unknown",
+                Total = o.TotalPrice
             })
             .ToList();
 
@@ -708,7 +798,6 @@ public class AdminController : Controller
         return Json(upcomingReservations);
     }
 
-    [HttpGet]
     public JsonResult GetRecentActivities()
     {
         var activities = new List<string>();
@@ -718,13 +807,15 @@ public class AdminController : Controller
             .Include(o => o.User)
             .OrderByDescending(o => o.CreatedAt)
             .Take(3)
-            .Select(o => $"🛒 Order completed - {o.User.FirstName} {o.User.LastName} - {o.TotalPrice} лв")
+            .AsEnumerable()
+            .Select(o => $"🛒 Order completed - {o.User.FirstName} {o.User.LastName} - {o.TotalPrice.ToString("C2")}")
             .ToList();
 
         var recentReservations = _context.Reservations
             .Where(r => r.Status != "cancelled")
             .OrderByDescending(r => r.ReservationTime)
             .Take(2)
+            .AsEnumerable() 
             .Select(r => $"📅 Reservation - {r.Name} for {r.NumberOfPeople} people")
             .ToList();
 
@@ -734,6 +825,64 @@ public class AdminController : Controller
         return Json(activities);
     }
 
+    [HttpGet]
+    public JsonResult SearchDailyIncome(string query)
+    {
+        var completedOrders = _context.Orders
+            .Where(o => o.Status.ToLower() == "completed")
+            .ToList();
 
+        var groupedIncome = completedOrders
+            .GroupBy(o => o.CreatedAt.Date)
+            .Select(g => new
+            {
+                Date = g.Key,
+                TotalIncome = g.Sum(x => x.TotalPrice)
+            })
+            .OrderByDescending(x => x.Date)
+            .ToList();
+
+        if (!string.IsNullOrEmpty(query))
+        {
+            query = query.ToLower();
+            groupedIncome = groupedIncome
+                .Where(x => x.Date.ToString("MMM dd, yyyy").ToLower().Contains(query))
+                .ToList();
+        }
+
+        var result = groupedIncome.Select(x => new
+        {
+            dateFormatted = x.Date.ToString("MMM dd, yyyy"),
+            totalIncomeFormatted = x.TotalIncome.ToString("C")
+        });
+
+        return Json(result);
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> OrdersOnDay(DateTime date)
+    {
+        var orders = await _context.Orders
+            .Where(o => o.CreatedAt.Date == date.Date && o.Status.ToLower() == "completed")
+            .Include(o => o.User)
+            .Include(o => o.OrderItems)
+            .ThenInclude(oi => oi.MenuItem)
+            .ToListAsync();
+
+        var viewModel = orders.Select(o => new OrdersOnDayViewModel
+        {
+            OrderId = o.Id,
+            FullName = $"{o.User.FirstName} {o.User.LastName}",
+            Items = o.OrderItems.Select(i => new OrderItemViewModel
+            {
+                Name = i.MenuItem.Name,
+                Price = i.MenuItem.Price
+            }).ToList()
+        }).ToList();
+
+        ViewData["SelectedDate"] = date.ToString("MMMM dd, yyyy");
+        return View(viewModel);
+    }
 
 }

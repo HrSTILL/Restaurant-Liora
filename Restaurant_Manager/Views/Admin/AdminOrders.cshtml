@@ -1,4 +1,5 @@
-﻿@model List<Restaurant_Manager.Models.Order>
+﻿@model PaginatedList<Restaurant_Manager.Models.Order>
+@using Restaurant_Manager.Utils
 
 @{
     ViewData["Title"] = "All Orders";
@@ -14,12 +15,12 @@
 
     <div class="search-form">
         <input type="text" id="searchOrdersInput" placeholder="Search by user name..." />
-        <button onclick="filterOrders()">🔍</button>
     </div>
 
     <table class="admin-table" id="ordersTable">
         <thead>
             <tr>
+                <th>#</th>
                 <th>User</th>
                 <th>Email</th>
                 <th>Status</th>
@@ -32,6 +33,7 @@
             @foreach (var order in Model)
             {
                 <tr data-name="@((order.User.FirstName + " " + order.User.LastName).ToLower())">
+                    <td>@order.Id</td>
                     <td>@order.User.FirstName @order.User.LastName</td>
                     <td>@order.User.Email</td>
                     <td style="text-transform: capitalize;">@order.Status</td>
@@ -44,6 +46,20 @@
             }
         </tbody>
     </table>
+
+    <div class="pagination">
+        @if (Model.HasPreviousPage)
+        {
+            <a class="pagination-link btn action-btn" href="@Url.Action("AdminOrders", new { page = Model.PageIndex - 1 })">Prev</a>
+        }
+
+        <span>Page @Model.PageIndex of @Model.TotalPages</span>
+
+        @if (Model.HasNextPage)
+        {
+            <a class="pagination-link btn action-btn" href="@Url.Action("AdminOrders", new { page = Model.PageIndex + 1 })">Next</a>
+        }
+    </div>
 </div>
 
 @section Scripts {

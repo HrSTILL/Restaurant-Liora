@@ -1,0 +1,41 @@
+﻿@model List<Restaurant_Manager.ViewModels.OrdersOnDayViewModel>
+
+@{
+    ViewData["Title"] = "Orders on " + ViewData["SelectedDate"];
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/orders-on-day.css" asp-append-version="true" />
+}
+
+<div class="admin-container">
+    <h2>Orders on @ViewData["SelectedDate"]</h2>
+
+    <a href="@Url.Action("AdminIncome", "Admin")" class="back-btn" style="margin-bottom: 20px;">Back</a>
+
+    @if (!Model.Any())
+    {
+        <p class="no-orders">No orders found for this day.</p>
+    }
+    else
+    {
+        <div class="orders-list">
+            @foreach (var order in Model)
+            {
+                <div class="order-card">
+                    <div class="order-header">
+                        <span class="order-id">Order #@order.OrderId</span>
+                        <span class="customer-name">@order.FullName</span>
+                    </div>
+                    <ul class="order-items">
+                        @foreach (var item in order.Items)
+                        {
+                            <li>@item.Name - <strong>@item.Price.ToString("C")</strong></li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    }
+</div>

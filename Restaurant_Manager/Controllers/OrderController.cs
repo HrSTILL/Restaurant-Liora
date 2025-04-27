@@ -99,7 +99,6 @@ namespace Restaurant_Manager.Controllers
             {
                 return RedirectToAction("CustomerCart", "Cart");
             }
-
             return View(order);
         }
 
@@ -112,6 +111,7 @@ namespace Restaurant_Manager.Controllers
                 order.Status = "cancelled";
                 await _context.SaveChangesAsync();
             }
+            TempData["ToastSuccess"] = "Order cancelled successfully!";
             return RedirectToAction("MyOrders");
         }
 

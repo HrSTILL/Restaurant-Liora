@@ -26,8 +26,8 @@
                     <p>@item.Description</p>
 
                     <div class="price-wrapper">
-                        <span class="old-price">@oldPrice.ToString("F2") лв.</span>
-                        <span class="special-price">@originalPrice.ToString("F2") лв. 🔥</span>
+                        <span class="old-price">$@oldPrice.ToString("F2")</span>
+                        <span class="special-price">$@originalPrice.ToString("F2")🔥</span>
                     </div>
 
                     <button class="order-btn" onclick="event.stopPropagation(); tryAddToCart(@item.Id)">

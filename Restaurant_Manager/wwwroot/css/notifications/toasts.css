@@ -1,0 +1,87 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.notifications {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column-reverse;
+    z-index: 9999;
+}
+
+.lio-toast {
+    position: relative;
+    padding: 1rem;
+    width: 400px;
+    background: #ffffff;
+    color: #7a6650;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 2px solid #d6a75c;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(170, 132, 83, 0.2);
+    font-family: 'Poppins', sans-serif;
+    animation: slideIn 0.5s ease forwards;
+    margin-bottom: 15px;
+}
+
+    .lio-toast .title {
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .lio-toast .content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .lio-toast span {
+        font-size: 0.9rem;
+        color: #7a6650;
+    }
+
+    .lio-toast i.fa-xmark {
+        font-size: 1.5rem;
+        color: #aa8453;
+        cursor: pointer;
+    }
+
+    .lio-toast i:first-child {
+        font-size: 2rem;
+        color: #d6a75c;
+    }
+
+    .lio-toast.success {
+        border-color: #9fcf8f;
+        background: #f9fdf9;
+    }
+
+    .lio-toast.error {
+        border-color: #e0a3a3;
+        background: #fef9f9;
+    }
+
+    .lio-toast.warning {
+        border-color: #e9d58c;
+        background: #fffcf0;
+    }
+
+    .lio-toast.info {
+        border-color: #a3d1e0;
+        background: #f9fcfe;
+    }
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

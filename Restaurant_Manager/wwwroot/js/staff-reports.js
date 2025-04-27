@@ -1,17 +1,29 @@
-﻿function animateCount(id, value, duration = 2000) {
+﻿document.addEventListener("DOMContentLoaded", function () {
+    loadSummaryCards();
+    loadRevenueChart();
+    loadReservationChart();
+});
+
+function animateCount(id, value, duration = 2000) {
     const el = document.getElementById(id);
-    const start = 0;
+    if (!el) return;
+
     const end = parseFloat(value);
-    const range = end - start;
-    const increment = range / (duration / 16);
-    let current = start;
+    const increment = end / (duration / 16);
+    let current = 0;
+
+    const isCurrency = id === "card-total-revenue";
 
     function update() {
         current += increment;
         if (current >= end) {
-            el.innerText = Math.round(end);
+            el.innerText = isCurrency
+                ? `$${end.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                : Math.round(end).toLocaleString();
         } else {
-            el.innerText = Math.round(current);
+            el.innerText = isCurrency
+                ? `$${current.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                : Math.round(current).toLocaleString();
             requestAnimationFrame(update);
         }
     }
@@ -39,7 +51,7 @@ function loadRevenueChart() {
                 data: {
                     labels: data.map(x => x.date),
                     datasets: [{
-                        label: 'Revenue (лв)',
+                        label: 'Revenue ($)',
                         data: data.map(x => x.totalRevenue),
                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
                         borderColor: 'rgba(54, 162, 235, 1)',
@@ -54,6 +66,26 @@ function loadRevenueChart() {
                     animation: {
                         duration: 1500,
                         easing: 'easeOutBounce'
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += `$${context.parsed.y.toFixed(2)}`;
+                                    }
+                                    return label;
+                                }
+                            }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
                     },
                     scales: {
                         y: {
@@ -89,6 +121,12 @@ function loadReservationChart() {
                         duration: 1500,
                         easing: 'easeOutQuart'
                     },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
                     scales: {
                         y: {
                             beginAtZero: true
@@ -98,9 +136,3 @@ function loadReservationChart() {
             });
         });
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-    loadSummaryCards();
-    loadRevenueChart();
-    loadReservationChart();
-});

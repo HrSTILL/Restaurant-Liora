@@ -1,5 +1,7 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
     const deleteForm = document.getElementById("deleteMenuItemForm");
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
 
     if (deleteForm) {
         deleteForm.addEventListener("submit", async function (e) {
@@ -18,6 +20,14 @@
             }
         });
     }
+
+    if (searchInput) {
+        searchInput.addEventListener("input", filterMenu);
+    }
+
+    if (categoryFilter) {
+        categoryFilter.addEventListener("change", filterMenu);
+    }
 });
 
 function confirmDelete(id) {
@@ -28,7 +38,6 @@ function confirmDelete(id) {
 function closeDeleteModal() {
     document.getElementById("deleteMenuItemModal").classList.remove("show");
 }
-
 
 function filterMenu() {
     const searchValue = document.getElementById("searchInput").value.toLowerCase();
@@ -44,4 +53,3 @@ function filterMenu() {
         row.style.display = (matchesSearch && matchesCategory) ? "" : "none";
     });
 }
-

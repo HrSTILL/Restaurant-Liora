@@ -10,17 +10,16 @@
 }
 
 <div class="admin-container">
-    <h2>Manage Menu Items</h2>
+    <h2 class="text-center my-4">Manage Menu Items</h2>
 
-    <a asp-action="CreateMenuItem" class="btn shared-button-style">Create New Item</a>
+    <a asp-action="CreateMenuItem" class="btn shared-button-style mb-3">Create New Item</a>
 
     <div class="top-bar">
         <div class="search-form">
             <input type="text" id="searchInput" placeholder="Search menu items..." />
-            <button onclick="filterMenu()">🔍</button>
         </div>
         <div class="search-form">
-            <select id="categoryFilter" onchange="filterMenu()">
+            <select id="categoryFilter">
                 <option value="all">All Categories</option>
                 <option value="salad">Salads and Appetizers</option>
                 <option value="main">Main Courses</option>
@@ -54,7 +53,6 @@
                     </td>
                 </tr>
             }
-
         </tbody>
     </table>
 </div>

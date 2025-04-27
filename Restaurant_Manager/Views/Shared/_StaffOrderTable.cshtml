@@ -7,6 +7,7 @@
             <th>Total Price</th>
             <th>Created At</th>
             <th>Status</th>
+            <th>Detials</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +25,12 @@
                         <option value="completed" selected="@(order.Status == "completed")">Completed</option>
                         <option value="cancelled" selected="@(order.Status == "cancelled")">Cancelled</option>
                     </select>
+                </td>
+                <td>
+                    @foreach (var item in order.OrderItems)
+                    {
+                        <li>@item.MenuItem.Name x @item.Quantity</li>
+                    }
                 </td>
             </tr>
         }

@@ -495,3 +495,17 @@ select.form-input {
         transform: translateY(-2px);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
+
+.select-status {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+    .select-status:focus {
+        border-color: #d6a75c;
+        outline: none;
+    }
