@@ -1,4 +1,5 @@
-﻿document.addEventListener("DOMContentLoaded", () => {
+﻿//(EN) Call dashboard loading functions | (BG) Извиква функциите при зареждане на таблото
+document.addEventListener("DOMContentLoaded", () => {
     loadSummaryCards();
     loadRevenueChart();
     loadReservationChart();
@@ -7,7 +8,7 @@
     loadUpcomingReservations();
     loadRecentActivities();
 });
-
+//(EN) Animate revenue loading | (BG) Анимира зареждането на оборота
 function animateCount(id, value, isCurrency = false, duration = 2000) {
     const el = document.getElementById(id);
     const end = parseFloat(value);
@@ -26,7 +27,7 @@ function animateCount(id, value, isCurrency = false, duration = 2000) {
     update();
 }
 
-
+//(EN) Load dashboard summary cards | (BG) Зареждане на картите с обобщение на таблото
 function loadSummaryCards() {
     fetch('/Admin/GetDashboardSummary')
         .then(res => res.json())
@@ -40,7 +41,7 @@ function loadSummaryCards() {
         });
 }
 
-
+//(EN) Load revenue chart  | (BG) Зареждане на графиката с оборота
 function loadRevenueChart() {
     fetch('/Admin/GetDashboardRevenueChart')
         .then(res => res.json())
@@ -67,7 +68,7 @@ function loadRevenueChart() {
             });
         });
 }
-
+//(EN) Load reservation chart | (BG) Зареждане на графиката с резервациите
 function loadReservationChart() {
     fetch('/Admin/GetDashboardReservationChart')
         .then(res => res.json())
@@ -92,7 +93,7 @@ function loadReservationChart() {
             });
         });
 }
-
+//(EN) Load top menu items chart | (BG) Зареждане на графиката с най-продаваните ястия
 function loadTopItemsChart() {
     fetch('/Admin/GetTopMenuItems')
         .then(res => res.json())
@@ -120,7 +121,7 @@ function loadTopItemsChart() {
             });
         });
 }
-
+//(EN) Load recent customer orders | (BG) Зареждане на последните поръчки на клиентите
 function loadRecentOrders() {
     fetch('/Admin/GetRecentOrders')
         .then(res => res.json())
@@ -129,8 +130,7 @@ function loadRecentOrders() {
                 `<ul>${data.map(o => `<li>${o.customerName} - $${o.total.toFixed(2)}</li>`).join('')}</ul>`;
         });
 }
-
-
+//(EN) Load upcoming reservation list | (BG) Зарежда списъка с предстоящи резервации
 function loadUpcomingReservations() {
     fetch('/Admin/GetUpcomingReservations')
         .then(res => res.json())
@@ -139,7 +139,7 @@ function loadUpcomingReservations() {
                 `<ul>${data.map(r => `<li>${r.time} - ${r.people} people - ${r.customerName}</li>`).join('')}</ul>`;
         });
 }
-
+//(EN) Load reacent activity | (BG) Зарежда последната активност
 function loadRecentActivities() {
     fetch('/Admin/GetRecentActivities')
         .then(res => res.json())

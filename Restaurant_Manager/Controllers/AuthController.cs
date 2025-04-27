@@ -14,13 +14,13 @@ public class AuthController : Controller
     {
         _context = context;
     }
-
+    // (EN) Loads the register page | (BG) Зареждa страницата за регистрация
     [HttpGet]
     public IActionResult Register()
     {
         return View();
     }
-
+    // (EN) Handles the registration process | (BG) Обработва процеса на регистрация
     [HttpPost]
     public IActionResult Register(RegisterViewModel model)
     {
@@ -71,13 +71,13 @@ public class AuthController : Controller
         TempData["ToastSuccess"] = "Registration successful! Please login.";
         return RedirectToAction("Login");
     }
-
+    // (EN) Loads the login page | (BG) Зарежда страницата за вход
     [HttpGet]
     public IActionResult Login()
     {
         return View();
     }
-
+    // (EN) Handles the login process | (BG) Обработва процеса на вход
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
     {
@@ -122,7 +122,7 @@ public class AuthController : Controller
             _ => RedirectToAction("Restricted", "Auth")
         };
     }
-
+    // (EN) Checks if the user is logged in and returns session data | (BG) Проверява дали потребителят е влязъл и връща данни за сесията
     [HttpGet("check-session")]
     public IActionResult CheckSession()
     {
@@ -137,12 +137,13 @@ public class AuthController : Controller
             Role = role
         });
     }
-
+    // (EN) Loads the restricted access page | (BG) Зарежда страницата с ограничен достъп
     public IActionResult Restricted()
     {
         return View();
     }
 
+    // (EN) Handles the logout process | (BG) Обработва процеса на изход
     [HttpPost]
     public async Task<IActionResult> Logout()
     {

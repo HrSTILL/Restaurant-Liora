@@ -16,12 +16,12 @@ namespace Restaurant_Manager.Controllers
         {
             _context = context;
         }
-
+        // (EN) Loads the customer account page | (BG) Зарежда страницата на клиентския акаунт
         public IActionResult CustomerAccount()
         {
             return View();
         }
-
+        // (EN) Loads the page for editing profile | (BG) Зарежда страницата за редактиране на профила
         [HttpGet]
         public async Task<IActionResult> EditProfile()
         {
@@ -43,7 +43,7 @@ namespace Restaurant_Manager.Controllers
 
             return View(model);
         }
-
+        // (EN) Handles the edit profile form submission | (BG) Обработва изпращането на формата за редактиране на профила
         [HttpPost]
         public async Task<IActionResult> EditProfile(EditProfileViewModel model)
         {
@@ -71,18 +71,18 @@ namespace Restaurant_Manager.Controllers
             TempData["ToastSuccess"] = "Profile updated successfully.";
             return RedirectToAction("CustomerAccount");
         }
-
+        // (EN) Loads the privacy policy page | (BG) Зарежда страницата с политиката за поверителност
         public IActionResult PrivacyPolicy()
         {
             return View();
         }
-
+        // (EN) Loads the page for changing password | (BG) Зарежда страницата за смяна на паролата
         [HttpGet]
         public IActionResult ChangePassword()
         {
             return View();
         }
-
+        // (EN) Handles the change password form submission | (BG) Обработва изпращането на формата за смяна на паролата
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {

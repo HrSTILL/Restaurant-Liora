@@ -11,7 +11,7 @@
 @section Styles {
     <link rel="stylesheet" href="~/css/customer/customermenu.css" asp-append-version="true" />
 }
-
+@* (EN) Customer Menu Page displaying categories and dishes with modals | (BG) Страница за клиентско меню с категории и ястия и модали*@
 @functions {
     string GetName(string category) => category.ToLower() switch
     {
@@ -119,5 +119,5 @@
         }
     ));
     </script>
-    <script src="~/js/menu.js" asp-append-version="true"></script>
+    <script src="~/js/other/menu.js" asp-append-version="true"></script>
 }

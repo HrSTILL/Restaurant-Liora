@@ -22,13 +22,13 @@ namespace Restaurant_Manager.Controllers
         {
             _context = context;
         }
-
+        // (EN) Loads the customer-cart page | (BG) Зарежда страницата на количката
         public IActionResult CustomerCart()
         {
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>(CartSessionKey) ?? new List<CartItem>();
             return View(cart);
         }
-
+        // (EN) Gets the information for the cart | (BG) Взима информацията за количката
         private List<CartItem> GetCart()
         {
             var json = HttpContext.Session.GetString(CartSessionKey);
@@ -36,13 +36,13 @@ namespace Restaurant_Manager.Controllers
                 ? new List<CartItem>()
                 : JsonSerializer.Deserialize<List<CartItem>>(json) ?? new List<CartItem>();
         }
-
+        // (EN) Saves the cart to the session | (BG) Записва количката в сесията
         private void SaveCart(List<CartItem> cart)
         {
             var json = JsonSerializer.Serialize(cart);
             HttpContext.Session.SetString(CartSessionKey, json);
         }
-
+        // (EN) Adds an item to the cart | (BG) Добавя артикул в количката
         [HttpPost]
         public async Task<JsonResult> AddToCartAjax([FromBody] AddToCartRequest data)
         {
@@ -99,13 +99,12 @@ namespace Restaurant_Manager.Controllers
             return Json(new { success = true, itemCount = cart.Sum(i => i.Quantity) });
         }
 
-
-
+        // (EN) Model for the request to add an item to the cart | (BG) Модел за заявка за добавяне на артикул в количката
         public class AddToCartRequest
         {
             public int MenuItemId { get; set; }
         }
-
+        // (EN) Removes an item from the cart | (BG) Премахва артикул от количката
         [HttpPost]
         public IActionResult RemoveFromCart(int menuItemId)
         {
@@ -118,7 +117,7 @@ namespace Restaurant_Manager.Controllers
             }
             return RedirectToAction("CustomerCart");
         }
-
+        // (EN) Updates the quantity of an item in the cart | (BG) Обновява количеството на артикул в количката
         [HttpPost]
         public IActionResult UpdateQuantity(int menuItemId, int quantity)
         {
@@ -131,7 +130,7 @@ namespace Restaurant_Manager.Controllers
             }
             return RedirectToAction("CustomerCart");
         }
-
+        // (EN) Model for the request to update the quantity of an item in the cart | (BG) Модел за заявка за обновяване на количеството на артикул в количката
         [HttpPost]
         public async Task<IActionResult> UpdateQuantityAjax([FromBody] UpdateQuantityRequestViewModel request)
         {
@@ -150,7 +149,7 @@ namespace Restaurant_Manager.Controllers
 
             return Json(new { success = false });
         }
-
+        // (EN) Model for the request to remove an item from the cart | (BG) Модел за заявка за премахване на артикул от количката
         [HttpPost]
         public async Task<JsonResult> RemoveFromCartAjax([FromBody] RemoveRequestViewModel data)
         {
@@ -169,7 +168,7 @@ namespace Restaurant_Manager.Controllers
             }
             return Json(new { success = false });
         }
-
+        // (EN) Model for the request to clear the cart | (BG) Модел за заявка за изчистване на количката
         [HttpPost]
         public IActionResult ClearCart()
         {
@@ -177,7 +176,7 @@ namespace Restaurant_Manager.Controllers
             TempData["ToastSuccess"] = "Cart cleared successfully!";
             return RedirectToAction("CustomerCart");
         }
-
+        // (EN) Loads the place-order page | (BG) Зарежда страницата за поръчка
         [HttpGet]
         public IActionResult PlaceOrder()
         {
@@ -188,7 +187,7 @@ namespace Restaurant_Manager.Controllers
 
             return View(cart);
         }
-
+        // (EN) Places the order | (BG) Поръчва
         [HttpPost]
         public async Task<IActionResult> ConfirmOrder()
         {
@@ -230,7 +229,7 @@ namespace Restaurant_Manager.Controllers
             TempData["ToastSuccess"] = "Order placed successfully!";
             return RedirectToAction("OrderSuccess", "Order");
         }
-
+        // (EN) Checks if the user has an active reservation | (BG) Проверява дали потребителят има активна резервация
         [HttpGet]
         public async Task<IActionResult> CheckReservation()
         {
@@ -240,7 +239,7 @@ namespace Restaurant_Manager.Controllers
 
             return Json(new { success = await IsUserReservationActive(userId) });
         }
-
+        // (EN) Checks if the user has an active reservation | (BG) Проверява дали потребителят има активна резервация
         private async Task<bool> IsUserReservationActive(int userId)
         {
             var now = DateTime.Now;
@@ -267,7 +266,7 @@ namespace Restaurant_Manager.Controllers
             return isActive;
         }
 
-
+        // (EN) Gets the reservation duration based on the type | (BG) Взима продължителността на резервацията в зависимост от типа
         private TimeSpan GetReservationDuration(string type) => type switch
         {
             "Extended" => TimeSpan.FromHours(3),

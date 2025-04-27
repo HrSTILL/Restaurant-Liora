@@ -20,15 +20,17 @@ public class AdminController : Controller
     {
         _context = context;
     }
-
+    // (EN) Loads the admin dashboard page | (BG) Запълва страницата на админ таблото
     public IActionResult AdminDash() => View();
 
+    // (EN) Loads the admin menu page | (BG) Запълва страницата на админ менюто
     public IActionResult AdminMenu()
     {
         var menuItems = _context.MenuItems.ToList();
         return View(menuItems);
     }
 
+    // (EN) Loads the create menu item form | (BG) Запълва формата за създаване на меню
     [HttpGet]
     public IActionResult CreateMenuItem()
     {
@@ -36,6 +38,7 @@ public class AdminController : Controller
         return View(model);
     }
 
+    // (EN) Handles the creation of a new menu item | (BG) Обработва създаването на ново меню
     [HttpPost]
     public async Task<IActionResult> CreateMenuItem(MenuItemFormViewModel model)
     {
@@ -69,7 +72,7 @@ public class AdminController : Controller
         return RedirectToAction("AdminMenu");
     }
 
-
+    // (EN) Loads the edit menu item form | (BG) Запълва формата за редактиране на меню
     [HttpGet]
     public async Task<IActionResult> EditMenuItem(int id)
     {
@@ -96,6 +99,7 @@ public class AdminController : Controller
         return View("EditMenuItem", model);
     }
 
+    // (EN) Handles the editing of an existing menu item | (BG) Обработва редактирането на съществуващо меню
     [HttpPost]
     public async Task<IActionResult> EditMenuItem(MenuItemFormViewModel model)
     {
@@ -138,6 +142,7 @@ public class AdminController : Controller
         return RedirectToAction("AdminMenu");
     }
 
+    // (EN) Handles the deletion of a menu item | (BG) Обработва изтриването на меню
     [HttpPost]
     public async Task<IActionResult> DeleteMenuItemAjax(int id)
     {
@@ -150,6 +155,7 @@ public class AdminController : Controller
         return Ok();
     }
 
+    // (EN) Loads the details of a menu item | (BG) Запълва детайлите на меню
     [HttpGet]
     public async Task<IActionResult> GetMenuItemById(int id)
     {
@@ -169,6 +175,7 @@ public class AdminController : Controller
         return Json(model);
     }
 
+    // (EN) Loads the admin special offers page | (BG) Запълва страницата на админ специални оферти
     public IActionResult AdminSpecialOffers()
     {
         var specials = _context.MenuItems
@@ -178,6 +185,7 @@ public class AdminController : Controller
         return View(specials);
     }
 
+    // (EN) Loads the create special offer form | (BG) Запълва формата за създаване на специална оферта
     [HttpGet]
     public IActionResult CreateSpecialOffer()
     {
@@ -186,6 +194,7 @@ public class AdminController : Controller
         return View("CreateSpecialOffer", model);
     }
 
+    // (EN) Handles the creation of a new special offer | (BG) Обработва създаването на нова специална оферта
     [HttpPost]
     public async Task<IActionResult> CreateSpecialOffer(MenuItemFormViewModel model)
     {
@@ -226,6 +235,7 @@ public class AdminController : Controller
         return RedirectToAction("AdminSpecialOffers");
     }
 
+    // (EN) Loads the edit special offer form | (BG) Запълва формата за редактиране на специална оферта
     [HttpGet]
     public async Task<IActionResult> EditSpecialOffer(int id)
     {
@@ -252,6 +262,7 @@ public class AdminController : Controller
         return View("EditSpecialOffer", model);
     }
 
+    // (EN) Handles the editing of an existing special offer | (BG) Обработва редактирането на съществуваща специална оферта
     [HttpPost]
     public async Task<IActionResult> EditSpecialOffer(MenuItemFormViewModel model)
     {
@@ -292,6 +303,7 @@ public class AdminController : Controller
         TempData["ToastSuccess"] = "Special offer updated successfully!";
         return RedirectToAction("AdminSpecialOffers");
     }
+    // (EN) Handles the deletion of a special offer | (BG) Обработва изтриването на специална оферта
     [HttpGet]
     public async Task<IActionResult> AdminOrders(string search = "", int page = 1)
     {
@@ -316,7 +328,7 @@ public class AdminController : Controller
         return View(orders);
     }
 
-
+    // (EN) Loads the admin reservations page | (BG) Запълва страницата на админ резервации
     [HttpGet]
     public async Task<IActionResult> AdminReservations(string search = "", int page = 1)
     {
@@ -339,7 +351,7 @@ public class AdminController : Controller
 
         return View(reservations);
     }
-
+    // (EN) Updates the status of an order | (BG) Обновява статуса на поръчка
     [HttpPost]
     public async Task<IActionResult> UpdateOrderStatus(int id, string newStatus)
     {
@@ -352,7 +364,7 @@ public class AdminController : Controller
         TempData["ToastSuccess"] = "Status updated successfully!";
         return Ok();
     }
-
+    // (EN) Updates the status of a reservation | (BG) Обновява статуса на резервация
     [HttpPost]
     public async Task<IActionResult> UpdateReservationStatus(int id, string newStatus)
     {
@@ -365,7 +377,7 @@ public class AdminController : Controller
         TempData["ToastSuccess"] = "Status updated successfully!";
         return Ok();
     }
-
+    // (EN) Loads the admin income page | (BG) Запълва страницата на админ приходи
     public IActionResult AdminIncome(int page = 1, int? year = null)
     {
         var completedOrders = _context.Orders
@@ -420,9 +432,7 @@ public class AdminController : Controller
         return View(viewModel);
     }
 
-
-
-
+    // (EN) Loads the admin users page | (BG) Запълва страницата на админ потребители
     public async Task<IActionResult> ManageUsers(int page = 1, string search = "")
     {
         var query = _context.Users.Where(u => u.Role == "customer");
@@ -452,7 +462,7 @@ public class AdminController : Controller
         ViewData["Search"] = search;
         return View(users);
     }
-
+    // (EN) Loads the admin staff page | (BG) Запълва страницата на админ служители
     public async Task<IActionResult> ManageStaff(int page = 1, string search = "")
     {
         var query = _context.Users.Where(u => u.Role == "staff");
@@ -482,7 +492,7 @@ public class AdminController : Controller
         ViewData["Search"] = search;
         return View(staff);
     }
-
+    // (EN) Loads the create user form | (BG) Запълва формата за създаване на потребител
     [HttpPost]
     public async Task<IActionResult> CreateUser(CreateUserViewModel model)
     {
@@ -504,7 +514,7 @@ public class AdminController : Controller
         TempData["ToastSuccess"] = "User created successfully!";
         return Ok();
     }
-
+    // (EN) Loads the create staff form | (BG) Запълва формата за създаване на служител
     [HttpPost]
     public async Task<IActionResult> CreateStaff(CreateUserViewModel model)
     {
@@ -526,7 +536,7 @@ public class AdminController : Controller
         TempData["ToastSuccess"] = "Staff created successfully!";
         return Ok();
     }
-
+    // (EN) Loads the edit user/staff form | (BG) Запълва формата за редактиране на потребител/служител
     [HttpPost]
     public async Task<IActionResult> EditUser(EditUserViewModel model)
     {
@@ -548,7 +558,7 @@ public class AdminController : Controller
         TempData["ToastSuccess"] = "Staff updated successfully.";
         return Ok();
     }
-
+    // (EN) Handles the deletion of a user/staff | (BG) Обработва изтриването на потребител/служител
     [HttpPost]
     public async Task<IActionResult> DeleteUser([FromBody] int id)
     {
@@ -564,7 +574,7 @@ public class AdminController : Controller
         return Ok();
     }
 
-
+    // (EN) Loads the user orders page | (BG) Запълва страницата на поръчките на потребителя
     [HttpGet]
     public async Task<IActionResult> UserOrders(int id)
     {
@@ -591,7 +601,7 @@ public class AdminController : Controller
 
         return View("UserOrders", viewModel);
     }
-
+    // (EN) Loads the user reservations page | (BG) Запълва страницата на резервациите на потребителя
     [HttpGet]
     public async Task<IActionResult> UserReservations(int id)
     {
@@ -616,7 +626,7 @@ public class AdminController : Controller
 
         return View("UserReservations", viewModel);
     }
-
+    // (EN) Gets users by ID | (BG) Взима потребители по ID
     [HttpGet]
     public async Task<IActionResult> GetUserById(int id)
     {
@@ -635,14 +645,14 @@ public class AdminController : Controller
 
         return Json(model);
     }
-
+    // (EN) Hashes the password | (BG) Хешира паролата
     private string HashPassword(string password)
     {
         using var sha256 = SHA256.Create();
         var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
         return Convert.ToBase64String(bytes);
     }
-
+    // (EN) Prepares the menu item form | (BG) Подготвя формата за меню
     private MenuItemFormViewModel PrepareMenuItemForm()
     {
         return new MenuItemFormViewModel
@@ -651,7 +661,7 @@ public class AdminController : Controller
             AllergenOptions = GetAllergenOptions()
         };
     }
-
+    //(EN) Gets the category options | (BG) Взима категориите
     private List<SelectListItem> GetCategoryOptions() => new()
     {
         new SelectListItem { Value = "salad", Text = "Salads and Appetizers" },
@@ -659,7 +669,7 @@ public class AdminController : Controller
         new SelectListItem { Value = "dessert", Text = "Desserts" },
         new SelectListItem { Value = "drink", Text = "Drinks" }
     };
-
+    // (EN) Gets the allergen options | (BG) Взима алергените
     private List<SelectListItem> GetAllergenOptions() => new()
     {
         new SelectListItem { Value = "Gluten", Text = "Gluten" },
@@ -672,6 +682,7 @@ public class AdminController : Controller
         new SelectListItem { Value = "Sesame", Text = "Sesame" }
     };
 
+    // (EN) Gets the dashboard summary | (BG) Взима резюмето на таблото
     [HttpGet]
     public JsonResult GetDashboardSummary()
     {
@@ -702,7 +713,7 @@ public class AdminController : Controller
         });
     }
 
-
+    // (EN) Gets the dashboard revenue chart | (BG) Взима графиката на приходите
     [HttpGet]
     public JsonResult GetDashboardRevenueChart()
     {
@@ -723,7 +734,7 @@ public class AdminController : Controller
 
         return Json(revenueData);
     }
-
+    // (EN) Gets the dashboard reservation chart | (BG) Взима графиката на резервациите
     [HttpGet]
     public JsonResult GetDashboardReservationChart()
     {
@@ -743,7 +754,7 @@ public class AdminController : Controller
 
         return Json(reservationData);
     }
-
+    // (EN) Gets the top menu items | (BG) Взима топ менюта
     [HttpGet]
     public JsonResult GetTopMenuItems()
     {
@@ -760,7 +771,7 @@ public class AdminController : Controller
 
         return Json(topItems);
     }
-
+    // (EN) Gets the recent orders | (BG) Взима последните поръчки
     [HttpGet]
     public JsonResult GetRecentOrders()
     {
@@ -779,7 +790,7 @@ public class AdminController : Controller
 
         return Json(recentOrders);
     }
-
+    // (EN) Gets the upcoming reservations | (BG) Взима предстоящите резервации
     [HttpGet]
     public JsonResult GetUpcomingReservations()
     {
@@ -797,7 +808,7 @@ public class AdminController : Controller
 
         return Json(upcomingReservations);
     }
-
+    // (EN) Gets the recent activities | (BG) Взима последните активности
     public JsonResult GetRecentActivities()
     {
         var activities = new List<string>();
@@ -824,7 +835,7 @@ public class AdminController : Controller
 
         return Json(activities);
     }
-
+    // (EN) Gets the daily income | (BG) Взима дневния приход
     [HttpGet]
     public JsonResult SearchDailyIncome(string query)
     {
@@ -859,7 +870,7 @@ public class AdminController : Controller
         return Json(result);
     }
 
-
+    // (EN) Gets the orders on a specific day | (BG) Взима поръчките на определен ден
     [HttpGet]
     public async Task<IActionResult> OrdersOnDay(DateTime date)
     {

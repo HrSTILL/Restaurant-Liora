@@ -14,11 +14,12 @@ namespace Restaurant_Manager.Controllers
         {
             _context = context;
         }
-
+        // (EN) Loads the main customer page | (BG) Зарежда главната страница на клиента
         public IActionResult Index()
         {
             return View();
         }
+        // (EN) Loads the menu page | (BG) Зарежда страницата с менюто
         public IActionResult Menu()
         {
             var menuItems = _context.MenuItems.ToList();
@@ -29,6 +30,7 @@ namespace Restaurant_Manager.Controllers
 
             return View(grouped);
         }
+        // (EN) Loads the special offers page | (BG) Зарежда страницата с промоции
         public IActionResult SpecialOffers()
         {
             var specials = _context.MenuItems

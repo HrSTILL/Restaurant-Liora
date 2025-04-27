@@ -1,12 +1,12 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿// (EN) Setup staff search and row selection | (BG) Настройка на търсене и избор на служители
+document.addEventListener("DOMContentLoaded", function () {
     const staffSearchInput = document.getElementById("staffSearchInput");
-
     if (staffSearchInput) {
         staffSearchInput.addEventListener("input", function () {
             performSearch("/Admin/ManageStaff", staffSearchInput.value);
         });
     }
-
+// (EN) Perform live search request | (BG) Изпълнява търсене в реално време
     function performSearch(url, searchTerm) {
         fetch(`${url}?search=${encodeURIComponent(searchTerm)}&page=1`)
             .then(response => response.text())
@@ -21,7 +21,7 @@
             })
             .catch(error => console.error('Search failed:', error));
     }
-
+// (EN) Restore buttons for table rows | (BG) Възстановява бутоните за редовете в таблицата
     function reattachRowClickEvents() {
         const rows = document.querySelectorAll("#userTable tbody tr");
         rows.forEach(row => {

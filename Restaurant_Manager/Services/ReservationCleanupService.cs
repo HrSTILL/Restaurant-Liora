@@ -17,7 +17,7 @@ public class ReservationCleanupService : BackgroundService
     {
         _serviceProvider = serviceProvider;
     }
-
+// (EN) Automatically cancel no-show reservations | (BG) Автоматично анулира резервации при неявяване
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
@@ -41,7 +41,6 @@ public class ReservationCleanupService : BackgroundService
                     await context.SaveChangesAsync();
                 }
             }
-
             await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken); 
         }
     }

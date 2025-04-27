@@ -1,4 +1,5 @@
-﻿function changeReservationStatus(reservationId, selectElement) {
+﻿// (EN) Change reservation status| (BG) Променя статуса на резервация
+function changeReservationStatus(reservationId, selectElement) {
     const newStatus = selectElement.value;
 
     fetch(`/Admin/UpdateReservationStatus?id=${reservationId}&newStatus=${newStatus}`, {

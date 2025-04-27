@@ -16,7 +16,7 @@ public class ReservationController : Controller
     {
         _context = context;
     }
-
+    // (EN) Loads the page with customers personal reservations  | (BG) Зарежда страницата с личните резервации на клиента
     public async Task<IActionResult> MyReservations()
     {
         var userIdStr = HttpContext.Session.GetString("UserId");
@@ -38,6 +38,7 @@ public class ReservationController : Controller
         });
     }
 
+    // (EN) Loads the page for successful reservation  | (BG) Зарежда страницата за успешна резервация
     public IActionResult ReservationSuccess()
     {
         if (TempData["SuccessMessage"] == null)
@@ -46,6 +47,7 @@ public class ReservationController : Controller
         return View();
     }
 
+    // (EN) Loads the page for creating a reservation  | (BG) Зарежда страницата за създаване на резервация
     [HttpGet]
     public async Task<IActionResult> CustomerReservations()
     {
@@ -63,7 +65,7 @@ public class ReservationController : Controller
             SeatingArea = "Indoor"
         });
     }
-
+    // (EN) Creates a reservation  | (BG) Създава резервация
     [HttpPost]
     public async Task<IActionResult> Create(CustomerReservationsViewModel model)
     {
@@ -191,14 +193,14 @@ public class ReservationController : Controller
         TempData["ToastSuccess"] = "Reservation created successfully!";
         return RedirectToAction("ReservationSuccess");
     }
-
+    // (EN) Gets the duration based on the type of reservation  | (BG) Връща продължителността на резервацията в зависимост от типа
     private TimeSpan GetDuration(string type) => type switch
     {
         "Extended" => TimeSpan.FromHours(3),
         "ExtendedPlus" => TimeSpan.FromHours(6),
         _ => TimeSpan.FromMinutes(90)
     };
-
+    // (EN) Cancels a reservation  | (BG) Отменя резервация
     [HttpPost]
     public async Task<IActionResult> Cancel(int id)
     {

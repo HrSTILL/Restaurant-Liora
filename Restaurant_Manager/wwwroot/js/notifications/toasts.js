@@ -1,5 +1,4 @@
-﻿console.log('toasts.js is loaded!');
-
+﻿// (EN) Create toast notification | (BG) Създаване на известие
 let notifications = document.querySelector('.notifications');
 function createToast(type, icon, title, text) {
     let newToast = document.createElement('div');

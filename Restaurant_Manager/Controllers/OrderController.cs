@@ -19,7 +19,7 @@ namespace Restaurant_Manager.Controllers
         {
             _context = context;
         }
-
+        // (EN) Places order | (BG) Поръчва
         [HttpPost]
         public async Task<IActionResult> PlaceOrder()
         {
@@ -54,7 +54,7 @@ namespace Restaurant_Manager.Controllers
 
             return RedirectToAction("MyOrders");
         }
-
+        // (EN) Loads the page with customers personal orders | (BG) Зарежда страницата с личните поръчки на клиента
         [HttpGet]
         public async Task<IActionResult> MyOrders()
         {
@@ -81,7 +81,7 @@ namespace Restaurant_Manager.Controllers
             return View(model);
         }
 
-
+        // (EN) Loads the page for successful order | (BG) Зарежда страницата за успешна поръчка
         [HttpGet]
         public async Task<IActionResult> OrderSuccess()
         {
@@ -101,7 +101,7 @@ namespace Restaurant_Manager.Controllers
             }
             return View(order);
         }
-
+        // (EN) Cancels the order | (BG) Отказва поръчката
         [HttpPost]
         public async Task<IActionResult> CancelOrder(int id)
         {

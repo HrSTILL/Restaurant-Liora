@@ -1,19 +1,17 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿// (EN) Load staff dashboard | (BG) Зарежда таблото за персонала
+document.addEventListener("DOMContentLoaded", function () {
     loadSummaryCards();
     loadRevenueChart();
     loadReservationChart();
 });
-
+//(EN) Animate revenue loading | (BG) Анимира зареждането на оборота
 function animateCount(id, value, duration = 2000) {
     const el = document.getElementById(id);
     if (!el) return;
-
     const end = parseFloat(value);
     const increment = end / (duration / 16);
     let current = 0;
-
     const isCurrency = id === "card-total-revenue";
-
     function update() {
         current += increment;
         if (current >= end) {
@@ -27,10 +25,9 @@ function animateCount(id, value, duration = 2000) {
             requestAnimationFrame(update);
         }
     }
-
     update();
 }
-
+//(EN) Load dashboard summary cards | (BG) Зареждане на картите с обобщение на таблото
 function loadSummaryCards() {
     fetch('/Staff/GetStaffSummary')
         .then(response => response.json())
@@ -40,7 +37,7 @@ function loadSummaryCards() {
             animateCount("card-total-reservations", data.totalReservations);
         });
 }
-
+//(EN) Load revenue chart  | (BG) Зареждане на графиката с оборота
 function loadRevenueChart() {
     fetch('/Staff/GetStaffRevenueChart')
         .then(response => response.json())
@@ -96,7 +93,7 @@ function loadRevenueChart() {
             });
         });
 }
-
+//(EN) Load reservation chart | (BG) Зареждане на графиката с резервации
 function loadReservationChart() {
     fetch('/Staff/GetStaffReservationChart')
         .then(response => response.json())

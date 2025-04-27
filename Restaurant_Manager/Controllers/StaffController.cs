@@ -13,17 +13,17 @@ public class StaffController : Controller
     {
         _context = context;
     }
-
+    // (EN) Loads the staff dashboard page | (BG) Зарежда страницата на таблото на служителя
     public IActionResult StaffDash()
     {
         return View();
     }
-
+    // (EN) Loads the staff reports page | (BG) Зарежда страницата на служебните отчети
     public IActionResult StaffReports()
     {
         return View();
     }
-
+    // (EN) Gets the staff summary data for the dashboard | (BG) Получава обобщените данни на служителя за таблото
     [HttpGet]
     public JsonResult GetStaffSummary()
     {
@@ -48,7 +48,7 @@ public class StaffController : Controller
         });
     }
 
-
+    // (EN) Gets the staff revenue chart data for the last 7 days | (BG) Получава данните за графиката на приходите на служителя за последните 7 дни
     [HttpGet]
     public JsonResult GetStaffRevenueChart()
     {
@@ -68,7 +68,7 @@ public class StaffController : Controller
 
         return Json(revenueData);
     }
-
+    // (EN) Gets the staff reservation chart data for the last 7 days | (BG) Получава данните за графиката на резервациите на служителя за последните 7 дни
     [HttpGet]
     public JsonResult GetStaffReservationChart()
     {
@@ -88,7 +88,7 @@ public class StaffController : Controller
 
         return Json(reservationData);
     }
-
+    // (EN) Gets all of the users that have active orders | (BG) Получава всички потребители, които имат активни поръчки
     [HttpGet]
     public async Task<IActionResult> StaffOrders()
     {
@@ -108,7 +108,7 @@ public class StaffController : Controller
 
         return View(usersWithOrders);
     }
-
+    // (EN) Gets all of the users that have active reservations | (BG) Получава всички потребители, които имат активни резервации
     [HttpGet]
     public async Task<IActionResult> StaffReservations()
     {
@@ -134,7 +134,7 @@ public class StaffController : Controller
         return View(usersWithReservations);
     }
 
-
+    // (EN) Gets the orders of a specific user | (BG) Получава поръчките на конкретен потребител
     [HttpGet]
     public async Task<IActionResult> StaffUserOrders(int id)
     {
@@ -161,7 +161,7 @@ public class StaffController : Controller
 
         return View("StaffUserOrders", viewModel);
     }
-
+    // (EN) Gets the reservations of a specific user | (BG) Получава резервациите на конкретен потребител
     [HttpGet]
     public async Task<IActionResult> StaffUserReservations(int id)
     {
@@ -186,7 +186,7 @@ public class StaffController : Controller
 
         return View("StaffUserReservations", viewModel);
     }
-
+    // (EN) Updates the status of an order | (BG) Актуализира статуса на поръчка
     [HttpPost]
     public async Task<IActionResult> UpdateOrderStatus(int id, string newStatus)
     {
@@ -199,7 +199,7 @@ public class StaffController : Controller
         TempData["ToastSuccess"] = "Status updated Successfully.";
         return Ok();
     }
-
+    // (EN) Updates the status of a reservation | (BG) Актуализира статуса на резервация
     [HttpPost]
     public async Task<IActionResult> UpdateReservationStatus(int id, string newStatus)
     {

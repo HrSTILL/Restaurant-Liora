@@ -17,7 +17,7 @@ namespace Restaurant_Manager.Controllers
         {
             _context = context;
         }
-
+        // (EN) Makes a profile after registration | (BG) Прави профил след регистрация
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto request)
         {
@@ -43,7 +43,7 @@ namespace Restaurant_Manager.Controllers
 
             return Ok("User registered successfully.");
         }
-
+        //(EN) Hashes the password | (BG) Хешира паролата 
         private string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())

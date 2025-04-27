@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Restaurant_Manager.Utils
 {
+// (EN) Utility for paginating lists | (BG) Помощен клас за страниране на списъци
     public class PaginatedList<T> : List<T>
     {
         public int PageIndex { get; private set; }

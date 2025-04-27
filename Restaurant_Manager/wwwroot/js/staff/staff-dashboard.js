@@ -1,4 +1,5 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿// (EN) Load mini dashboard charts | (BG) Зарежда мини графики на таблото
+document.addEventListener("DOMContentLoaded", function () {
     new Chart(document.getElementById('salesMiniChart'), {
         type: 'bar',
         data: {
@@ -15,7 +16,6 @@
             maintainAspectRatio: false
         }
     });
-
     new Chart(document.getElementById('occupancyMiniChart'), {
         type: 'line',
         data: {
@@ -35,7 +35,6 @@
             maintainAspectRatio: false
         }
     });
-
     new Chart(document.getElementById('preferencesMiniChart'), {
         type: 'pie',
         data: {

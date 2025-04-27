@@ -1,4 +1,5 @@
-﻿document.addEventListener("DOMContentLoaded", () => {
+﻿// (EN) Setup delete and search | (BG) Настройка на изтриване и търсене
+document.addEventListener("DOMContentLoaded", () => {
     const deleteForm = document.getElementById("deleteMenuItemForm");
 
     if (deleteForm) {
@@ -22,16 +23,16 @@
 
     setupLiveSpecialSearch();
 });
-
+// (EN) Open delete confirmation modal | (BG) Отваря модал за потвърждение на изтриване
 function confirmDelete(id) {
     document.getElementById("deleteMenuItemId").value = id;
     document.getElementById("deleteMenuItemModal").classList.add("show");
 }
-
+// (EN) Close delete confirmation modal | (BG) Затваря модал за потвърждение на изтриване
 function closeDeleteModal() {
     document.getElementById("deleteMenuItemModal").classList.remove("show");
 }
-
+// (EN) Setup live search for specials | (BG) Настройва търсене на специални оферти
 function setupLiveSpecialSearch() {
     const searchInput = document.getElementById("searchSpecialsInput");
     if (!searchInput) return;

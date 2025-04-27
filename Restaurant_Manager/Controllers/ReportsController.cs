@@ -11,12 +11,13 @@ public class ReportsController : Controller
     {
         _context = context;
     }
-
+    // (EN) Loads the page for admin reports | (BG) Зарежда страницата за администраторски отчети
     public ActionResult AdminReports()
     {
         return View();
     }
 
+    // (EN) Gets the revenue data for the admin dashboard | (BG) Взима данни за приходите за администраторския табло
     [HttpGet]
     public JsonResult GetRevenueData(string mode = "last7")
     {
@@ -117,7 +118,7 @@ public class ReportsController : Controller
 
         return Json(result);
     }
-
+    // (EN) Gets the reservation data for the admin dashboard | (BG) Взима данни за резервациите за администраторския табло
     [HttpGet]
     public JsonResult GetReservationData(string mode = "last7")
     {
@@ -222,7 +223,7 @@ public class ReportsController : Controller
 
         return Json(result);
     }
-
+    // (EN) Gets the popular items data for the admin dashboard | (BG) Взима данни за популярните артикули за администраторския табло
     [HttpGet]
     public JsonResult GetPopularItemsData()
     {
@@ -239,7 +240,7 @@ public class ReportsController : Controller
 
         return Json(popularItems);
     }
-
+    // (EN) Gets the summary cards data for the admin dashboard | (BG) Взима данни за резюме картите за администраторския табло
     [HttpGet]
     public JsonResult GetSummaryCardsData()
     {

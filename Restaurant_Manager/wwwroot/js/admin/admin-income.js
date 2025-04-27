@@ -1,13 +1,13 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+﻿//(EN) Call income dashboard functions | (BG) Извиква функциите на таблото за приходи
+document.addEventListener('DOMContentLoaded', function () {
     setupChart();
     setupPaginationLinks();
     setupLiveSearch('incomeSearch', 'dailyIncomeTable');
     setupYearDropdown();
     animateIncomeCards();
 });
-
+//(EN) Setup daily income chart | (BG) Настройва графиката на дневния приход
 let incomeChartInstance = null;
-
 function setupChart() {
     if (typeof incomeLabels === 'undefined' || typeof incomeDataPoints === 'undefined' || incomeLabels.length === 0) {
         console.log("No income data to show.");
@@ -64,7 +64,7 @@ function setupChart() {
         }
     });
 }
-
+//(EN) Setup pagination for income table | (BG) Настройва страницирането на таблицата с приходи
 function setupPaginationLinks() {
     document.querySelectorAll('.pagination-link').forEach(function (link) {
         link.addEventListener('click', function (e) {
@@ -84,7 +84,7 @@ function setupPaginationLinks() {
         });
     });
 }
-
+//(EN) Setup live search for income | (BG) Настройва живото-търсене на приходи
 function setupLiveSearch(inputId, tableId) {
     const searchInput = document.getElementById(inputId);
     if (!searchInput) return;
@@ -120,8 +120,7 @@ function setupLiveSearch(inputId, tableId) {
             });
     });
 }
-
-
+//(EN) Setup year filter for income | (BG) Настройва филтъра по година за приходи
 function setupYearDropdown() {
     const yearDropdown = document.getElementById('yearDropdown');
     if (!yearDropdown) return;
@@ -140,14 +139,14 @@ function setupYearDropdown() {
             });
     });
 }
-
+//(EN) Animate income summary cards | (BG) Анимира обобщените карти за приходи
 function animateIncomeCards() {
     animateIncomeCard('income-total', parseFloat(document.getElementById('income-total').getAttribute('data-value')));
     animateIncomeCard('income-this-month', parseFloat(document.getElementById('income-this-month').getAttribute('data-value')));
     animateIncomeCard('income-today', parseFloat(document.getElementById('income-today').getAttribute('data-value')));
     animateIncomeCard('income-highest-day', parseFloat(document.getElementById('income-highest-day').getAttribute('data-value')));
 }
-
+//(EN) Animate single income card | (BG) Анимира отделна карта за приход
 function animateIncomeCard(id, endValue, duration = 2000) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -163,6 +162,5 @@ function animateIncomeCard(id, endValue, duration = 2000) {
             requestAnimationFrame(update);
         }
     }
-
     update();
 }

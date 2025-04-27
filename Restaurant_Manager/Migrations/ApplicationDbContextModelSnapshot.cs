@@ -36,7 +36,7 @@ namespace Restaurant_Manager.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Reports");
+                    b.ToTable("Reports", (string)null);
                 });
 
             modelBuilder.Entity("Reservation", b =>
@@ -91,7 +91,7 @@ namespace Restaurant_Manager.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservations", (string)null);
                 });
 
             modelBuilder.Entity("RestaurantTable", b =>
@@ -115,7 +115,7 @@ namespace Restaurant_Manager.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RestaurantTables");
+                    b.ToTable("RestaurantTables", (string)null);
                 });
 
             modelBuilder.Entity("Restaurant_Manager.Models.MenuItem", b =>
@@ -166,7 +166,7 @@ namespace Restaurant_Manager.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MenuItems");
+                    b.ToTable("MenuItems", (string)null);
                 });
 
             modelBuilder.Entity("Restaurant_Manager.Models.Order", b =>
@@ -192,7 +192,7 @@ namespace Restaurant_Manager.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Restaurant_Manager.Models.OrderItem", b =>
@@ -219,7 +219,7 @@ namespace Restaurant_Manager.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("User", b =>
@@ -266,7 +266,7 @@ namespace Restaurant_Manager.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Reservation", b =>

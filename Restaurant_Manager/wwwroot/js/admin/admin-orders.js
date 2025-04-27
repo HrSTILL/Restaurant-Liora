@@ -1,4 +1,5 @@
-﻿function changeOrderStatus(orderId, selectElement) {
+﻿// (EN) Change order status| (BG) Променя статуса на поръчка
+function changeOrderStatus(orderId, selectElement) {
     const newStatus = selectElement.value;
 
     fetch(`/Admin/UpdateOrderStatus?id=${orderId}&newStatus=${newStatus}`, {
