@@ -10,6 +10,10 @@
             <th>Duration</th>
             <th>Area</th>
             <th>Status</th>
+            @if (User.IsInRole("customer"))
+            {
+                <th style="text-align: center;">Cancel</th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -22,12 +26,31 @@
                 <td>@reservation.DurationType</td>
                 <td>@reservation.SeatingArea</td>
                 <td>
-                    <select class="form-select" onchange="changeReservationStatus(@reservation.Id, this)">
-                        <option value="pending" selected="@((reservation.Status == "pending") ? "selected" : null)">Pending</option>
-                        <option value="confirmed" selected="@((reservation.Status == "confirmed") ? "selected" : null)">Confirmed</option>
-                        <option value="completed" selected="@((reservation.Status == "completed") ? "selected" : null)">Completed</option>
-                        <option value="cancelled" selected="@((reservation.Status == "cancelled") ? "selected" : null)">Cancelled</option>
-                    </select>
+                    @if (User.IsInRole("admin"))  
+                    {
+                        <select class="form-select" onchange="changeReservationStatus(@reservation.Id, this)">
+                            <option value="pending" selected="@((reservation.Status == "pending") ? "selected" : null)">Pending</option>
+                            <option value="confirmed" selected="@((reservation.Status == "confirmed") ? "selected" : null)">Confirmed</option>
+                            <option value="completed" selected="@((reservation.Status == "completed") ? "selected" : null)">Completed</option>
+                            <option value="cancelled" selected="@((reservation.Status == "cancelled") ? "selected" : null)">Cancelled</option>
+                        </select>
+                    }
+                    else
+                    {
+                        <span><strong>@reservation.Status</strong></span>
+                    }
+                </td>
+                <td style="text-align: center;">
+                    @if (User.IsInRole("customer"))
+                    {
+                        @if (reservation.Status == "pending")
+                        {
+                            <form asp-action="Cancel" asp-controller="Reservation" method="post">
+                                <input type="hidden" name="id" value="@reservation.Id" />
+                                <button type="submit" class="cancel-btn">Cancel</button>
+                            </form>
+                        }
+                    }
                 </td>
             </tr>
         }

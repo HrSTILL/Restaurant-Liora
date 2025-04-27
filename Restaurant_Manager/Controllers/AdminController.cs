@@ -888,8 +888,10 @@ public class AdminController : Controller
             Items = o.OrderItems.Select(i => new OrderItemViewModel
             {
                 Name = i.MenuItem.Name,
-                Price = i.MenuItem.Price
+                Price = i.MenuItem.Price,
+                Quantity = i.Quantity,
             }).ToList()
+
         }).ToList();
 
         ViewData["SelectedDate"] = date.ToString("MMMM dd, yyyy");

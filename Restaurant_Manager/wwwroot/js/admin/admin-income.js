@@ -105,6 +105,10 @@ function setupLiveSearch(inputId, tableId) {
                 } else {
                     data.forEach(item => {
                         const row = document.createElement('tr');
+
+                        row.setAttribute('style', 'cursor:pointer;');
+                        row.setAttribute('onclick', `location.href='/Admin/OrdersOnDay?date=${encodeURIComponent(item.dateFormatted)}'`);
+
                         row.innerHTML = `
                             <td>${item.dateFormatted}</td>
                             <td>${item.totalIncomeFormatted}</td>
@@ -120,6 +124,7 @@ function setupLiveSearch(inputId, tableId) {
             });
     });
 }
+
 //(EN) Setup year filter for income | (BG) Настройва филтъра по година за приходи
 function setupYearDropdown() {
     const yearDropdown = document.getElementById('yearDropdown');

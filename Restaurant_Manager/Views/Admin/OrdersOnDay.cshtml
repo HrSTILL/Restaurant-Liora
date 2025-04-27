@@ -31,8 +31,19 @@
                     <ul class="order-items">
                         @foreach (var item in order.Items)
                         {
-                            <li>@item.Name - <strong>@item.Price.ToString("C")</strong></li>
+                            var itemTotalPrice = item.Price * item.Quantity;
+                            <li>
+                                @item.Name -
+                                <strong>@item.Price.ToString("C")</strong> x @item.Quantity =
+                                <strong>@itemTotalPrice.ToString("C")</strong>
+                            </li>
                         }
+
+                        @{
+                            var orderTotalPrice = order.Items.Sum(i => i.Price * i.Quantity);
+                        }
+
+                        <p><strong>Total for the Order:</strong> @orderTotalPrice.ToString("C")</p>
                     </ul>
                 </div>
             }

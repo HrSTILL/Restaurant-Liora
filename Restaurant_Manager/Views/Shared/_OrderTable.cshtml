@@ -9,6 +9,10 @@
             <th>Total</th>
             <th>Status</th>
             <th>Items</th>
+            @if (User.IsInRole("customer"))
+            {
+                <th style="text-align: center;">Cancel</th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -19,13 +23,19 @@
                 <td>@order.CreatedAt.ToString("g")</td>
                 <td>@order.TotalPrice.ToString("C")</td>
                 <td>
-                    <select class="select-status" onchange="changeOrderStatus(@order.Id, this)">
-                        <option value="pending" selected="@(order.Status == "pending")">Pending</option>
-                        <option value="preparing" selected="@(order.Status == "preparing")">Preparing</option>
-                        <option value="served" selected="@(order.Status == "served")">Served</option>
-                        <option value="completed" selected="@(order.Status == "completed")">Completed</option>
-                        <option value="cancelled" selected="@(order.Status == "cancelled")">Cancelled</option>
-                    </select>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <select class="select-status" onchange="changeOrderStatus(@order.Id, this)">
+                            <option value="pending" selected="@(order.Status == "pending")">Pending</option>
+                            <option value="preparing" selected="@(order.Status == "preparing")">Preparing</option>
+                            <option value="served" selected="@(order.Status == "served")">Served</option>
+                            <option value="completed" selected="@(order.Status == "completed")">Completed</option>
+                            <option value="cancelled" selected="@(order.Status == "cancelled")">Cancelled</option>
+                        </select>
+                    }
+                    else{
+                        <span><strong>@order.Status</strong></span>
+                    }
                 </td>
                 <td>
                     <ul class="order-items">
@@ -34,6 +44,18 @@
                             <li>@item.MenuItem.Name x @item.Quantity</li>
                         }
                     </ul>
+                </td>
+                <td style="text-align: center;">
+                    @if (User.IsInRole("customer"))
+                    {
+                        @if (order.Status == "pending")
+                        {
+                            <form asp-action="CancelOrder" asp-controller="Order" method="post">
+                                <input type="hidden" name="id" value="@order.Id" />
+                                <button type="submit" class="cancel-btn">Cancel</button>
+                            </form>
+                        }
+                    }
                 </td>
             </tr>
         }
