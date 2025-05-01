@@ -1,11 +1,12 @@
-﻿    .register-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 85vh;
-        background-color: #f5efe6;
-        margin-top: 30px;
-    }
+﻿.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+    background-color: #f5efe6;
+    padding: 20px;
+    margin-top: 30px;
+}
 
 .register-box {
     background-color: #f5f5f5;
@@ -15,12 +16,14 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 450px;
+    box-sizing: border-box;
 }
 
 .register-title {
     text-align: center;
     margin-bottom: 25px;
     color: #3d2f1b;
+    font-size: 1.8rem;
 }
 
 .register-form {
@@ -36,6 +39,8 @@
     font-size: 1rem;
     background-color: #fdfaf6;
     color: #3d2f1b;
+    width: 100%;
+    box-sizing: border-box;
 }
 
     .register-input::placeholder {
@@ -59,73 +64,47 @@
         transform: translateY(-1px);
     }
 
-@media (max-width: 992px) {
-
-    .register-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 85vh;
-        background-color: #f5efe6;
-        margin-top: 120px;
+@media (max-width: 768px) {
+    .register-box {
+        padding: 30px 20px;
     }
 
+    .register-title {
+        font-size: 1.5rem;
+    }
+
+    .register-input {
+        font-size: 0.95rem;
+        padding: 10px 12px;
+    }
+
+    .register-btn {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
     .register-box {
-        padding: 30px;
-        max-width: 90%;
+        padding: 25px 15px;
+        border-radius: 8px;
     }
 
     .register-title {
         font-size: 1.4rem;
     }
 
-    .register-input,
-    .register-btn {
-        font-size: 0.95rem;
-        padding: 10px 12px;
-    }
-}
-
-@media (max-width: 576px) {
-    .register-box {
-        padding: 25px;
+    .register-form {
+        gap: 12px;
     }
 
-    .register-title {
-        font-size: 1.3rem;
-    }
-
-    .register-input,
-    .register-btn {
+    .register-input {
         font-size: 0.9rem;
         padding: 10px;
     }
-}
 
-@media (max-width: 375px) {
-
-    .register-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 85vh;
-        background-color: #f5efe6;
-        margin-top: 180px;
-    }
-
-    .register-box {
-        padding: 20px;
-        border-radius: 8px;
-    }
-
-    .register-title {
-        font-size: 1.2rem;
-        margin-bottom: 20px;
-    }
-
-    .register-input,
     .register-btn {
-        font-size: 0.85rem;
-        padding: 8px 10px;
+        font-size: 0.9rem;
+        padding: 10px;
     }
 }
