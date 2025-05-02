@@ -1,0 +1,113 @@
+## Documentation of the Web-Based Restaurant System "Liora"
+
+### 1. Introduction
+
+"Liora" is a web-based restaurant management system developed to digitize and simplify essential processes such as reservations, orders, menu management, 
+user profiles, and reporting. The project is implemented using ASP.NET MVC and utilizes C# for server-side logic, Entity Framework for database access, 
+and client-side technologies like HTML, CSS, JavaScript, and Bootstrap to build the user interface.
+
+The system provides different levels of access depending on the user role: client, staff, or administrator.
+
+### 2. Goals and Scope
+
+* Provide a convenient interface for clients to make online reservations and orders.
+* Facilitate staff operations through centralized management of orders and reservations.
+* Support the administrative team with visualization of reporting data and capabilities for content and user management.
+
+### 3. System Functionalities
+
+#### 3.1 Client Functionalities
+
+* Registration and login to a user profile.
+* Viewing a homepage with images and welcoming content.
+* Browsing the full menu with modal windows showing detailed information.
+* Viewing special offers (seasonal or discounted items).
+* Making reservations through a modal window with filters for date, time, number of people, and duration.
+* Pre-filled personal data for easier form completion.
+* Adding items to the cart, modifying quantities, and removing items.
+* Finalizing orders and receiving confirmation.
+* Viewing order and reservation history with options to cancel.
+* Editing user data and password.
+* Logging out by clearing the session and cookies.
+
+#### 3.2 Staff Functionalities
+
+* Dashboard with important information.
+* Page with active customer orders, with the ability to view and edit statuses.
+* Similar page for managing reservations.
+
+#### 3.3 Administrative Functionalities
+
+* Access to the administrative dashboard.
+* Menu management: adding, editing, and removing items.
+* Management of special offers.
+* Viewing and editing all orders and reservations.
+* Reporting pages with revenue and occupancy by day, week, month, and year.
+* Generating statistics on the most ordered products.
+* User and staff management.
+
+### 4. System Architecture
+
+The system is built using the MVC (Model-View-Controller) design pattern, which separates the logic, user interface, and data into distinct components.
+
+* **Model** – Represents business logic and data structure (e.g., users, orders, meals).
+* **View** – Renders the interface using Razor and HTML templates.
+* **Controller** – Handles requests and coordinates interaction between models and views.
+
+### 5. Database
+
+A relational database created using Entity Framework is used. Main tables include:
+
+* Users (users with roles)
+* MenuItems (menu products)
+* SpecialOffers
+* Orders
+* OrderItems (many-to-many relationship between orders and meals)
+* Reservations
+
+Each table has a primary key, appropriate foreign keys, and validation constraints.
+
+### 6. Interfaces
+
+#### 6.1 Client Interface
+
+* Accessible without login: homepage, menu, special offers.
+* After login: additional access to reservations, orders, and personal profile.
+* Easy navigation and responsive design suitable for mobile devices.
+
+#### 6.2 Staff Interface
+
+* Focused on managing active reservations and orders.
+* Ability to change statuses and view customer requests.
+
+#### 6.3 Administrative Interface
+
+* Extended dashboard with key information.
+* Access to all modules: menu, offers, users, reports.
+* Only administrators have access via role-based protection.
+
+### 7. Security and Access
+
+* Authentication and role-based authorization implemented.
+* Protected access to controllers and views using `Authorize` attributes.
+* Form validation using ASP.NET Unobtrusive Validation.
+* Protection against direct URL access without a valid session or role.
+
+### 8. Testing and Validation
+
+* Manual testing of all main workflows: registration, login, order, reservation, logout.
+* Validation of forms against invalid inputs.
+* Testing restrictions on past dates and times in the reservation module.
+
+### 9. Future Improvements
+
+* Adding a separate kitchen panel.
+* Improving the design for a more modern user experience.
+* Implementing automatic reservation reminders.
+* Adding the ability to pay online.
+
+### 10. Conclusion
+
+The "Liora" project successfully fulfills the primary objectives defined in the technical specification: providing a web platform for restaurant management through
+ an intuitive and functional interface, role-based structure, and data-driven reporting. The system is easily extendable with new modules and improvements tailored 
+to real-world restaurant business needs.
