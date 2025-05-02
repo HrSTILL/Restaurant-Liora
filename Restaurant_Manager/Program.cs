@@ -16,8 +16,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // (EN) Sets strict cookie policy and security | (BG) Задава строгата политика за бисквитки и сигурност
 builder.Services.Configure<CookiePolicyOptions>(options =>
 {
-    options.MinimumSameSitePolicy = SameSiteMode.Strict;
-    options.Secure = CookieSecurePolicy.Always;
+    options.MinimumSameSitePolicy = builder.Environment.IsDevelopment()
+        ? SameSiteMode.Lax
+        : SameSiteMode.Strict;
+    options.Secure = builder.Environment.IsDevelopment()
+        ? CookieSecurePolicy.SameAsRequest
+        : CookieSecurePolicy.Always;
 });
 
 // (EN) Adds session management with specified timeout and secure settings | (BG) Добавя управление на сесиите с указаното време на изтичане и сигурни настройки
@@ -26,8 +30,12 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(30);  // (EN) Set session timeout | (BG) Задава време за изтичане на сесията
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-    options.Cookie.SameSite = SameSiteMode.Strict;
+    options.Cookie.SecurePolicy = builder.Environment.IsDevelopment()
+        ? CookieSecurePolicy.SameAsRequest
+        : CookieSecurePolicy.Always;
+    options.Cookie.SameSite = builder.Environment.IsDevelopment()
+        ? SameSiteMode.Lax
+        : SameSiteMode.Strict;
 });
 
 // (EN) Adds authentication with cookie-based authentication | (BG) Добавя автентикация с базирана на бисквитки автентикация
@@ -35,8 +43,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(options =>
     {
         options.Cookie.HttpOnly = true;
-        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-        options.Cookie.SameSite = SameSiteMode.Strict;
+        options.Cookie.SecurePolicy = builder.Environment.IsDevelopment()
+            ? CookieSecurePolicy.SameAsRequest
+            : CookieSecurePolicy.Always;
+        options.Cookie.SameSite = builder.Environment.IsDevelopment()
+            ? SameSiteMode.Lax
+            : SameSiteMode.Strict;
         options.LoginPath = "/Auth/Login";  // (EN) Path for login | (BG) Път за вход
         options.AccessDeniedPath = "/Auth/Restricted";  // (EN) Path for access denied | (BG) Път за отказан достъп
     });

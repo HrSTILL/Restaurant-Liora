@@ -1,4 +1,6 @@
-﻿* {
+@media (min-width: 1000px) and (max-width: 1099px) {
+}
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -64,12 +66,69 @@ main {
     text-decoration: none;
 }
 
-    .shared-button-style:hover,
-    .shared-button-style:focus {
-        background: linear-gradient(135deg, #d6a75c, #f3e5ab);
-        transform: translateY(-1px);
-        text-decoration: none;
+.shared-button-style:hover,
+.shared-button-style:focus {
+    background: linear-gradient(135deg, #d6a75c, #f3e5ab);
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.nav-cart {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 6px;
+    z-index: 2;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+    animation: bounce 1s infinite alternate;
+    transition: transform 0.2s ease, background-color 0.3s;
+}
+
+.cart-badge.shake {
+    animation: shake 0.4s ease;
+}
+
+@keyframes bounce {
+    from {
+        transform: scale(1);
     }
+
+    to {
+        transform: scale(1.15);
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-1px, 2px);
+    }
+
+    50% {
+        transform: translate(2px, -1px);
+    }
+
+    75% {
+        transform: translate(-1px, 1px);
+    }
+
+    100% {
+        transform: translate(1px, 0);
+    }
+}
 
 
 button, a {
@@ -91,31 +150,7 @@ button, a {
     }
 }
 
-@media (min-width: 1201px) {
-    main {
-        padding-top: 120px;
-    }
-}
-
-@media (min-width: 901px) and (max-width: 1199px) {
-    main {
-        padding-top: 110px;
-    }
-}
-
-@media (min-width: 700px) and (max-width: 1200px) {
-    main {
-        padding-top: 100px;
-    }
-}
-
-@media (max-width: 699px) {
-    main {
-        padding-top: 90px;
-    }
-}
-
-@media (max-width: 576px) {
+@media (max-width: 1500px) {
     .custom-navbar {
         flex-direction: column;
         align-items: flex-start;
@@ -142,8 +177,6 @@ button, a {
     .top-logo {
         max-height: 55px;
         margin-bottom: 10px;
-        margin: 0 auto 10px auto;
-        display: block;
     }
 
     main {
@@ -151,54 +184,14 @@ button, a {
     }
 }
 
-@media (min-width: 400px) and (max-width: 499px) {
-    .custom-navbar {
-        padding: 10px 20px;
-        position: relative;
-    }
-
-    .shared-button-style {
-        font-size: 0.8rem;
-        padding: 0 14px;
-        height: 38px;
-    }
-
-    .top-logo {
-        max-height: 50px;
-        margin-bottom: 10px;
-        margin: 0 auto 10px auto;
-        display: block;
-    }
-
+@media (min-width: 901px) and (max-width: 1199px) {
     main {
-        padding-top: 70px;
+        padding-top: 110px;
     }
 }
 
-@media (min-width: 300px) and (max-width: 399px) {
-    .custom-navbar {
-        padding: 8px 15px;
-        position: relative;
-    }
-
-    .shared-button-style {
-        font-size: 0.75rem;
-        padding: 0 12px;
-        height: 36px;
-    }
-
-    .top-logo {
-        max-height: 45px;
-        margin-bottom: 10px;
-        margin: 0 auto 10px auto;
-        display: block;
-    }
-
+@media (max-width: 576px) {
     main {
-        padding-top: 60px;
+        padding-top: 80px;
     }
-}
-/* Custom font for navbar items */
-.custom-navbar a {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

@@ -85,3 +85,94 @@
         opacity: 1;
     }
 }
+
+@media (min-width: 1601px) {
+    .lio-toast {
+        width: 400px;
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+    .lio-toast {
+        width: 380px;
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 1201px) {
+    .lio-toast {
+        width: 360px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+    .lio-toast {
+        width: 340px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1200px) {
+    .lio-toast {
+        width: 320px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 699px) {
+    .lio-toast {
+        width: 300px;
+        font-size: 0.85rem;
+    }
+    .lio-toast .title {
+        font-size: 1rem;
+    }
+
+    .lio-toast span {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .lio-toast {
+        width: 280px;
+        font-size: 0.8rem;
+    }
+    .lio-toast .title {
+        font-size: 0.9rem;
+    }
+
+    .lio-toast span {
+        font-size: 0.75rem;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+    .lio-toast {
+        width: 260px;
+        font-size: 0.75rem;
+    }
+    .lio-toast .title {
+        font-size: 0.85rem;
+    }
+
+    .lio-toast span {
+        font-size: 0.7rem;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    .lio-toast {
+        width: 240px;
+        font-size: 0.7rem;
+    }
+    .lio-toast .title {
+        font-size: 0.8rem;
+    }
+
+    .lio-toast span {
+        font-size: 0.65rem;
+    }
+}

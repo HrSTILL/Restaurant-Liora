@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" asp-append-version="true" />
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/home/homenavbar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/staff/staffnavbar.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/notifications/toasts.css" asp-append-version="true" />
     @RenderSection("Styles", required: false)
 </head>
@@ -23,8 +23,8 @@
                 <a href="/Staff/StaffOrders" class="shared-button-style">Orders</a>
                 <a href="/Staff/StaffReservations" class="shared-button-style">Reservations</a>
                 <a href="/Staff/StaffReports" class="shared-button-style">Reports</a>
-                <form asp-action="Logout" asp-controller="Auth" method="post" style="display:inline;">
-                    <button type="submit" class="shared-button-style btn-nav">Logout</button>
+                <form asp-action="Logout" asp-controller="Auth" method="post">
+                    <button type="submit" class="shared-button-style">Logout</button>
                 </form>
             </div>
         </nav>

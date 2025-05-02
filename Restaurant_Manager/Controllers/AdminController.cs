@@ -898,4 +898,32 @@ public class AdminController : Controller
         return View(viewModel);
     }
 
+    // (EN) Gets the orders on a specific month | (BG) Взима поръчките за избран месец
+    [HttpGet]
+    public async Task<IActionResult> OrdersOnMonth(int year, int month)
+    {
+        var orders = await _context.Orders
+            .Where(o => o.CreatedAt.Year == year && o.CreatedAt.Month == month && o.Status.ToLower() == "completed")
+            .Include(o => o.User)
+            .Include(o => o.OrderItems)
+            .ThenInclude(oi => oi.MenuItem)
+            .ToListAsync();
+
+        var viewModel = orders.Select(o => new OrdersOnDayViewModel
+        {
+            OrderId = o.Id,
+            FullName = $"{o.User.FirstName} {o.User.LastName}",
+            Items = o.OrderItems.Select(i => new OrderItemViewModel
+            {
+                Name = i.MenuItem.Name,
+                Price = i.MenuItem.Price,
+                Quantity = i.Quantity,
+            }).ToList()
+
+        }).ToList();
+
+        ViewData["SelectedDate"] = new DateTime(year, month, 1).ToString("MMMM yyyy");
+        return View("OrdersOnDay", viewModel);
+    }
+
 }

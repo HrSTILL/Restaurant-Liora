@@ -467,3 +467,104 @@ select.form-input {
         background-color: rgba(255, 0, 0, 0.1);
         transform: scale(1.05);
     }
+
+@media (min-width: 1601px) {
+  .my-reservations {
+    padding: 60px;
+    max-width: 1400px;
+  }
+  .reservation-table td, .reservation-table th {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+  .my-reservations {
+    padding: 50px;
+    max-width: 1300px;
+  }
+  .reservation-table td, .reservation-table th {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1299px) {
+  .my-reservations {
+    padding: 45px;
+    max-width: 1200px;
+  }
+  .reservation-table td, .reservation-table th {
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+  .my-reservations {
+    padding: 40px;
+  }
+  .reservation-table td, .reservation-table th {
+    font-size: 0.57rem;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 1200px) {
+  .my-reservations {
+    padding: 30px;
+  }
+  .reservation-table td, .reservation-table th {
+    font-size: 0.5rem;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+  .reservation-table td, .reservation-table th {
+    font-size: 0.47rem;
+  }
+}
+
+@media (max-width: 699px) {
+  .my-reservations {
+    padding: 20px;
+  }
+  .reservation-table td, .reservation-table th {
+    font-size: 0.4rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .my-reservations {
+    padding: 16px;
+  }
+  .reservation-table td, .reservation-table th {
+    font-size: 0.37rem;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+  .my-reservations {
+    padding: 12px;
+  }
+  .reservation-table td, .reservation-table th {
+    font-size: 0.33rem;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+  .my-reservations {
+    padding: 10px;
+  }
+  .reservation-table td, .reservation-table th {
+    font-size: 0.3rem;
+  }
+}
+
+
+@media (min-width: 1100px) and (max-width: 1200px) {
+  .my-reservations {
+    padding: 42px;
+    max-width: 1150px;
+  }
+  .reservation-table td, .reservation-table th {
+    font-size: 0.9rem;
+  }
+}

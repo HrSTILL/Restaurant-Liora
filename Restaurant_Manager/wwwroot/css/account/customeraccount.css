@@ -42,6 +42,28 @@
     height: 230px;
     width: 100%;
     max-width: 220px;
+    font-size: 0.9rem;
+}
+
+.account-card-grid h3 {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #5c4733;
+    font-weight: 600;
+    text-align: center;
+}
+
+.account-card-grid p {
+    font-size: 0.95rem;
+    color: #6c584c;
+    text-align: center;
+    margin: 0.25rem 0;
+}
+
+.account-card-grid i {
+    font-size: 2rem;
+    color: #aa8453;
+    margin-bottom: 0.5rem;
 }
 
     .account-card:hover {
@@ -50,15 +72,251 @@
     }
 
     .account-card .icon {
-        font-size: 2.5rem;
+        font-size: 2rem;
         color: #aa8453;
-        margin-bottom: 1rem;
+        margin: 0.5rem 0;
     }
 
 .account-username {
-    font-size: 1.1rem;
-    color: #7a6650;
-    margin-top: -1rem;
-    margin-bottom: 1.5rem;
-    font-style: italic;
+    font-size: 1.2rem;
+    color: #5c4733;
+    margin: 0.5rem 0 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+@media (min-width: 1601px) {
+    .account-card-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    .account-card {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+    .account-card-grid h3 {
+        font-size: 1rem;
+        margin: 0.4rem 0;
+        color: #5c4733;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .account-card-grid p {
+        font-size: 0.8rem;
+        color: #6c584c;
+        text-align: center;
+        margin: 0.2rem 0;
+    }
+
+    .account-card-grid i {
+        font-size: 1.6rem;
+        color: #aa8453;
+        margin-bottom: 0.4rem;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+    .account-card-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .account-card {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+    .account-card-grid h3 {
+        font-size: 1.1rem;
+        margin: 0.4rem 0;
+        color: #5c4733;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .account-card-grid p {
+        font-size: 0.85rem;
+        color: #6c584c;
+        text-align: center;
+        margin: 0.2rem 0;
+    }
+
+    .account-card-grid i {
+        font-size: 1.8rem;
+        color: #aa8453;
+        margin-bottom: 0.4rem;
+    }
+}
+
+@media (min-width: 1201px) and (max-width: 1299px) {
+    .account-card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .account-card {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+    .account-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .account-card {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+    .account-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .account-card {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+    .account-card-grid p {
+        font-size: 0.85rem;
+        color: #6c584c;
+        text-align: center;
+        margin: 0.2rem 0;
+    }
+}
+
+@media (max-width: 699px) {
+    .account-card-grid {
+        grid-template-columns: 1fr;
+    }
+    .account-card {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .account-card-grid {
+        grid-template-columns: 1fr;
+    }
+    .account-card {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+    .account-card-grid h3 {
+        font-size: 1.1rem;
+        margin: 0.4rem 0;
+        color: #5c4733;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .account-card-grid p {
+        font-size: 0.85rem;
+        color: #6c584c;
+        text-align: center;
+        margin: 0.2rem 0;
+    }
+
+    .account-card-grid i {
+        font-size: 1.8rem;
+        color: #aa8453;
+        margin-bottom: 0.4rem;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+    .account-card {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+    .account-card-grid h3 {
+        font-size: 1.1rem;
+        margin: 0.4rem 0;
+        color: #5c4733;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .account-card-grid p {
+        font-size: 0.85rem;
+        color: #6c584c;
+        text-align: center;
+        margin: 0.2rem 0;
+    }
+
+    .account-card-grid i {
+        font-size: 1.8rem;
+        color: #aa8453;
+        margin-bottom: 0.4rem;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    .account-card {
+        font-size: 0.85rem;
+        line-height: 1.5;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+    .account-card-grid h3 {
+        font-size: 1.1rem;
+        margin: 0.4rem 0;
+        color: #5c4733;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .account-card-grid p {
+        font-size: 0.85rem;
+        color: #6c584c;
+        text-align: center;
+        margin: 0.2rem 0;
+    }
+
+    .account-card-grid i {
+        font-size: 1.8rem;
+        color: #aa8453;
+        margin-bottom: 0.4rem;
+    }
+}
+
+
+@media (min-width: 500px) and (max-width: 699px) {
+    .account-card {
+        font-size: 0.8rem;
+        line-height: 1.5;
+        text-align: center;
+        padding: 1.5rem 1rem;
+    }
+    .account-card-grid h3 {
+        font-size: 1rem;
+        margin: 0.35rem 0;
+        color: #5c4733;
+        font-weight: 600;
+        text-align: center;
+    }
+    .account-card-grid p {
+        font-size: 0.8rem;
+        color: #6c584c;
+        text-align: center;
+        margin: 0.2rem 0;
+    }
+    .account-card-grid i {
+        font-size: 1.6rem;
+        color: #aa8453;
+        margin-bottom: 0.4rem;
+    }
 }

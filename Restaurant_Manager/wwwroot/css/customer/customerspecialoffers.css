@@ -45,9 +45,9 @@
     transition: transform 0.2s ease;
 }
 
-    .menu-card:hover {
-        transform: scale(1.01);
-    }
+.menu-card:hover {
+    transform: scale(1.01);
+}
 
 .menu-img {
     width: 100%;
@@ -130,11 +130,11 @@
     box-shadow: 0 2px 6px rgba(240, 128, 160, 0.15);
 }
 
-    .order-btn:hover {
-        background: linear-gradient(135deg, #f8bbd0, #fce4ec);
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(240, 128, 160, 0.25);
-    }
+.order-btn:hover {
+    background: linear-gradient(135deg, #f8bbd0, #fce4ec);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(240, 128, 160, 0.25);
+}
 
 
 #dishModal {
@@ -155,14 +155,14 @@
     backdrop-filter: blur(10px);
 }
 
-    #dishModal.show {
-        display: flex;
-        pointer-events: auto;
-    }
+#dishModal.show {
+    display: flex;
+    pointer-events: auto;
+}
 
-    #dishModal.visible {
-        opacity: 1;
-    }
+#dishModal.visible {
+    opacity: 1;
+}
 
 .dish-modal-content {
     background: #fdfaf6;
@@ -182,35 +182,35 @@
     overflow: hidden;
 }
 
-    .dish-modal-content:hover {
-        transform: scale(1.01);
-    }
+.dish-modal-content:hover {
+    transform: scale(1.01);
+}
 
-    .dish-modal-content h2 {
-        color: #3d2f1b;
-        margin-bottom: 10px;
-        font-size: 1.8rem;
-        text-align: center;
-    }
+.dish-modal-content h2 {
+    color: #3d2f1b;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+    text-align: center;
+}
 
-    .dish-modal-content img {
-        width: 100%;
-        max-height: 460px;
-        object-fit: contain;
-        border-radius: 10px;
-        margin-bottom: 15px;
-        display: block;
-    }
+.dish-modal-content img {
+    width: 100%;
+    max-height: 460px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    display: block;
+}
 
-    .dish-modal-content p {
-        margin-bottom: 8px;
-        color: #5a4531;
-        font-size: 1rem;
-        text-align: left;
-        width: 100%;
-        max-width: 500px;
-        line-height: 1.4;
-    }
+.dish-modal-content p {
+    margin-bottom: 8px;
+    color: #5a4531;
+    font-size: 1rem;
+    text-align: left;
+    width: 100%;
+    max-width: 500px;
+    line-height: 1.4;
+}
 
 .close-btn {
     position: absolute;
@@ -222,9 +222,9 @@
     font-weight: bold;
 }
 
-    .close-btn:hover {
-        color: red;
-    }
+.close-btn:hover {
+    color: red;
+}
 
 body.modal-open {
     overflow: hidden;
@@ -249,28 +249,6 @@ html {
 }
 
 
-@media (max-width: 576px) {
-    .nav-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .shared-button-style {
-        width: 100%;
-        max-width: 300px;
-        height: 40px;
-        font-size: 0.85rem;
-    }
-
-    .top-logo {
-        max-height: 55px;
-    }
-
-    main {
-        padding-top: 200px;
-    }
-}
 
 
 .reservation-modal-overlay {
@@ -286,9 +264,9 @@ html {
     z-index: 9999;
 }
 
-    .reservation-modal-overlay.show {
-        display: flex;
-    }
+.reservation-modal-overlay.show {
+    display: flex;
+}
 
 .reservation-modal-content {
     background: #fffaf0;
@@ -301,15 +279,15 @@ html {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-    .reservation-modal-content h2 {
-        margin-bottom: 10px;
-        color: #3d2f1b;
-    }
+.reservation-modal-content h2 {
+    margin-bottom: 10px;
+    color: #3d2f1b;
+}
 
-    .reservation-modal-content p {
-        color: #5a4531;
-        margin-bottom: 20px;
-    }
+.reservation-modal-content p {
+    color: #5a4531;
+    margin-bottom: 20px;
+}
 
 .reservation-modal-actions {
     display: flex;
@@ -327,26 +305,111 @@ html {
     transition: 0.3s;
 }
 
-    .modal-btn.confirm {
-        background: linear-gradient(135deg, #f3e5ab, #d6a75c);
-        text-decoration: none;
-        color: #3d2f1b;
+.modal-btn.confirm {
+    background: linear-gradient(135deg, #f3e5ab, #d6a75c);
+    text-decoration: none;
+    color: #3d2f1b;
+}
+
+.modal-btn.cancel {
+    background-color: #fff8f6;
+    border: 2px solid #d6a75c;
+    color: #3d2f1b;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.modal-btn.cancel:hover {
+    background-color: #f3e5ab;
+    transform: scale(1.03);
+}
+
+
+.modal-btn:hover {
+    transform: translateY(-1px);
+}
+
+
+main {
+    padding-top: 130px;
+}
+
+@media (min-width: 1601px) {
+    main {
+        padding-top: 120px;
     }
+}
 
-    .modal-btn.cancel {
-        background-color: #fff8f6;
-        border: 2px solid #d6a75c;
-        color: #3d2f1b;
-        font-weight: bold;
-        transition: background-color 0.2s ease, transform 0.2s ease;
+@media (min-width: 1300px) and (max-width: 1600px) {
+    main {
+        padding-top: 110px;
     }
+}
 
-        .modal-btn.cancel:hover {
-            background-color: #f3e5ab;
-            transform: scale(1.03);
-        }
-
-
-    .modal-btn:hover {
-        transform: translateY(-1px);
+@media (min-width: 1201px) {
+    main {
+        padding-top: 105px;
     }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+    main {
+        padding-top: 100px;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1200px) {
+    main {
+        padding-top: 95px;
+    }
+}
+
+@media (max-width: 699px) {
+    main {
+        padding-top: 90px;
+    }
+}
+
+@media (max-width: 576px) {
+    main {
+        padding-top: 85px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+    main {
+        padding-top: 80px;
+    }
+    .menu-card{
+        padding: 10px;
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .menu-card p{
+        color:red;
+    }
+    .menu-wrapper {
+        align-items: center;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    main {
+        padding-top: 75px;
+    }
+    .menu-card{
+        padding: 8px;
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .menu-card p{
+        color:blueviolet;
+    }
+    .menu-wrapper {
+        align-items: center;
+    }
+}

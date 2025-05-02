@@ -250,28 +250,6 @@ html {
 }
 
 
-@media (max-width: 576px) {
-    .nav-links {
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .shared-button-style {
-        width: 100%;
-        max-width: 300px;
-        height: 40px;
-        font-size: 0.85rem;
-    }
-
-    .top-logo {
-        max-height: 55px;
-    }
-
-    main {
-        padding-top: 200px;
-    }
-}
 
 
 .reservation-modal-overlay {
@@ -351,3 +329,86 @@ html {
     .modal-btn:hover {
         transform: translateY(-1px);
     }
+
+
+@media (min-width: 1601px) {
+    main {
+        padding-top: 100px;
+        margin-top: 100px;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+    main {
+        padding-top: 90px;
+        margin-top: 80px;
+    }
+}
+
+@media (min-width: 1201px) {
+    main {
+        padding-top: 85px;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+    main {
+        padding-top: 80px;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1200px) {
+    main {
+        padding-top: 75px;
+    }
+}
+
+@media (max-width: 699px) {
+    main {
+        padding-top: 70px;
+    }
+}
+
+@media (max-width: 576px) {
+    main {
+        padding-top: 65px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+    main {
+        padding-top: 60px;
+    }
+    .menu-card{
+        padding: 10px;
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .menu-card p{
+        color:red;
+    }
+    .menu-wrapper {
+        align-items: center;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    main {
+        padding-top: 55px;
+    }
+    .menu-card{
+        padding: 8px;
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .menu-card p{
+        color:blueviolet;
+    }
+    .menu-wrapper {
+        align-items: center;
+    }
+}

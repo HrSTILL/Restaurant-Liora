@@ -97,3 +97,98 @@
     color: #888;
     margin: 40px 0;
 }
+
+
+@media (min-width: 1601px) {
+    .staff-table td, .staff-table th {
+        font-size: 1rem;
+        padding: 16px 20px;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+    .staff-table td, .staff-table th {
+        font-size: 0.95rem;
+        padding: 14px 18px;
+    }
+}
+
+@media (min-width: 1201px) and (max-width: 1299px) {
+    .staff-table td, .staff-table th {
+        font-size: 0.9rem;
+        padding: 12px 16px;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+    .staff-table td, .staff-table th {
+        font-size: 0.85rem;
+        padding: 10px 14px;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+    .staff-table td, .staff-table th {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 699px) {
+    .staff-table td, .staff-table th {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+    }
+
+    .select-status {
+        width: 140px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .staff-table td, .staff-table th {
+        display: block;
+        width: 100%;
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .staff-table td::before, .staff-table th::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .staff-table thead {
+        display: none;
+    }
+
+    .select-status {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+    .staff-table td, .staff-table th {
+        font-size: 0.7rem;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    .staff-table td, .staff-table th {
+        font-size: 0.65rem;
+    }
+
+    .select-status {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+}

@@ -1,5 +1,5 @@
 ﻿.container {
-    padding: 2rem 3rem;
+    padding: 4rem 3rem 2rem 3rem;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -11,6 +11,8 @@
     border-radius: 12px;
     margin-bottom: 3rem;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
 }
 
 .slider {
@@ -106,6 +108,9 @@
     width: 100%;
     max-width: 280px;
     align-self: center;
+    display: block;
+    margin: 1rem auto;
+    text-align: center;
 }
 
     .button:hover,
@@ -126,6 +131,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .dashboard-card {
@@ -135,6 +143,7 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     text-align: center;
     transition: transform 0.3s ease;
+    align-items: center;
 }
 
     .dashboard-card:hover {
@@ -163,6 +172,8 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 2rem;
+    align-items: center;
+    text-align: center;
 }
 
 .card {
@@ -172,6 +183,8 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     overflow: hidden;
     transition: transform 0.3s ease;
+    align-items: center;
+    text-align: center;
 }
 
     .card:hover {
@@ -191,7 +204,7 @@
 
     .card p {
         margin: 0 1rem 1rem 1rem;
-        font-size: 0.95rem;
+        font-size: 1.15rem;
         color: #666;
     }
 
@@ -207,16 +220,329 @@
 }
 
 
+.menu-cards.report-style {
+    display: grid;
+    gap: 2rem;
+    justify-content: center;
+    padding: 2rem;
+    align-items: center;
+    text-align: center;
+}
+
 .menu-cards.report-style .card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 350px; 
     padding: 1rem;
+    align-items: center;
+    text-align: center;
+}
+
+.menu-cards.report-style .card .button {
+    margin: 1rem auto 0 auto;
+    display: block;
+}
+
+.menu-cards.report-style > .button {
+    grid-column: span 3;
+    justify-self: center;
+    margin-top: 1rem;
 }
 
 .menu-cards.report-style canvas {
+    font-size: 0.45rem !important;
     max-height: 120px;
     margin: 0 auto;
 }
 
+@media (min-width: 1601px) {
+    .menu-cards.report-style {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .menu-cards.report-style .card h3 {
+        font-size: 2rem;
+    }
+    .menu-cards.report-style .card p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+    .menu-cards.report-style {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .menu-cards.report-style .card h3 {
+        font-size: 1.5rem;
+    }
+    .menu-cards.report-style .card p {
+        font-size: 0.7rem;
+    }
+}
+
+@media (min-width: 1201px) and (max-width: 1299px) {
+    .menu-cards.report-style {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .card {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .menu-cards.report-style .card h3 {
+        font-size: 1.5rem;
+    }
+    .menu-cards.report-style .card p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1200px)  {
+    .menu-cards.report-style .card {
+        grid-template-columns: 1fr;
+    }
+    .menu-cards.report-style .card h3 {
+        font-size: 0.9rem;
+        margin-top: 5rem;
+        margin-bottom: 2rem;
+    }
+    .menu-cards.report-style .card p {
+        font-size: 1rem;
+    }
+    main {
+        padding-top: 30px;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+    .menu-cards.report-style .card {
+        grid-template-columns: 1fr;
+    }
+    .menu-cards.report-style .card h3 {
+        font-size: 1.2rem;
+    }
+    .menu-cards.report-style .card p {
+        font-size: 0.9rem;
+    }
+    main {
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 699px) {
+    .menu-cards.report-style {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+    }
+    .menu-cards.report-style .card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .menu-cards.report-style .card h3 {
+        font-size: 0.9rem;
+    }
+    .menu-cards.report-style .card p {
+        font-size: 0.85rem;
+    }
+    .card p {
+        display: block;
+        width: 100%;
+    }
+    main {
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .menu-cards.report-style {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+    }
+    .menu-cards.report-style .card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .menu-cards.report-style .card h3 {
+        font-size: 0.9rem;
+    }
+    .menu-cards.report-style .card p {
+        font-size: 0.8rem;
+    }
+    .card p {
+        display: block;
+        width: 100%;
+    }
+    main {
+        padding-top: 30px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+    .menu-cards.report-style {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+    }
+    .menu-cards.report-style  .card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .menu-cards.report-style .card h3 {
+        font-size: 0.9rem;
+    }
+    .menu-cards.report-style .card p {
+        font-size: 0.7rem;
+    }
+    .card p {
+        display: block;
+        width: 100%;
+    }
+    main {
+        padding-top: 30px;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    body {
+        font-size: 0.7rem;
+    }
+    .menu-cards.report-style {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+    }
+    .menu-cards.report-style .card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .hero-text h1 {
+        font-size: 1.2rem;
+    }
+    .hero-text p {
+        font-size: 0.65rem;
+    }
+    .dashboard-card h3,
+    .menu-cards.report-style .card h3 {
+        font-size: 0.9rem;
+    }
+    .dashboard-card p,
+    .menu-cards.report-style .card p,
+    .card p {
+        font-size: 0.6rem;
+    }
+    .button,
+    .button.small,
+    .reserve-button {
+        font-size: 0.7rem;
+        padding: 8px 16px;
+        max-width: 220px;
+    }
+    .card p {
+        display: block;
+        width: 100%;
+    }
+    main {
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .menu-cards.report-style .card {
+        grid-template-columns: 1fr;
+    }
+    .menu-cards.report-style .card canvas {
+        font-size: 0.6rem !important;
+    }
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+    .hero-text p {
+        font-size: 1rem;
+    }
+    .menu-cards.report-style .card h3 {
+        font-size: 0.9rem;
+        margin-top: 5rem;
+        margin-bottom: 2rem;
+    }
+    main {
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 768px)  {
+    .menu-cards.report-style {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+    }
+    .menu-cards.report-style .card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+    .hero-text p {
+        font-size: 0.9rem;
+    }
+    .card p {
+        display: block;
+        width: 100%;
+    }
+    .menu-cards.report-style .card h3 {
+        font-size: 0.9rem;
+        margin-top: 5rem;
+        margin-bottom: 2rem;
+    }
+    main {
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-cards.report-style {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+    }
+    .menu-cards.report-style .card {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .hero-text h1 {
+        font-size: 1.5rem;
+    }
+    .hero-text p {
+        font-size: 0.8rem;
+    }
+    .card p {
+        display: block;
+        width: 100%;
+    }
+    .menu-cards.report-style .card h3 {
+        font-size: 0.9rem;
+        margin-top: 5rem;
+        margin-bottom: 2rem;
+    }
+    main {
+        padding-top: 30px;
+    }
+}

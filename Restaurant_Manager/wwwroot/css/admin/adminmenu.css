@@ -245,3 +245,57 @@
     .search-form button:hover {
         background: #b89045;
     }
+
+@media (min-width: 1601px) {
+    .admin-container {
+        padding: 60px;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+    .admin-container {
+        padding: 50px;
+    }
+}
+
+@media (min-width: 1201px) {
+    .admin-container {
+        padding: 40px;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+    .admin-container {
+        padding: 30px;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1200px) {
+    .admin-container {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 699px) {
+    .admin-container {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-container {
+        padding: 16px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+    .admin-container {
+        padding: 14px;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    .admin-container {
+        padding: 12px;
+    }
+}

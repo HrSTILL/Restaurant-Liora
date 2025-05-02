@@ -105,13 +105,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var month in Model.MonthlyIncomes)
-                {
-                    <tr>
-                        <td>@(new DateTime(1, month.Month, 1).ToString("MMMM"))</td>
-                        <td>@month.TotalIncome.ToString("C")</td>
-                    </tr>
-                }
+            @foreach (var month in Model.MonthlyIncomes)
+            {
+                <tr onclick="location.href='@Url.Action("OrdersOnMonth", "Admin", new { year = Model.SelectedYear, month = month.Month })'" style="cursor:pointer;">
+                    <td>@(new DateTime(1, month.Month, 1).ToString("MMMM"))</td>
+                    <td>@month.TotalIncome.ToString("C")</td>
+                </tr>
+            }
             </tbody>
         </table>
     </div>

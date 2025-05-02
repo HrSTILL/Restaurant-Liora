@@ -137,3 +137,140 @@
     color: #5a3e1b;
 }
 
+@media (min-width: 1601px) {
+    .admin-container {
+        padding: 60px;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+    .admin-container {
+        padding: 50px;
+    }
+}
+
+@media (min-width: 1201px) {
+    .admin-container {
+        padding: 40px;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+    .admin-container {
+        padding: 30px;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1200px) {
+    .admin-container {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 699px) {
+    .admin-container {
+        padding: 20px;
+    }
+    body {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-container {
+        padding: 16px;
+    }
+    body {
+        font-size: 0.6rem;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+    .admin-container {
+        padding: 14px;
+    }
+    body {
+        font-size: 0.55rem;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    .admin-container {
+        padding: 12px;
+    }
+    body {
+        font-size: 0.5rem;
+    }
+}
+
+@media (max-width: 1400px) {
+    .admin-container {
+        padding: 18px;
+    }
+    body {
+        font-size: 0.225rem;
+    }
+}
+
+@media (max-width: 1300px) {
+    .admin-container {
+        padding: 16px;
+    }
+    body {
+        font-size: 0.2rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .admin-container {
+        padding: 14px;
+    }
+    body {
+        font-size: 0.175rem;
+    }
+}
+
+@media (max-width: 1100px) {
+    .admin-container {
+        padding: 12px;
+    }
+    body {
+        font-size: 0.15rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .admin-container {
+        padding: 10px;
+    }
+    body {
+        font-size: 0.125rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .admin-container {
+        padding: 8px;
+    }
+    body {
+        font-size: 0.1rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .admin-container {
+        padding: 6px;
+    }
+    body {
+        font-size: 0.075rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .admin-container {
+        padding: 4px;
+    }
+    body {
+        font-size: 0.05rem;
+    }
+}

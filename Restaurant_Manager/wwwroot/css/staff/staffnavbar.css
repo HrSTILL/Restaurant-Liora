@@ -1,0 +1,340 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5efe6;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+main {
+    padding-top: 140px;
+}
+
+.logo-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.top-logo {
+    max-height: 100px;
+    height: auto;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.custom-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    width: 100%;
+    background-color: #556b2f !important;
+    height: 130px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.shared-button-style {
+    color: #3d2f1b;
+    background: linear-gradient(135deg, #f3e5ab, #d6a75c);
+    border: 1px solid #c9a25a;
+    border-radius: 10px;
+    min-height: 48px;
+    min-width: 120px;
+    width: 100%;
+    max-width: 200px;
+    padding: 0 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.shared-button-style:hover,
+.shared-button-style:focus {
+    background: linear-gradient(135deg, #d6a75c, #f3e5ab);
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+
+button, a {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    box-shadow: none;
+}
+
+@media (min-width: 1601px) {
+    .nav-links {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+    .nav-links {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 1201px) {
+    .nav-links {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 0.75rem;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+    .nav-links {
+        flex-direction: row;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    .shared-button-style {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+    .custom-navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 10px 20px;
+        position: relative;
+    }
+    .logo-link {
+        align-self: flex-start;
+    }
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 10px;
+        gap: 0.5rem;
+    }
+    .shared-button-style {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 699px) {
+    .custom-navbar {
+        position: relative;
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 10px 20px;
+    }
+
+    .logo-link {
+        align-self: flex-start;
+    }
+
+    .nav-links {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+        gap: 0.5rem;
+    }
+
+    .shared-button-style {
+        width: 100%;
+        max-width: none;
+    }
+
+    form .shared-button-style {
+        width: 100%;
+        max-width: none;
+        height: 50px;
+        font-size: 1.1rem;
+    }
+
+    .top-logo {
+        max-height: 40px;
+        height: auto;
+        margin-left: 0;
+    }
+
+    main {
+        padding-top: 160px;
+    }
+}
+
+@media (max-width: 699px) {
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .custom-navbar {
+        position: relative;
+        flex-direction: column;
+        height: auto;
+        padding: 10px 20px;
+    }
+    .logo-link {
+        align-self: flex-start;
+    }
+
+    .nav-links {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+        gap: 0.5rem;
+    }
+
+    main {
+        padding-top: 80px;
+    }
+
+    .shared-button-style {
+        width: 100%;
+        max-width: none;
+    }
+
+    .top-logo {
+        max-height: 40px;
+        height: auto;
+        margin-left: 0;
+    }
+
+    form .shared-button-style {
+        width: 100%;
+        max-width: none;
+        height: 50px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+    .custom-navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 20px;
+    }
+
+    .logo-link {
+        align-self: flex-start;
+    }
+
+    .nav-links {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+        gap: 0.4rem;
+    }
+
+    main {
+        padding-top: 160px;
+    }
+
+    .shared-button-style {
+        width: 100%;
+        max-width: none;
+    }
+
+    .top-logo {
+        max-height: 40px;
+        height: auto;
+        margin-left: 0;
+    }
+
+    form .shared-button-style {
+        width: 100%;
+        max-width: none;
+        height: 50px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    .custom-navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 8px 15px;
+    }
+
+    .logo-link {
+        align-self: flex-start;
+    }
+
+    .nav-links {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+        gap: 0.4rem;
+    }
+
+    main {
+        padding-top: 160px;
+    }
+
+    .shared-button-style {
+        width: 100%;
+        max-width: none;
+    }
+
+    .top-logo {
+        max-height: 40px;
+        height: auto;
+        margin-left: 0;
+    }
+
+    form .shared-button-style {
+        width: 100%;
+        max-width: none;
+        height: 50px;
+        font-size: 1.1rem;
+    }
+}
+
+
+form .shared-button-style {
+    width: 100%;
+    max-width: none;
+    height: 50px;
+    font-size: 1.1rem;
+    color: #3d2f1b;
+    background: linear-gradient(135deg, #f3e5ab, #d6a75c);
+    border: 1px solid #c9a25a;
+    border-radius: 10px;
+    padding: 0 12px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    text-decoration: none;
+}

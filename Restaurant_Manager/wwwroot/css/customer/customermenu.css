@@ -14,7 +14,7 @@
 }
 
 .menu-category {
-    font-size: 2rem;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
     color: #3d2f1b;
     text-align: center;
     margin-bottom: 20px;
@@ -23,58 +23,59 @@
 
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 24px;
-    justify-items: center;
+    grid-auto-flow: row;
+    justify-content: center;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
 }
 
 .menu-card {
-    width: 360px;
-    height: 280px;
+    width: 400px;
+    height: 320px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 20px;
-    gap: 20px;
+    padding: 16px;
+    gap: 16px;
     border-radius: 12px;
     border: 2px solid #d6a75c;
     background: #fffaf0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s;
 }
 
-    .menu-card:hover {
-        transform: scale(1.01);
-    }
+.menu-card:hover {
+    transform: scale(1.01);
+}
 
 .menu-img {
     height: 380px;
     width: 120px;
+    background-color: transparent;
     object-fit: contain;
     display: block;
     margin: 0 auto;
     max-width: 100%;
     max-height: 100%;
-    background-color: transparent;
-    border-radius: 16px;
     image-rendering: auto;
+    border-radius: 16px;
 }
 
-    .menu-img:hover {
-        transform: scale(1.02);
-    }
+.menu-img:hover {
+    transform: scale(1.02);
+}
 
 .menu-card h3 {
-    font-size: 1.1rem;
-    line-height: 1.3;
-    margin-bottom: 6px;
-    word-break: break-word;
-    max-width: 100%;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: #3d2f1b;
+    margin-bottom: 8px;
 }
 
 .menu-card p {
-    color: #6c584c;
-    font-size: 0.9rem;
+    color: green;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
     margin-bottom: 8px;
 }
 
@@ -85,17 +86,10 @@
     justify-content: center;
 }
 
-.price-wrapper {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-}
-
 .old-price {
     color: #333;
     text-decoration: line-through;
+    margin-right: 10px;
     font-weight: normal;
     font-size: 1rem;
     opacity: 0.7;
@@ -113,16 +107,17 @@
     text-align: center;
     text-decoration: none;
     transition: all 0.3s ease;
+    margin-top: auto;
     width: 100%;
     max-width: 240px;
     align-self: center;
-    margin-top: 20px;
 }
 
-    .order-btn:hover {
-        background: linear-gradient(135deg, #d6a75c, #f3e5ab);
-        transform: translateY(-1px);
-    }
+.order-btn:hover {
+    background: linear-gradient(135deg, #d6a75c, #f3e5ab);
+    transform: translateY(-1px);
+}
+
 
 #dishModal {
     position: fixed;
@@ -142,16 +137,19 @@
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-    #dishModal.show {
-        visibility: visible;
-        opacity: 1;
-    }
+#dishModal.show {
+    visibility: visible;
+    opacity: 1;
+}
 
-    #dishModal.visible {
-        opacity: 1;
-    }
+
+
+#dishModal.visible {
+    opacity: 1;
+}
 
 .dish-modal-content {
+    position: relative;
     background: #fdfaf6;
     padding: 30px;
     border: 3px solid #d6a75c;
@@ -163,24 +161,25 @@
     flex-direction: column;
     align-items: center;
     animation: fadeSlideIn 0.4s ease-in-out;
-    position: relative;
 }
 
-    .dish-modal-content h2 {
-        color: #3d2f1b;
-        font-size: 2rem;
-        margin-bottom: 20px;
-        text-align: center;
-    }
 
-    .dish-modal-content img {
-        width: 100%;
-        max-width: 450px;
-        max-height: 400px;
-        object-fit: contain;
-        border-radius: 12px;
-        margin: 20px 0;
-    }
+
+.dish-modal-content h2 {
+    color: #3d2f1b;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.dish-modal-content img {
+    width: 100%;
+    max-width: 450px;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 12px;
+    margin: 20px 0;
+}
 
 .dish-modal-details {
     display: flex;
@@ -193,6 +192,8 @@
     gap: 60px;
 }
 
+
+
 .dish-details-left, .dish-details-right {
     flex: 1;
     display: flex;
@@ -202,9 +203,9 @@
     color: #5a4531;
 }
 
-    .dish-details-left p, .dish-details-right p {
-        margin: 0;
-    }
+.dish-details-left p, .dish-details-right p {
+    margin: 0;
+}
 
 .close-btn {
     position: absolute;
@@ -219,9 +220,32 @@
     z-index: 10000;
 }
 
-    .close-btn:hover {
-        color: red;
+.close-btn:hover {
+    color: red;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
     }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.modal-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+html {
+    font-size: 80.5%;
+    overflow-y: auto;
+}
 
 .reservation-modal-overlay {
     position: fixed;
@@ -234,15 +258,11 @@
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    backdrop-filter: blur(10px);
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
-    .reservation-modal-overlay.show {
-        display: flex;
-        opacity: 1;
-    }
+.reservation-modal-overlay.show {
+    display: flex;
+}
 
 .reservation-modal-content {
     background: #fffaf0;
@@ -252,20 +272,18 @@
     max-width: 500px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    animation: fadeSlideIn 0.4s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-    .reservation-modal-content h2 {
-        margin-bottom: 10px;
-        color: #3d2f1b;
-        font-size: 1.8rem;
-    }
-
-    .reservation-modal-content p {
-        color: #5a4531;
-        margin-bottom: 20px;
-        font-size: 1rem;
-    }
+.reservation-modal-content h2 {
+    margin-bottom: 10px;
+    color: #3d2f1b;
+}
+    
+.reservation-modal-content p {
+    color: #5a4531;
+    margin-bottom: 20px;
+}
 
 .reservation-modal-actions {
     display: flex;
@@ -283,47 +301,275 @@
     transition: 0.3s;
 }
 
-    .modal-btn.confirm {
-        background: linear-gradient(135deg, #f3e5ab, #d6a75c);
-        color: #3d2f1b;
-        text-decoration: none;
-    }
+.modal-btn.confirm {
+    background: linear-gradient(135deg, #f3e5ab, #d6a75c);
+    text-decoration: none;
+    color: #3d2f1b;
+}
 
-    .modal-btn.cancel {
-        background-color: #fff8f6;
-        border: 2px solid #d6a75c;
-        color: #3d2f1b;
-    }
+.modal-btn.cancel {
+    background-color: #fff8f6;
+    border: 2px solid #d6a75c;
+    color: #3d2f1b;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
 
-    .modal-btn:hover {
-        transform: translateY(-1px);
-    }
+.modal-btn.cancel:hover {
+    background-color: #f3e5ab;
+    transform: scale(1.03);
+}
 
-@keyframes fadeSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+.modal-btn:hover {
+    transform: translateY(-1px);
+}
+
+
+@media (min-width: 1601px) {
+    main{
+        padding-top: 100px;
     }
 }
 
-@media (max-width: 768px) {
-    .dish-modal-details {
+@media (min-width: 1300px) and (max-width: 1600px) {
+    main{
+        padding-top: 100px;
+    }
+}
+
+@media (min-width: 1201px) {
+    .menu-card {
+        width: auto;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+    }
+    main{
+        padding-top: 100px;
+    }
+
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+    .menu-card h3 {
+        font-size: 1rem;
+    }
+
+    .menu-card p {
+        font-size: 0.85rem;
+    }
+
+    .order-btn {
+        font-size: 0.85rem;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1200px) {
+    .menu-card {
+        width: auto;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        box-sizing: border-box;
+        text-align: left;
+    }
+
+    .menu-img {
+        width: 90px;
+        height: auto;
+    }
+
+    .menu-card h3 {
+        font-size: 1rem;
+    }
+
+    .menu-card p {
+        font-size: 0.8rem;
+    }
+
+    .order-btn {
+        font-size: 0.85rem;
+        padding: 8px 14px;
+        max-width: 100%;
+    }
+    main{
+        padding-top: 100px;
+    }
+}
+
+@media (max-width: 699px) {
+    .menu-card {
+        flex-direction: column;
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 10px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .menu-img {
+        width: 80px;
+        height: auto;
+    }
+
+    .menu-card h3 {
+        font-size: 0.9rem;
+    }
+
+    .menu-card p {
+        font-size: 0.75rem;
+    }
+
+    .order-btn {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+        max-width: 100%;
+    }
+    main{
+        padding-top: 100px;
+    }
+}
+
+@media (max-width: 576px) {
+    .nav-links {
         flex-direction: column;
         align-items: center;
+        gap: 8px;
+    }
+
+    .shared-button-style {
+        width: 100%;
+        max-width: 300px;
+        height: 40px;
+        font-size: 0.85rem;
+        font-weight: bold;
+    }
+
+    .top-logo {
+        max-height: 55px;
+    }
+
+    main {
+        padding-top: 200px;
+    }
+
+    .menu-card {
+        flex-direction: column;
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 10px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .menu-img {
+        width: 80px;
+        height: auto;
+    }
+
+    .menu-card h3 {
+        font-size: 0.85rem;
+    }
+
+    .menu-card p {
+        font-size: 0.7rem;
+    }
+
+    .order-btn {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+        max-width: 100%;
+    }
+
+    .dish-modal-content {
+        width: 90%;
+        padding: 18px;
     }
 }
 
-body.modal-open {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
+@media (min-width: 400px) and (max-width: 499px) {
+    .menu-card {
+        flex-direction: column;
+        width: 90%;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 8px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .menu-img {
+        width: 65px;
+        height: auto;
+    }
+
+    .menu-card h3 {
+        font-size: 0.8rem;
+    }
+
+    .menu-card p {
+        font-size: 0.7rem;
+    }
+
+    .order-btn {
+        font-size: 0.7rem;
+        padding: 6px 12px;
+        max-width: 100%;
+    }
+
+    main {
+        padding-top: 95px;
+    }
 }
 
-html {
-    overflow-y: auto;
+@media (min-width: 400px) and (max-width: 499px) {
+    .dish-modal-content {
+        width: 88%;
+        padding: 16px;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    .menu-card {
+        flex-direction: column;
+        width: 77%;
+        max-width: 280px;
+        margin: 0 auto;
+        padding: 10px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .menu-img {
+        width: 60px;
+        height: auto;
+    }
+
+    .menu-card h3 {
+        font-size: 0.75rem;
+    }
+
+    .menu-card p {
+        font-size: 0.65rem;
+    }
+
+    .order-btn {
+        font-size: 0.65rem;
+        padding: 5px 10px;
+        max-width: 100%;
+    }
+
+    main {
+        padding-top: 90px;
+    }
+
+    .dish-modal-content {
+        width: 65%;
+        padding: 1px;
+    }
 }

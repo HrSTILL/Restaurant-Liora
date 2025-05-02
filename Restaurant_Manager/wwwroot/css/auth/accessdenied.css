@@ -37,3 +37,192 @@
         background: linear-gradient(135deg, #d6a75c, #f3e5ab);
         transform: translateY(-1px);
     }
+
+@media (min-width: 1601px) {
+    .access-denied-container {
+        padding: 50px;
+        margin: 120px auto;
+        width: 60%;
+    }
+
+    .access-title {
+        font-size: 2.25rem;
+    }
+
+    .access-message {
+        font-size: 1.15rem;
+    }
+
+    .back-login-button {
+        font-size: 1rem;
+        padding: 12px 26px;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+    .access-denied-container {
+        padding: 45px;
+        margin: 110px auto;
+        width: 65%;
+    }
+
+    .access-title {
+        font-size: 2rem;
+    }
+
+    .access-message {
+        font-size: 1.1rem;
+    }
+
+    .back-login-button {
+        font-size: 1rem;
+        padding: 12px 24px;
+    }
+}
+
+@media (min-width: 1201px) {
+    .access-denied-container {
+        padding: 40px;
+        margin: 100px auto;
+        width: 70%;
+    }
+
+    .access-title {
+        font-size: 1.85rem;
+    }
+
+    .access-message {
+        font-size: 1.05rem;
+    }
+
+    .back-login-button {
+        font-size: 0.95rem;
+        padding: 11px 22px;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+    .access-denied-container {
+        padding: 35px;
+        margin: 85px auto;
+        width: 75%;
+    }
+
+    .access-title {
+        font-size: 1.75rem;
+    }
+
+    .access-message {
+        font-size: 1rem;
+    }
+
+    .back-login-button {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1200px) {
+    .access-denied-container {
+        padding: 30px;
+        margin: 75px auto;
+        width: 85%;
+    }
+
+    .access-title {
+        font-size: 1.5rem;
+    }
+
+    .access-message {
+        font-size: 0.98rem;
+    }
+
+    .back-login-button {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 699px) {
+    .access-denied-container {
+        padding: 25px;
+        margin: 60px 15px;
+        width: auto;
+    }
+
+    .access-title {
+        font-size: 1.35rem;
+    }
+
+    .access-message {
+        font-size: 0.95rem;
+    }
+
+    .back-login-button {
+        font-size: 0.85rem;
+        padding: 9px 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .access-denied-container {
+        padding: 20px;
+        margin: 40px 20px;
+        width: auto;
+    }
+
+    .access-title {
+        font-size: 1.25rem;
+    }
+
+    .access-message {
+        font-size: 0.95rem;
+    }
+
+    .back-login-button {
+        font-size: 0.85rem;
+        padding: 8px 16px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+    .access-denied-container {
+        padding: 18px;
+        margin: 35px 15px;
+        width: auto;
+    }
+
+    .access-title {
+        font-size: 1.15rem;
+    }
+
+    .access-message {
+        font-size: 0.9rem;
+    }
+
+    .back-login-button {
+        font-size: 0.8rem;
+        padding: 7px 14px;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    .access-denied-container {
+        padding: 16px;
+        margin: 30px 10px;
+        width: auto;
+    }
+
+    .access-title {
+        font-size: 1.1rem;
+    }
+
+    .access-message {
+        font-size: 0.85rem;
+    }
+
+    .back-login-button {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+}

@@ -81,3 +81,100 @@
         background-color: rgba(255, 0, 0, 0.1);
         transform: scale(1.05);
     }
+
+@media (min-width: 1601px) {
+  .my-orders {
+    padding: 60px;
+    max-width: 1400px;
+  }
+  .order-table td, .order-table th {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+  .my-orders {
+    padding: 50px;
+    max-width: 1300px;
+  }
+  .order-table td, .order-table th {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1299px) {
+  .my-orders {
+    padding: 45px;
+    max-width: 1200px;
+  }
+  .order-table td, .order-table th {
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1200px) {
+  .my-orders {
+    padding: 42px;
+    max-width: 1150px;
+  }
+  .order-table td, .order-table th {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1099px) {
+  .my-orders {
+    padding: 40px;
+    max-width: 1050px;
+  }
+  .order-table td, .order-table th {
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+  .my-orders {
+    padding: 35px;
+    max-width: 950px;
+  }
+  .order-table td, .order-table th {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 699px) {
+  .my-orders {
+    padding: 30px;
+    max-width: 95%;
+  }
+  .order-table td, .order-table th {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .my-orders {
+    padding: 24px;
+  }
+  .order-table td, .order-table th {
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+  .my-orders {
+    padding: 20px;
+  }
+  .order-table td, .order-table th {
+    font-size: 0.25rem;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+  .my-orders {
+    padding: 16px;
+  }
+  .order-table td, .order-table th {
+    font-size: 0.3rem;
+  }
+}

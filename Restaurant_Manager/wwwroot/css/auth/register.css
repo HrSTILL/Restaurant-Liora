@@ -10,7 +10,7 @@
 
 .register-box {
     background-color: #f5f5f5;
-    padding: 40px;
+    padding: 50px;
     border-radius: 12px;
     border: 1px solid #d6a75c;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -63,10 +63,113 @@
         background: linear-gradient(135deg, #d6a75c, #f3e5ab);
         transform: translateY(-1px);
     }
-
-@media (max-width: 768px) {
+main{
+    padding: 16px;
+    margin-top: 100px;
+}
+@media (min-width: 1601px) {
     .register-box {
-        padding: 30px 20px;
+        padding: 60px;
+    }
+
+    .register-title {
+        font-size: 2rem;
+    }
+
+    .register-input {
+        font-size: 1.05rem;
+        padding: 14px 18px;
+    }
+
+    .register-btn {
+        font-size: 1.05rem;
+        padding: 14px;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+    .register-box {
+        padding: 55px;
+    }
+
+    .register-title {
+        font-size: 1.9rem;
+    }
+
+    .register-input {
+        font-size: 1rem;
+        padding: 13px 16px;
+    }
+
+    .register-btn {
+        font-size: 1rem;
+        padding: 13px;
+    }
+}
+
+@media (min-width: 1201px) {
+    .register-box {
+        padding: 50px;
+    }
+
+    .register-title {
+        font-size: 1.85rem;
+    }
+
+    .register-input {
+        font-size: 1rem;
+        padding: 12px 15px;
+    }
+
+    .register-btn {
+        font-size: 1rem;
+        padding: 12px;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+    .register-box {
+        padding: 45px;
+    }
+
+    .register-title {
+        font-size: 1.75rem;
+    }
+
+    .register-input {
+        font-size: 0.95rem;
+        padding: 12px 14px;
+    }
+
+    .register-btn {
+        font-size: 0.95rem;
+        padding: 12px;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1200px) {
+    .register-box {
+        padding: 40px;
+    }
+
+    .register-title {
+        font-size: 1.6rem;
+    }
+
+    .register-input {
+        font-size: 0.95rem;
+        padding: 11px 12px;
+    }
+
+    .register-btn {
+        font-size: 0.95rem;
+        padding: 11px;
+    }
+}
+
+@media (max-width: 699px) {
+    .register-box {
+        padding: 35px;
     }
 
     .register-title {
@@ -74,37 +177,81 @@
     }
 
     .register-input {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         padding: 10px 12px;
     }
 
     .register-btn {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         padding: 10px;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
     .register-box {
-        padding: 25px 15px;
-        border-radius: 8px;
+        padding: 30px;
     }
 
     .register-title {
         font-size: 1.4rem;
     }
 
-    .register-form {
-        gap: 12px;
-    }
-
     .register-input {
-        font-size: 0.9rem;
-        padding: 10px;
+        font-size: 0.85rem;
+        padding: 9px 10px;
     }
 
     .register-btn {
-        font-size: 0.9rem;
-        padding: 10px;
+        font-size: 0.85rem;
+        padding: 9px;
+    }
+    main{
+        magrin-top: -30px;
+    }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+    .register-box {
+        padding: 25px;
+    }
+
+    .register-title {
+        font-size: 1.3rem;
+    }
+
+    .register-input {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+
+    .register-btn {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+    main{
+        magrin-top: -30px;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+    .register-box {
+        padding: 22px;
+    }
+
+    .register-title {
+        font-size: 1.2rem;
+    }
+
+    .register-input {
+        font-size: 0.75rem;
+        padding: 7px 9px;
+    }
+
+    .register-btn {
+        font-size: 0.75rem;
+        padding: 7px;
+    }
+    main{
+        magrin-top: -30px;
     }
 }
