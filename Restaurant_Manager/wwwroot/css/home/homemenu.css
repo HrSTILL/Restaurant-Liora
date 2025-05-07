@@ -1,4 +1,4 @@
-﻿.menu-wrapper {
+.menu-wrapper {
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -368,7 +368,7 @@ html {
 
     .menu-card p {
         font-size: 0.7rem;
-        color: purple;
+        color: green;
     }
 
     .order-btn {
@@ -436,7 +436,7 @@ html {
 
     .menu-card p {
         font-size: 0.8rem;
-        color: blue;
+        color: green;
     }
 
     .order-btn {
@@ -461,7 +461,7 @@ html {
         padding-top: 40px;
     }
     .menu-card p {
-        color: orange;
+        color: green;
     }
 }
 
@@ -471,7 +471,7 @@ html {
         margin-top: 80px;
     }
     .menu-card p {
-        color: yellow;
+        color: green;
     }
 }
 
@@ -481,7 +481,7 @@ html {
         margin-top: 100px;
     }
     .menu-card p {
-        color: red;
+        color: green;
     }
 }
 
@@ -507,7 +507,7 @@ html {
 
     .menu-card p {
         font-size: 0.65rem;
-        color: white;
+        color: green;
     }
 
     .order-btn {    
@@ -548,7 +548,7 @@ html {
 
     .menu-card p {
         font-size: 0.7rem;
-        color: teal;
+        color: green;
     }
 
     .order-btn {
